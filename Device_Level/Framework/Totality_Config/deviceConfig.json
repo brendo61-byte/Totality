@@ -1,0 +1,33 @@
+{
+  "launcher": {
+    "args": {
+      "supervisorList": [
+        {
+          "supervisorType": "intMaker",
+          "supervisorID": 1,
+          "customConfig": "None"
+        },
+        {
+          "supervisorType": "intMaker",
+          "supervisorID": 2,
+          "customConfig": {
+            "supervisorName": "Little Thanos"
+          }
+        }
+      ]
+    }
+  },
+  "commandControl": {
+    "args": {
+      "heartBeatInterval": 5
+    }
+  },
+  "dataControl": {
+    "args": {
+      "updateInterval": 5
+    }
+  },
+  "logLevel": "DEBUG",
+  "test": "True",
+  "deviceID": 1
+}

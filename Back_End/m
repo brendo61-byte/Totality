@@ -1,0 +1,86 @@
+#!/bin/bash
+set -e
+
+CLEAN () {
+    printf "\nStopping All Containers\n"
+    docker stop $(docker ps -q)
+}
+
+START () {
+    printf "\nStarting Docker Network\n"
+	docker-compose up -d
+}
+
+REBUILD () {
+    printf "\nStarting Docker Network With Rebuilt Images\n"
+	docker-compose up -d --build
+}
+
+FORGROUND () {
+    printf "\nStarting Docker Network (Not In Background)\n"
+	docker-compose up
+}
+
+STOP () {
+    printf "\nStopping Docker Network\n"
+	docker-compose down
+}
+
+BOMB () {
+    printf "\nRemoving Images"
+	docker rmi -f $(docker images -q)
+	printf "\nRemoving All Containers"
+	docker rm  -f $(docker ps -aq)
+}
+
+SEED () {
+    printf "\nSeeding DB With New Customer And New Device"
+    python3 seed.py
+}
+
+
+if [ $1 = "start" ];
+then
+    START
+    fi
+
+if [ $1 = "start-s" ];
+then
+    FORGROUND
+    fi
+
+if [ $1 = "start-b" ];
+then
+    REBUILD
+    fi
+
+if [ $1 = "stop" ];
+then
+    STOP
+    fi
+
+if [ $1 = "clean" ];
+then
+    CLEAN
+    fi
+
+if [ $1 = "bomb" ];
+then
+    BOMB
+    fi
+
+if [ $1 = "seed" ];
+then
+    SEED
+    fi
+
+if [ $1 = "help" ];
+then
+    printf "start       start docker network in Background\n"
+    printf "start-s     start docker network\n"
+    printf "start-b     rebuilds docker network images if they already exist\n"
+    printf "stop        stop docker network\n"
+    printf "clean       stop all running docker containers\n"
+    printf "bomb        deletes all images removes all containers\n"
+    printf "seed        enters a new Customer and New Device into the DB. For testing ONLY - assumes a clean DB"
+    fi

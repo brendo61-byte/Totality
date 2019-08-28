@@ -1,0 +1,2 @@
+class SupervisorUniqueError(BaseException):
+    pass
