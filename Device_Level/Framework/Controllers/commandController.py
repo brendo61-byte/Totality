@@ -6,7 +6,7 @@ import logging
 import json
 import traceback
 
-# ToDo: Make this an env variable
+# ToDo: Make this an env variable --- This will be done during/around deployment
 CommandServerEndPoint = 'http://localhost:8802/device/commands/getCommands'
 
 

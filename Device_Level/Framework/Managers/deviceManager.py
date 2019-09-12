@@ -46,24 +46,30 @@ FileNotFoundError)
 # Todo: How to monitor and handle when a thread dies
 
 class deviceManager:
-    def __init__(self, pipe, deviceID, test):
+    def __init__(self, pipe, deviceID, test, threadLimit):
         self.MasterSupervisorDict = {}
         self.datapipe = pipe
         self.deviceID = deviceID
+        self.threadLimit = threadLimit
         if test == "True":
             os.system("rm -r Local_Data")
             os.system("mkdir Local_Data")
 
     def launcher(self, supervisorType, supervisorID, customConfig=None, restart=False, callBack=False):
-        supervisor = self.makeSupervisor(supervisorType=supervisorType, supervisorID=supervisorID, customConfig=customConfig, restart=restart)
+        if len(self.MasterSupervisorDict) >= self.threadLimit:
+            SupervisorThreadLimit()
+            # ToDo: Test This --- exception CLass updated --- deviceConfig --- Update README
+
+        supervisor = self.makeSupervisor(supervisorType=supervisorType, supervisorID=supervisorID,
+                                         customConfig=customConfig, restart=restart)
         self.MasterSupervisorDict[supervisorID] = supervisor
         self.dirSetUp(supervisorID=supervisorID, supervisor=supervisor)
 
         thread = Thread(target=supervisor.getData, name=supervisorID)
         thread.start()
-        # ToDo: Use pool to set a max number of threads
 
-        logging.info("New supervisor Spawned. supervisor Info: {}\n".format(json.dumps(supervisor.getSupervisorInfo(), indent=4, sort_keys=True)))
+        logging.info("New supervisor Spawned. supervisor Info: {}\n".format(
+            json.dumps(supervisor.getSupervisorInfo(), indent=4, sort_keys=True)))
 
     def makeSupervisor(self, supervisorType, supervisorID, customConfig, restart):
         config = self.getConfig(supervisorType=supervisorType)

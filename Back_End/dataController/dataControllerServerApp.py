@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
-#from Back_End.dataController.models import *
+# from Back_End.dataController.models import *
 from models import *
-
 
 import traceback
 import logging
@@ -13,11 +12,9 @@ This is the API for data ingestion. This not only means data in terms of reading
 commandController).
 """
 
-logging.basicConfig(level="DEBUG", filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
-
-# ToDo: Add to README
-# ToDo: Make a test script for this
 
 def validateDeviceAuth(token):
     # ToDo: Ensure whoever is trying to get commands is authorized to do so
@@ -30,11 +27,18 @@ def validateDeviceExists(deviceID):
         logging.debug("Validate DID: DID '{}' Validate".format(deviceID))
         return True
     except peewee.IntegrityError as PTE:
-        logging.info("Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID, PTE, traceback.format_exc()))
+        logging.info(
+            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID,
+                                                                                                              PTE,
+                                                                                                              traceback.format_exc()))
     except peewee.OperationalError as POE:
-        logging.info("Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(deviceID, POE, traceback.format_exc()))
+        logging.info(
+            "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
+                deviceID, POE, traceback.format_exc()))
     except Exception as e:
-        logging.warning("Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e, traceback.format_exc()))
+        logging.warning(
+            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
+                                                                                                            traceback.format_exc()))
 
 
 @app.route('/device/dataPush', methods=["POST"])
@@ -60,7 +64,8 @@ def dataPush():
         logging.debug("Data Push Hit: New Entry Into RD")
         return jsonify(userMessage="Payload added to reliable delivery"), 200
     except Exception as e:
-        logging.warning("Data Push Hit: Unable To Push Data Into RD.\nException: {}\nTraceBack: {}".format(e, traceback.format_exc()))
+        logging.warning("Data Push Hit: Unable To Push Data Into RD.\nException: {}\nTraceBack: {}".format(e,
+                                                                                                           traceback.format_exc()))
         return jsonify(userMessage="Unable to Push"), 400
 
 

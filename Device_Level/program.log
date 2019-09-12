@@ -1,10 +1,11 @@
-2019-07-19 14:22:07,428 - INFO - 
+2019-09-06 14:36:18,057 - INFO - 
 
 Launching Program
-2019-07-19 14:22:07,434 - DEBUG - Preforming Data-Push
-2019-07-19 14:22:07,434 - INFO - All Threads Launched Successfully
-2019-07-19 14:22:07,435 - INFO - Starting Tests ...
-2019-07-19 14:22:07,442 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-06 14:36:18,065 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:18,065 - INFO - All Threads Launched Successfully
+2019-09-06 14:36:18,065 - INFO - Starting Tests ...
+2019-09-06 14:36:18,073 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:18,074 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -15,7 +16,7 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-07-19 14:22:07,445 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-06 14:36:18,079 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
@@ -26,446 +27,374 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-07-19 14:22:07,445 - INFO - All Launch Supervisors Spawned Successfully
-2019-07-19 14:22:07,453 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-07-19 14:22:07,459 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106368b70>: Failed to establish a new connection: [Errno 61] Connection refused'))
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
-    (self._dns_host, self.port), self.timeout, **extra_kw)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
-    raise err
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
-    chunked=chunked)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
-    conn.request(method, url, **httplib_request_kw)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1229, in request
-    self._send_request(method, url, body, headers, encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1275, in _send_request
-    self.endheaders(body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1224, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1016, in _send_output
-    self.send(msg)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 956, in send
-    self.connect()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
-    conn = self._new_conn()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
-    self, "Failed to establish a new connection: %s" % e)
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x106368b70>: Failed to establish a new connection: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
-    timeout=timeout
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
-    _stacktrace=sys.exc_info()[2])
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
-    raise MaxRetryError(_pool, url, error or ResponseError(cause))
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106368b70>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/repos/totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
-    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 116, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 60, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
-    r = adapter.send(request, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106368b70>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-2019-07-19 14:22:09,438 - INFO - Device_Level Manager Test:
-2019-07-19 14:22:10,445 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-06 14:36:18,079 - INFO - All Launch Supervisors Spawned Successfully
+2019-09-06 14:36:18,088 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:18,088 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:18,088 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:20,066 - INFO - Device_Level Manager Test:
+2019-09-06 14:36:21,077 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1004,
+    "supervisorID": 1086,
     "supervisorName": "intMaker",
     "supervisorType": "intMaker"
 }
 
-2019-07-19 14:22:10,448 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-06 14:36:21,081 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1008,
+    "supervisorID": 1081,
     "supervisorName": "TestSupervisor",
     "supervisorType": "intMaker"
 }
 
-2019-07-19 14:22:10,448 - INFO - supervisor Killed. Dead supervisorID: 1004
-2019-07-19 14:22:10,448 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-06 14:36:21,081 - INFO - supervisor Killed. Dead supervisorID: 1086
+2019-09-06 14:36:21,082 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1004,
+    "supervisorID": 1086,
     "supervisorName": "UpdatedSupervisor",
     "supervisorType": "intMaker"
 }
 
-2019-07-19 14:22:10,448 - DEBUG - Starting CleanUp
-2019-07-19 14:22:10,448 - DEBUG - Cleaning Supervisor ID: 1008
-2019-07-19 14:22:10,448 - INFO - supervisor Killed. Dead supervisorID: 1008
-2019-07-19 14:22:12,437 - DEBUG - Preforming Data-Push
-2019-07-19 14:22:12,441 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,442 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10707b0f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,443 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,444 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10634b828>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,446 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,447 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10707b588>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,448 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,449 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10707bc50>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,451 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,452 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d358>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,452 - DEBUG - Cleaning Supervisor ID: 1004
-2019-07-19 14:22:12,452 - INFO - supervisor Killed. Dead supervisorID: 1004
-2019-07-19 14:22:12,454 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,455 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d898>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,456 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,457 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10709d080>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,458 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,459 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708dac8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,460 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,461 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d128>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,461 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
-Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1008/localCSV.csv'
+2019-09-06 14:36:21,082 - DEBUG - Starting CleanUp
+2019-09-06 14:36:21,082 - DEBUG - Cleaning Supervisor ID: 1081
+2019-09-06 14:36:21,082 - INFO - supervisor Killed. Dead supervisorID: 1081
+2019-09-06 14:36:23,065 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:23,071 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,083 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,086 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,090 - DEBUG - Cleaning Supervisor ID: 1086
+2019-09-06 14:36:23,090 - INFO - supervisor Killed. Dead supervisorID: 1086
+2019-09-06 14:36:23,093 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:23,096 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,099 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,106 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:23,107 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:23,107 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:23,108 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,111 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,119 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,122 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,131 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,134 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,142 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,145 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,154 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,155 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
+Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1081/localCSV.csv'
 Traceback (most recent call last):
-  File "/Users/brendonstanley/repos/totality/Device_Level/Framework/Controllers/dataController.py", line 52, in localCSV
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/dataController.py", line 52, in localCSV
     with open(path, 'a') as csvFile:
-FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1008/localCSV.csv'
+FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1081/localCSV.csv'
 
-2019-07-19 14:22:12,462 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,463 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106368ba8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,464 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-07-19 14:22:12,465 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,466 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390710>: Failed to establish a new connection: [Errno 61] Connection refused'))
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
-    (self._dns_host, self.port), self.timeout, **extra_kw)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
-    raise err
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 61] Connection refused
+2019-09-06 14:36:23,157 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,167 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,169 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,178 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,180 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,189 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,192 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,200 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,203 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,212 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,215 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,223 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,226 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,235 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,238 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,247 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:23,249 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:23,258 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:25,097 - DEBUG - deviceMangerTester: CleanUp Complete
 
-During handling of the above exception, another exception occurred:
+2019-09-06 14:36:25,098 - DEBUG - deviceManagerTester: All Tests Passed Successfully
 
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
-    chunked=chunked)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
-    conn.request(method, url, **httplib_request_kw)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1229, in request
-    self._send_request(method, url, body, headers, encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1275, in _send_request
-    self.endheaders(body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1224, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1016, in _send_output
-    self.send(msg)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 956, in send
-    self.connect()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
-    conn = self._new_conn()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
-    self, "Failed to establish a new connection: %s" % e)
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x106390710>: Failed to establish a new connection: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
-    timeout=timeout
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
-    _stacktrace=sys.exc_info()[2])
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
-    raise MaxRetryError(_pool, url, error or ResponseError(cause))
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390710>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/repos/totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
-    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 116, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 60, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
-    r = adapter.send(request, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390710>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-2019-07-19 14:22:12,466 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390cc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,467 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,468 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10709d7b8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,469 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,470 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10709de80>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,471 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,472 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10634bb38>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:12,473 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:12,474 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390fd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:14,456 - DEBUG - deviceMangerTester: CleanUp Complete
-
-2019-07-19 14:22:14,457 - DEBUG - deviceManagerTester: All Tests Passed Successfully
-
-2019-07-19 14:22:17,470 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-07-19 14:22:17,472 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390e48>: Failed to establish a new connection: [Errno 61] Connection refused'))
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
-    (self._dns_host, self.port), self.timeout, **extra_kw)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
-    raise err
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
-    chunked=chunked)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
-    conn.request(method, url, **httplib_request_kw)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1229, in request
-    self._send_request(method, url, body, headers, encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1275, in _send_request
-    self.endheaders(body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1224, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1016, in _send_output
-    self.send(msg)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 956, in send
-    self.connect()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
-    conn = self._new_conn()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
-    self, "Failed to establish a new connection: %s" % e)
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x106390e48>: Failed to establish a new connection: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
-    timeout=timeout
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
-    _stacktrace=sys.exc_info()[2])
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
-    raise MaxRetryError(_pool, url, error or ResponseError(cause))
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390e48>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/repos/totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
-    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 116, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 60, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
-    r = adapter.send(request, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390e48>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-2019-07-19 14:22:17,478 - DEBUG - Preforming Data-Push
-2019-07-19 14:22:17,481 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,482 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10709de48>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,484 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,484 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10709d390>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,486 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,487 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d208>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,489 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,489 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d828>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,491 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,492 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390c50>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,493 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,494 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390da0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,496 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,496 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10634b710>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,498 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,498 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d470>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,500 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,500 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708d6a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:17,502 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:17,502 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107072518>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,477 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-07-19 14:22:22,478 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107072da0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
-    (self._dns_host, self.port), self.timeout, **extra_kw)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
-    raise err
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
-    chunked=chunked)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
-    conn.request(method, url, **httplib_request_kw)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1229, in request
-    self._send_request(method, url, body, headers, encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1275, in _send_request
-    self.endheaders(body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1224, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1016, in _send_output
-    self.send(msg)
-  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 956, in send
-    self.connect()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
-    conn = self._new_conn()
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
-    self, "Failed to establish a new connection: %s" % e)
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x107072da0>: Failed to establish a new connection: [Errno 61] Connection refused
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
-    timeout=timeout
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
-    _stacktrace=sys.exc_info()[2])
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
-    raise MaxRetryError(_pool, url, error or ResponseError(cause))
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107072da0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/brendonstanley/repos/totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
-    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 116, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/api.py", line 60, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
-    r = adapter.send(request, **kwargs)
-  File "/Users/brendonstanley/virtual/Totality/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107072da0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-
-2019-07-19 14:22:22,502 - DEBUG - Preforming Data-Push
-2019-07-19 14:22:22,505 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,506 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1070729e8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,508 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,509 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107072358>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,511 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,511 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106368b00>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,513 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,514 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390dd8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,515 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,516 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1063907f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,518 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,518 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708e5f8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,520 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,521 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10708ecc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,522 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,523 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106390c50>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,525 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,525 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1063907b8>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
-2019-07-19 14:22:22,527 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-07-19 14:22:22,527 - WARNING - Unable To Push Package To DB.
-Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106368898>: Failed to establish a new connection: [Errno 61] Connection refused'))
-TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-09-06 14:36:28,113 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:28,131 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:28,132 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:28,132 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:28,263 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:28,267 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,279 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,282 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,291 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,294 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,303 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,306 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,315 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,318 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,327 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,330 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,339 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,342 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,352 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,354 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,363 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,366 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,375 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:28,378 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:28,388 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,140 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:33,153 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:33,154 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:33,154 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:33,392 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:33,396 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,407 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,410 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,418 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,421 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,430 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,433 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,442 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,444 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,453 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,455 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,465 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,468 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,476 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,479 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,488 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,491 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,500 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:33,503 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:33,512 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,161 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:38,177 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:38,177 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:38,177 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:38,515 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:38,520 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,531 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,534 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,548 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,551 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,560 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,562 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,571 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,574 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,582 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,584 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,593 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,596 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,606 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,609 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,618 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,621 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,630 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:38,632 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:38,643 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,182 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:43,197 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:43,197 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:43,197 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:43,644 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:43,648 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,659 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,662 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,671 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,674 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,682 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,685 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,693 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,696 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,705 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,708 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,716 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,719 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,727 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,730 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,739 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,742 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,751 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:43,754 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:43,763 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,203 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:48,223 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:48,224 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:48,224 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:48,763 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:48,766 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,776 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,779 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,788 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,791 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,799 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,802 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,811 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,813 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,822 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,825 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,833 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,836 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,845 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,848 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,858 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,861 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,870 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:48,873 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:48,882 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,232 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:53,250 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:53,251 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:53,251 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:53,887 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:53,890 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,901 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,904 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,912 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,914 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,923 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,925 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,935 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,938 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,945 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,948 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,957 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,959 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,968 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,970 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,978 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,981 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:53,989 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:53,992 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:54,001 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:58,255 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:36:58,271 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:36:58,272 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:36:58,272 - DEBUG - No New Commands To Execute
+2019-09-06 14:36:59,002 - DEBUG - Preforming Data-Push
+2019-09-06 14:36:59,006 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,019 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,022 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,032 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,034 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,042 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,045 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,053 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,056 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,063 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,066 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,075 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,077 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,084 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,087 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,095 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,097 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,106 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:36:59,109 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:36:59,116 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:03,277 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:37:03,291 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:37:03,292 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:37:03,292 - DEBUG - No New Commands To Execute
+2019-09-06 14:37:04,119 - DEBUG - Preforming Data-Push
+2019-09-06 14:37:04,122 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,135 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,138 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,146 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,148 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,157 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,159 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,167 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,169 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,177 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,180 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,189 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,192 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,200 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,203 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,211 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,213 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,222 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,225 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,232 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,235 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,244 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:04,246 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:04,255 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:08,299 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:37:08,317 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:37:08,318 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:37:08,318 - DEBUG - No New Commands To Execute
+2019-09-06 14:37:09,259 - DEBUG - Preforming Data-Push
+2019-09-06 14:37:09,263 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,273 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,277 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,286 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,288 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,296 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,299 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,308 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,311 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,321 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,323 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,332 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,336 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,345 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,348 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,356 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,359 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,367 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:09,370 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:09,377 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:13,327 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:37:13,343 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:37:13,344 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:37:13,344 - DEBUG - No New Commands To Execute
+2019-09-06 14:37:14,381 - DEBUG - Preforming Data-Push
+2019-09-06 14:37:14,386 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,397 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,400 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,408 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,411 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,419 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,422 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,430 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,433 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,442 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,445 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,453 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,456 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,464 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,468 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,476 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,479 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,487 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:14,490 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:14,498 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:18,350 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-06 14:37:18,371 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-09-06 14:37:18,372 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-06 14:37:18,372 - DEBUG - No New Commands To Execute
+2019-09-06 14:37:19,501 - DEBUG - Preforming Data-Push
+2019-09-06 14:37:19,505 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,515 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,518 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,527 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,529 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,538 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,541 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,549 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,552 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,561 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,564 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,572 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,575 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,584 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,587 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,597 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,600 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,610 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-06 14:37:19,613 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-06 14:37:19,623 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53

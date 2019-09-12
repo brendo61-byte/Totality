@@ -1,21 +1,21 @@
 from flask import Flask, request, jsonify
-#from Back_End.creationAPI.models import *
+# from Back_End.creationAPI.models import *
 from models import *
 
 import logging
 import traceback
 import datetime
+import re
 
 app = Flask(__name__)
 
-# ToDo: Add to README
 """
 This API handles the creation of customers and devices. This also means dropping customers and devices too. The idea is that you have customers and customers own
 actual (actual hardware). 
 """
 
-
-logging.basicConfig(level="DEBUG", filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 @app.route('/customer/newCustomer', methods=["POST"])
@@ -24,8 +24,8 @@ def newCustomer():
     name = data.get("name")
     address = data.get("address")
     phone = data.get("phone")
-    # ToDo: Ensure that phone number is valid
-    # ToDo: Ensure that address is valid
+    # ToDo: Ensure that phone number is valid --- TEST THIS --- UPDATE README
+    # ToDo: Ensure that address is valid --- This needs Google's APIs --- Pricing is involved
 
     if name is None:
         logging.info("New Customer Hit: No Name Provided")
@@ -33,7 +33,7 @@ def newCustomer():
     if address is None:
         logging.info("New Customer Hit: No Address Provided")
         return jsonify(userMessage="Please Provide A Valid Address"), 400
-    if phone is None:
+    if phone is None or not validPhoneNumber(phone_nuber=phone):
         logging.info("New Customer Hit: No Phone Provided")
         return jsonify(userMessage="Please Provide A Valid Phone Number"), 400
 
@@ -50,8 +50,14 @@ def newCustomer():
         logging.info("New Customer Hit: Success. New Customer Has Been Created. Name: {}".format(name))
         return jsonify(userMessage="Customer Has Been Created"), 200
     except Exception as e:
-        logging.warning("New Customer Hit: Unable To Create Customer In DB.\nException: {}\nTrackBack: {}".format(e, traceback))
+        logging.warning(
+            "New Customer Hit: Unable To Create Customer In DB.\nException: {}\nTrackBack: {}".format(e, traceback))
         return jsonify(userMessage="Invalid Request"), 400
+
+
+def validPhoneNumber(phone_nuber):
+    pattern = re.compile("^[\dA-Z]{3}-[\dA-Z]{3}-[\dA-Z]{4}$", re.IGNORECASE)
+    return pattern.match(phone_nuber) is not None
 
 
 @app.route('/customer/dropCustomer', methods=["POST"])
@@ -68,7 +74,8 @@ def dropCustomer():
         logging.info("Drop Customer Hit: Customer Has Been Deleted. Customer ID: {}".format(CID))
         return jsonify(userMessage="Customer Has Been Deleted. All Associated Devices Removed")
     except Exception as e:
-        logging.warning("Drop Customer Hit: Unable To Drop Customer. CID: {}.\nException: {}\nTraceBack".format(CID, e, traceback.format_exc()))
+        logging.warning("Drop Customer Hit: Unable To Drop Customer. CID: {}.\nException: {}\nTraceBack".format(CID, e,
+                                                                                                                traceback.format_exc()))
         return jsonify(userMessage="Please Provide A True CID")
 
 
@@ -90,7 +97,9 @@ def getCustomerInfo():
         logging.debug("Get Customer Hit: Get Customer Info Request Completed. CID: {}".format(CID))
         return jsonify(userMessage=body), 200
     except Exception as e:
-        logging.warning("Get Customer Hit: Unable To Get Customer Info. CID: {}\nException: {}\nTraceBack: {}".format(CID, e, traceback.format_exc()))
+        logging.warning(
+            "Get Customer Hit: Unable To Get Customer Info. CID: {}\nException: {}\nTraceBack: {}".format(CID, e,
+                                                                                                          traceback.format_exc()))
         return jsonify(userMessage="Please Provide A Valid CID"), 400
 
 
@@ -118,8 +127,10 @@ def newDevice():
         return jsonify(userMessage="Please Provide A Valid Customer Owner"), 400
 
     try:
-        Device.create(name=name, location=location, latitude=latitude, longitude=longitude, dataControllerPeriod=dataControllerPeriod,
-                      commandControllerPeriod=commandControllerPeriod, commandTimeWindow=commandTimeWindow, customerOwner=customerOwner)
+        Device.create(name=name, location=location, latitude=latitude, longitude=longitude,
+                      dataControllerPeriod=dataControllerPeriod,
+                      commandControllerPeriod=commandControllerPeriod, commandTimeWindow=commandTimeWindow,
+                      customerOwner=customerOwner)
         logging.info("New Device Hit: Success. New Device Has Been Created. Name: {}".format(name))
         return jsonify(userMessage="Successful Device Creation."), 200
     except Exception as e:
@@ -138,11 +149,12 @@ def dropDevice():
     try:
         device = Device.get(Device.deviceID == DID)
         device.delete_instance()
-        # ToDo: Send a shutdown command to the device?
+        # ToDo: Send a shutdown command to the device? --- Team Question!
         logging.info("Drop Device Hit: Device Has Been Deleted. DID: {}".format(DID))
         return jsonify(userMessage="Device Has Been Deleted")
     except Exception as e:
-        logging.warning("Drop Device Hit: Unable To Delete Device. DID: {}\nException: {}\nTraceBack: {}".format(DID, e, traceback.format_exc()))
+        logging.warning("Drop Device Hit: Unable To Delete Device. DID: {}\nException: {}\nTraceBack: {}".format(DID, e,
+                                                                                                                 traceback.format_exc()))
         return jsonify(userMessage="Please Provide A True Device ID")
 
 
@@ -176,7 +188,9 @@ def getDeviceInfo():
         logging.debug("Get Device Info Hit: Get Device Info Request Completed. DID: {}".format(DID))
         return jsonify(userMessage=body), 200
     except Exception as e:
-        logging.warning("Get Device Info Hit: Unable To Get Customer Info. DID: {}\nException: {}\nTraceBack: {}".format(DID, e, traceback.format_exc()))
+        logging.warning(
+            "Get Device Info Hit: Unable To Get Customer Info. DID: {}\nException: {}\nTraceBack: {}".format(DID, e,
+                                                                                                             traceback.format_exc()))
         return jsonify(userMessage="Please Provide A True Device ID"), 400
 
 

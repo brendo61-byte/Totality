@@ -9,9 +9,6 @@ import traceback
 
 CQ = Queue(maxsize=0)
 # ToDo: Should use rabbitmq - w/ a pub/sub type sorting by Device ID
-# ToDo: Add to README
-# ToDo: Talk to Brad about using a wrapper for method class to handle unexpected exceptions and security clearance
-
 app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
 

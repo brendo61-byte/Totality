@@ -30,7 +30,7 @@ if __name__ == '__main__':
             logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
             logging.info("\n\nLaunching Program")
             pipe = dataPipe.DataPipe()
-            DM = deviceManager(pipe=pipe, deviceID=DID, test=config["test"])
+            DM = deviceManager(pipe=pipe, deviceID=DID, test=config["test"], threadLimit=config["threadLimit"])
 
             useLauncher = False
             if config["launcher"]["args"] != 'None' and bool(config["launcher"]["args"]):

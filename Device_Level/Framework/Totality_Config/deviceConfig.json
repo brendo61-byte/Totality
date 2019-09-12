@@ -29,5 +29,6 @@
   },
   "logLevel": "DEBUG",
   "test": "True",
-  "deviceID": 1
+  "deviceID": 1,
+  "threadLimit": 10
 }
