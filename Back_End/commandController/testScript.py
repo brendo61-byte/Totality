@@ -17,7 +17,6 @@ GET_COMMANDS = "http://localhost:8802/device/commands/getCommands"
 def testNewSupervisor():
     body = {
         "supervisorType": "intMaker",
-        "supervisorID": 5,
         "deviceID": 1
     }
     response = requests.post(url=NEW_SUPERVISOR, json=body)
@@ -28,19 +27,7 @@ def testNewSupervisor():
 # tests that a 400 is returned when a supervisorType is not included in body
 def testNewSupervisorSupervisorTypeFailure():
     body = {
-        "supervisorID": 5,
         "deviceID": 1
-    }
-    response = requests.post(url=NEW_SUPERVISOR, json=body)
-
-    assert response.status_code == 400
-
-
-# tests that a 400 is returned when a deviceID is not included in body
-def testNewSupervisorDeviceIDFalure():
-    body = {
-        "supervisorType": "intMaker",
-        "supervisorID": 5
     }
     response = requests.post(url=NEW_SUPERVISOR, json=body)
 
@@ -51,7 +38,6 @@ def testNewSupervisorDeviceIDFalure():
 def testNewSupervisorFalseDeviceIdFailure():
     body = {
         "supervisorType": "intMaker",
-        "supervisorID": 5,
         "deviceID": 1234567890
     }
     response = requests.post(url=NEW_SUPERVISOR, json=body)

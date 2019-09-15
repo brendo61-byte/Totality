@@ -19,6 +19,7 @@ newDeviceBody = {
     "customerOwner": 1
 }
 
+
 print("Begin Seeding")
 try:
     requests.post(url=NEW_CUSTOMER, json=newCustomerBody)

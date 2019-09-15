@@ -148,7 +148,7 @@ def dropDevice():
 
     try:
         device = Device.get(Device.deviceID == DID)
-        device.delete_instance()
+        device.delete_instance(recursive=True)
         # ToDo: Send a shutdown command to the device? --- Team Question!
         logging.info("Drop Device Hit: Device Has Been Deleted. DID: {}".format(DID))
         return jsonify(userMessage="Device Has Been Deleted")

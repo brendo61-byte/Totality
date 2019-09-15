@@ -1,17 +1,19 @@
 from flask import Flask, request, jsonify
 from queue import Queue
-#from Back_End.commandController.models import *
+# from Back_End.commandController.models import *
 from models import *
 
 import datetime
 import logging
 import traceback
+import json
+import random
 
 CQ = Queue(maxsize=0)
 # ToDo: Should use rabbitmq - w/ a pub/sub type sorting by Device ID
 app = Flask(__name__)
-logging.basicConfig(level="DEBUG", filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
-
+logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 """
 This is the API for pushing new commands and pulling queued commands. There are a number of features that need to be added (see the #ToDo's around). Commands added
@@ -24,6 +26,7 @@ This is not implemented but the device knows how to handle "callBacks" so a litt
 needs to be set up too.
 
 """
+
 
 # ToDo: Link adding commands to the DB
 # ToDO: Add a 'get queued commands from DB' link
@@ -47,11 +50,18 @@ def validateDeviceExists(deviceID):
         logging.debug("Validate DID: DID '{}' Validate".format(deviceID))
         return True
     except peewee.IntegrityError as PTE:
-        logging.info("Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID, PTE, traceback.format_exc()))
+        logging.info(
+            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID,
+                                                                                                              PTE,
+                                                                                                              traceback.format_exc()))
     except peewee.OperationalError as POE:
-        logging.info("Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(deviceID, POE, traceback.format_exc()))
+        logging.info(
+            "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
+                deviceID, POE, traceback.format_exc()))
     except Exception as e:
-        logging.warning("Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e, traceback.format_exc()))
+        logging.warning(
+            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
+                                                                                                            traceback.format_exc()))
 
 
 def validateCommandAuth(token):
@@ -64,12 +74,21 @@ def validateDeviceAuth(token):
     return True
 
 
+def genRefID():
+    refID = random.randint(0, 2 ** 32)
+    q = Supervisor.select().where(Supervisor.refID == refID)
+
+    while q.exists():
+        refID = random.randint(0, 2 ** 32)
+        q = Supervisor.select().where(Supervisor.refID == refID)
+
+    return refID
+
+
 @app.route('/user/device/newSupervisor', methods=["POST"])
 def newSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
-    supervisorID = data.get('supervisorID')
-    # Todo: Supervisor ID should be dynamically created
     deviceID = data.get('deviceID')
     customConfig = data.get('customConfig')
     configStatus = True
@@ -89,10 +108,24 @@ def newSupervisor():
         logging.info("New Supervisor Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="New Supervisor Hit: Unable To Verify DID Existence"), 400
 
-    body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID, "customConfig": customConfig}
-    CF = makeCommandFormat(body=body, commandType="launcher", callBack=True)
-    CQ.put(CF)
-    logging.debug("New Supervisor Hit: New Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
+    refID = genRefID()
+    logging.debug("New Supervisor Hit: refID generated: {}".format(refID))
+
+    Supervisor.create(deviceOwner=deviceID, refID=refID)
+
+    q = Supervisor.select().where(Supervisor.refID == refID)
+    for entry in q:
+        supervisorID = entry.supervisorID
+        entry.refID = 0
+        entry.save()
+        logging.debug("New Supervisor Hit: supervisorID assigned: {}".format(supervisorID))
+
+    body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID,
+            "customConfig": customConfig}
+    CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True)).replace("'", "\'")
+    Command.create(command=CF, deviceOwner=deviceID)
+    logging.debug(
+        "New Supervisor Hit: New Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
             supervisorType, supervisorID, deviceID, configStatus))
 
     return jsonify(userMessage="New Supervisor Hit: New Supervisor Command Added To Queue"), 200
@@ -127,10 +160,12 @@ def updateSupervisor():
         logging.info("Update Supervisor Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="Unable To Verify DID Existence"), 400
 
-    body = {'supervisorType': supervisorType, 'supervisorID': supervisorID, 'customConfig': customConfig, "restart": True}
-    CF = makeCommandFormat(body=body, commandType="launcher",callBack=True)
-    CQ.put(CF)
-    logging.debug("Update Supervisor Hit: Update Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
+    body = {'supervisorType': supervisorType, 'supervisorID': supervisorID, 'customConfig': customConfig,
+            "restart": True}
+    CF = makeCommandFormat(body=body, commandType="launcher", callBack=True)
+    Command.create(command=CF, deviceOwner=deviceID)
+    logging.debug(
+        "Update Supervisor Hit: Update Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
             supervisorType, supervisorID, deviceID, configStatus))
 
     return jsonify(userMessage="Update Supervisor Command Added To Queue."), 200
@@ -155,10 +190,11 @@ def stopSupervisor():
 
     body = {"supervisorID": supervisorID}
     CF = makeCommandFormat(body=body, commandType="killSupervisor", callBack=True)
-    CQ.put(CF)
+    Command.create(command=CF, deviceOwner=deviceID)
     logging.debug("Stop Supervisor Hit: Stop Supervisor Command Added To Queue")
 
-    return jsonify(userMessage="Stop Supervisor Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID, supervisorID)), 200
+    return jsonify(userMessage="Stop Supervisor Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID,
+                                                                                                           supervisorID)), 200
 
 
 @app.route('/user/device/getSupervisorTags', methods=["POST"])
@@ -180,10 +216,11 @@ def getSupervisorTags():
 
     body = {"supervisorID": supervisorID}
     CF = makeCommandFormat(body=body, commandType="getTags")
-    CQ.put(CF)
+    Command.create(command=CF, deviceOwner=deviceID)
     logging.debug("Get Supervisor Tags Hit: Get Supervisor Tags Command Added To Queue")
 
-    return jsonify(userMessage="Get Tags Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID, supervisorID)), 200
+    return jsonify(
+        userMessage="Get Tags Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID, supervisorID)), 200
 
 
 @app.route('/user/device/getSupervisorInfo', methods=["POST"])
@@ -205,10 +242,11 @@ def getSupervisorInfo():
 
     body = {"supervisorID": supervisorID}
     CF = makeCommandFormat(body=body, commandType="getSupervisorInfo")
-    CQ.put(CF)
+    Command.create(command=CF, deviceOwner=deviceID)
     logging.debug("Get Supervisor Info Hit: Get Supervisor Info: Get Supervisor Info Command Added To Queue")
 
-    return jsonify(userMessage="Get Supervisor Info Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID, supervisorID)), 200
+    return jsonify(userMessage="Get Supervisor Info Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID,
+                                                                                                               supervisorID)), 200
 
 
 @app.route('/user/device/getAllLocalSupervisors', methods=["POST"])
@@ -226,19 +264,25 @@ def getAllLocalSupervisor():
 
     body = str(None)
     CF = makeCommandFormat(body=body, commandType="getAllLocalSupervisor", callBack=True)
-    CQ.put(CF)
+    Command.create(command=CF, deviceOwner=deviceID)
     logging.debug("Get All Local Supervisors Hit: Get All Local Supervisors: ")
 
     return jsonify(userMessage="Get ALL Supervisor Info Command Added To Queue"), 200
 
 
-def generateDeviceCommands():
-    # ToDo: Use a pub-sub module for sending commands
-    commandList = []
-    while not CQ.empty():
-        commandList.append(CQ.get())
+def generateDeviceCommands(deviceID):
+    query = Command.select().where(Command.deviceOwner == deviceID)
+    if not query.exists():
+        return []
+    else:
+        return convertCommandsToDict(query=query)
 
-    return commandList
+
+def convertCommandsToDict(query):
+    commandList = []
+    for entry in query:
+        command = str(entry.command)
+        commandList.append(json.loads(command))
 
 
 @app.route('/device/commands/getCommands', methods=["POST"])
@@ -257,13 +301,16 @@ def deviceGetCommands():
         device = Device.get(Device.deviceID == deviceID)
         device.missedCommands = 0
         device.timeOfLastCheckIn = datetime.datetime.utcnow()
-        device.commandTimeWindow = datetime.datetime.utcnow() + datetime.timedelta(seconds=device.commandControllerPeriod)
+        device.commandTimeWindow = datetime.datetime.utcnow() + datetime.timedelta(
+            seconds=device.commandControllerPeriod)
         device.save()
     except Exception as e:
-        logging.warning("Get Commands Hit: Could Not Update Device In Data Base. DID: {}\nException: {}\nTraceBack: {}".format(deviceID, e, traceback.format_exc()))
+        logging.warning(
+            "Get Commands Hit: Could Not Update Device In Data Base. DID: {}\nException: {}\nTraceBack: {}".format(
+                deviceID, e, traceback.format_exc()))
         return jsonify(userMessge="Unable To Update Device In Data Base"), 400
 
-    commandList = generateDeviceCommands()
+    commandList = generateDeviceCommands(deviceID=deviceID)
 
     if commandList:
         logging.debug("Get Commands  Hit: Returning Commands To DID: {}".format(deviceID))
