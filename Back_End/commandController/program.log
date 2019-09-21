@@ -1,2 +1,394 @@
-2019-07-16 15:47:37,249 - WARNING -  * Debugger is active!
-2019-07-16 15:47:37,253 - INFO -  * Debugger PIN: 134-442-503
+2019-09-21 15:34:46,905 - WARNING -  * Debugger is active!
+2019-09-21 15:34:46,909 - INFO -  * Debugger PIN: 312-177-428
+2019-09-21 15:34:46,920 - DEBUG - ('SELECT `t1`.`deviceID`, `t1`.`name`, `t1`.`location`, `t1`.`latitude`, `t1`.`longitude`, `t1`.`customerOwner_id`, `t1`.`dataControllerPeriod`, `t1`.`commandControllerPeriod`, `t1`.`timeOfLastCheckIn`, `t1`.`missedCommands`, `t1`.`commandTimeWindow`, `t1`.`status` FROM `device` AS `t1` WHERE (`t1`.`deviceID` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-09-21 15:34:46,923 - INFO - Validate DID: DID '1' Failed Validation. Operational Error.
+Exception: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+TraceBack: Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 583, in connect
+    **kwargs)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 707, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Back_End/commandController/commandControllerServerApp.py", line 47, in validateDeviceExists
+    Device.get(Device.deviceID == deviceID)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6201, in get
+    return sq.get()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6619, in get
+    return clone.execute(database)[0]
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1796, in inner
+    return method(self, database, *args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1867, in execute
+    return self._execute(database)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2038, in _execute
+    cursor = database.execute(self)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2994, in execute
+    return self.execute_sql(sql, params, commit=commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2988, in execute_sql
+    self.commit()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+2019-09-21 15:34:46,924 - DEBUG - ('SELECT `t1`.`deviceID`, `t1`.`name`, `t1`.`location`, `t1`.`latitude`, `t1`.`longitude`, `t1`.`customerOwner_id`, `t1`.`dataControllerPeriod`, `t1`.`commandControllerPeriod`, `t1`.`timeOfLastCheckIn`, `t1`.`missedCommands`, `t1`.`commandTimeWindow`, `t1`.`status` FROM `device` AS `t1` WHERE (`t1`.`deviceID` IS %s) LIMIT %s OFFSET %s', [None, 1, 0])
+2019-09-21 15:34:46,925 - INFO - Validate DID: DID 'None' Failed Validation. Operational Error.
+Exception: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+TraceBack: Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 583, in connect
+    **kwargs)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 707, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Back_End/commandController/commandControllerServerApp.py", line 47, in validateDeviceExists
+    Device.get(Device.deviceID == deviceID)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6201, in get
+    return sq.get()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6619, in get
+    return clone.execute(database)[0]
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1796, in inner
+    return method(self, database, *args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1867, in execute
+    return self._execute(database)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2038, in _execute
+    cursor = database.execute(self)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2994, in execute
+    return self.execute_sql(sql, params, commit=commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2988, in execute_sql
+    self.commit()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+2019-09-21 15:34:46,925 - INFO - Get Commands Hit: Unable To Verify DID Existence
+2019-09-21 15:34:46,926 - INFO - 127.0.0.1 - - [21/Sep/2019 15:34:46] "POST /device/commands/getCommands HTTP/1.1" 400 -
+2019-09-21 15:34:51,935 - DEBUG - ('SELECT `t1`.`deviceID`, `t1`.`name`, `t1`.`location`, `t1`.`latitude`, `t1`.`longitude`, `t1`.`customerOwner_id`, `t1`.`dataControllerPeriod`, `t1`.`commandControllerPeriod`, `t1`.`timeOfLastCheckIn`, `t1`.`missedCommands`, `t1`.`commandTimeWindow`, `t1`.`status` FROM `device` AS `t1` WHERE (`t1`.`deviceID` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-09-21 15:34:51,936 - INFO - Validate DID: DID '1' Failed Validation. Operational Error.
+Exception: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+TraceBack: Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 583, in connect
+    **kwargs)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 707, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Back_End/commandController/commandControllerServerApp.py", line 47, in validateDeviceExists
+    Device.get(Device.deviceID == deviceID)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6201, in get
+    return sq.get()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6619, in get
+    return clone.execute(database)[0]
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1796, in inner
+    return method(self, database, *args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1867, in execute
+    return self._execute(database)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2038, in _execute
+    cursor = database.execute(self)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2994, in execute
+    return self.execute_sql(sql, params, commit=commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2988, in execute_sql
+    self.commit()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+2019-09-21 15:34:51,937 - DEBUG - ('SELECT `t1`.`deviceID`, `t1`.`name`, `t1`.`location`, `t1`.`latitude`, `t1`.`longitude`, `t1`.`customerOwner_id`, `t1`.`dataControllerPeriod`, `t1`.`commandControllerPeriod`, `t1`.`timeOfLastCheckIn`, `t1`.`missedCommands`, `t1`.`commandTimeWindow`, `t1`.`status` FROM `device` AS `t1` WHERE (`t1`.`deviceID` IS %s) LIMIT %s OFFSET %s', [None, 1, 0])
+2019-09-21 15:34:51,938 - INFO - Validate DID: DID 'None' Failed Validation. Operational Error.
+Exception: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+TraceBack: Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 583, in connect
+    **kwargs)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 707, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Back_End/commandController/commandControllerServerApp.py", line 47, in validateDeviceExists
+    Device.get(Device.deviceID == deviceID)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6201, in get
+    return sq.get()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 6619, in get
+    return clone.execute(database)[0]
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1796, in inner
+    return method(self, database, *args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 1867, in execute
+    return self._execute(database)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2038, in _execute
+    cursor = database.execute(self)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2994, in execute
+    return self.execute_sql(sql, params, commit=commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2988, in execute_sql
+    self.commit()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2979, in execute_sql
+    cursor = self.cursor(commit)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2963, in cursor
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2923, in connect
+    self._initialize_connection(self._state.conn)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2759, in __exit__
+    reraise(new_type, new_type(*exc_args), traceback)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 183, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 2920, in connect
+    self._state.set_connection(self._connect())
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/peewee.py", line 3800, in _connect
+    conn = mysql.connect(db=self.database, **self.connect_params)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+peewee.OperationalError: (2003, "Can't connect to MySQL server on 'db' ([Errno 8] nodename nor servname provided, or not known)")
+
+2019-09-21 15:34:51,939 - INFO - Get Commands Hit: Unable To Verify DID Existence
+2019-09-21 15:34:51,939 - INFO - 127.0.0.1 - - [21/Sep/2019 15:34:51] "POST /device/commands/getCommands HTTP/1.1" 400 -

@@ -9,8 +9,6 @@ import traceback
 import json
 import random
 
-CQ = Queue(maxsize=0)
-# ToDo: Should use rabbitmq - w/ a pub/sub type sorting by Device ID
 app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -47,7 +45,7 @@ def makeCommandFormat(body, commandType, callBack=False):
 def validateDeviceExists(deviceID):
     try:
         Device.get(Device.deviceID == deviceID)
-        logging.debug("Validate DID: DID '{}' Validate".format(deviceID))
+        logging.debug("Validate DID: DID '{}' Validated".format(deviceID))
         return True
     except peewee.IntegrityError as PTE:
         logging.info(
@@ -111,24 +109,54 @@ def newSupervisor():
     refID = genRefID()
     logging.debug("New Supervisor Hit: refID generated: {}".format(refID))
 
-    Supervisor.create(deviceOwner=deviceID, refID=refID)
+    supervisorID = None
 
-    q = Supervisor.select().where(Supervisor.refID == refID)
-    for entry in q:
-        supervisorID = entry.supervisorID
-        entry.refID = 0
-        entry.save()
-        logging.debug("New Supervisor Hit: supervisorID assigned: {}".format(supervisorID))
+    try:
+        Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType)
+        logging.debug("New Supervisor Hit: Supervisor Created in DB")
 
-    body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID,
-            "customConfig": customConfig}
-    CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True)).replace("'", "\'")
-    Command.create(command=CF, deviceOwner=deviceID)
-    logging.debug(
-        "New Supervisor Hit: New Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
-            supervisorType, supervisorID, deviceID, configStatus))
+    except Exception as e:
+        logging.info("New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc()))
+        return jsonify(
+            userMesage="New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
+                e, traceback.format_exc())), 400
 
-    return jsonify(userMessage="New Supervisor Hit: New Supervisor Command Added To Queue"), 200
+    try:
+        q = Supervisor.select().where(Supervisor.refID == refID)
+
+        for entry in q:
+            supervisorID = entry.supervisorID
+            entry.refID = 0
+            entry.save()
+            logging.debug("New Supervisor Hit: SupervisorID assigned: {}".format(supervisorID))
+
+    except Exception as e:
+        logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc()))
+
+        return jsonify(
+            userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+                e, traceback.format_exc())), 400
+    try:
+
+        body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID,
+                "customConfig": customConfig}
+        CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True)).replace("'", "\'")
+        Command.create(command=CF, deviceOwner=deviceID)
+        logging.debug(
+            "New Supervisor Hit: New Supervisor Command Added. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
+                supervisorType, supervisorID, deviceID, configStatus))
+
+        return jsonify(userMessage="New Supervisor Hit: New Supervisor Command Added To Queue"), 200
+
+    except Exception as e:
+        logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc()))
+
+        return jsonify(
+            userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+                e, traceback.format_exc())), 400
 
 
 @app.route('/user/device/updateSupervisor', methods=["POST"])
@@ -272,22 +300,39 @@ def getAllLocalSupervisor():
 
 def generateDeviceCommands(deviceID):
     query = Command.select().where(Command.deviceOwner == deviceID)
+    logging.debug("Get Commands  Hit: Generating DB querry")
     if not query.exists():
-        return []
+        logging.debug("Get Commands  Hit: No commands in DB")
+        return None
     else:
-        return convertCommandsToDict(query=query)
+        return convertCommandsToDict(query=query, deviceID=deviceID)
 
 
-def convertCommandsToDict(query):
+def convertCommandsToDict(query, deviceID):
     commandList = []
-    for entry in query:
-        command = str(entry.command)
-        commandList.append(json.loads(command))
+    logging.debug("Get Commands  Hit: Parsing commands")
+    try:
+        for entry in query:
+            command = str(entry.command).replace("'", "\"")
+            logging.debug("Get Commands: DID no. {} has new command.\nCommand: {}".format(deviceID, command))
+            # entry.delivery = 1
+            # entry.save()
+            commandList.append(json.loads(command))
+
+    except Exception as e:
+        logging.warning(
+            "Get Commands: Unable to parse query to get DID no. commands\nException: {}\nTraceBack: {}".format(deviceID,
+                                                                                                               e,
+                                                                                                               traceback.format_exc()))
+
+    logging.debug("Get Commands Hit: Command List for DID no. {}:\nCL:{}".format(deviceID, commandList))
+
+    return commandList
 
 
 @app.route('/device/commands/getCommands', methods=["POST"])
 def deviceGetCommands():
-    deviceID = request.get_json().get('deviceID')
+    deviceID = request.get_json().get("deviceID")
 
     if deviceID is None:
         logging.info("Get Commands Hit: No DID Provided")

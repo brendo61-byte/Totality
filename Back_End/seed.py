@@ -25,7 +25,7 @@ try:
     requests.post(url=NEW_CUSTOMER, json=newCustomerBody)
     print("Seeded New Customer")
 except Exception as e:
-    print("Failed To See New Customer.Now Exiting Seeding Script.\nException: {}".format(e))
+    print("Failed To See New Customer. Now Exiting Seeding Script.\nException: {}".format(e))
     exit()
 
 try:

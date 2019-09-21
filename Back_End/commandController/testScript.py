@@ -20,9 +20,10 @@ def testNewSupervisor():
         "deviceID": 1
     }
     response = requests.post(url=NEW_SUPERVISOR, json=body)
-
     assert response.status_code == 200
 
+
+"""
 
 # tests that a 400 is returned when a supervisorType is not included in body
 def testNewSupervisorSupervisorTypeFailure():
@@ -328,3 +329,4 @@ def testGetCommandsDeviceIdFailure():
     response = requests.post(url=GET_COMMANDS, json=body)
 
     assert response.status_code == 400
+"""

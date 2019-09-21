@@ -32,8 +32,10 @@ class Device(BaseModel):
     dataControllerPeriod = peewee.FloatField(null=False)  # How often data will be regularly pushed -- in seconds
     commandControllerPeriod = peewee.FloatField(null=False)  # How often commands will be regularly pulled -- in seconds
     timeOfLastCheckIn = peewee.DateTimeField(null=True)  # Date time object
-    missedCommands = peewee.IntegerField(default=0, null=False)  # If device doesn't check-in with Command-Server during a command period then count += 1
-    commandTimeWindow = peewee.DateTimeField(null=False)  # Time that device must check in before missedCommand is incremented.
+    missedCommands = peewee.IntegerField(default=0,
+                                         null=False)  # If device doesn't check-in with Command-Server during a command period then count += 1
+    commandTimeWindow = peewee.DateTimeField(
+        null=False)  # Time that device must check in before missedCommand is incremented.
     status = peewee.IntegerField(default=0, null=False)
     # Todo: Get the status field working --- though dataController API
     # 0=No Connection has not been established,
@@ -47,27 +49,30 @@ class Command(BaseModel):
     refID = peewee.IntegerField(null=True)
     command = peewee.TextField(null=False)  # str of the command dict (see CCAPP)
     timeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # TS of when command was added
-    delivery = peewee.BooleanField(default=False, null=False)  # If the command has been sent to the device yet
-    status = peewee.BooleanField(default=False, null=False)  # If the command has been executed yet
-    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery', null=False)  # Back ref to know who gets the command
+    delivery = peewee.IntegerField(default=0,
+                                   null=False)  # If the command has been sent to the device yet. 0=F, 1=T
+    status = peewee.IntegerField(default=0, null=False)  # If the command has been executed yet. 0=F, 1=T
+    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
+                                         null=False)  # Back ref to know who gets the command
     # ToDo: Need security to determine if someone has privileges to give command to said device
 
 
 class ReliableDelivery(BaseModel):
     timeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # when payload was put into Db
     payload = peewee.CharField(null=False)  # payload for delivery
-    delivery = peewee.BooleanField(default=False)  # if the payload has been successfully sent
-    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery', null=False)  # Back ref to know who owns the payload
+    delivery = peewee.IntegerField(default=0)  # if the payload has been successfully sent. 0=F, 1=T
+    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
+                                         null=False)  # Back ref to know who owns the payload
 
 
 class Supervisor(BaseModel):
     name = peewee.CharField(null=True)
     refID = peewee.IntegerField(null=True)
+    supervisorType = peewee.CharField(null=False)
     supervisorID = peewee.AutoField(primary_key=True)  # Supervisor ID
     samplePeriod = peewee.IntegerField(default=1, null=False)
     deviceOwner = peewee.ForeignKeyField(Device, backref='intMaker', null=False)
-    customConfig = peewee.BooleanField(default=False, null=False)
-    # The above columns are static and ALL reader tables must include them
+    customConfig = peewee.IntegerField(default=0, null=False)  # 0=F, 1=T
 
 
 def makeTables():
