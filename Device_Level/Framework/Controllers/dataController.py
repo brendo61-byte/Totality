@@ -78,6 +78,7 @@ class DataController(Controller):
             "deviceID": self.deviceID
         }
 
+        print("Hi")
         return body
 
     def kill(self):
