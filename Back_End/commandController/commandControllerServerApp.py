@@ -8,6 +8,7 @@ import logging
 import traceback
 import json
 import random
+import peewee
 
 app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
@@ -29,7 +30,7 @@ needs to be set up too.
 # ToDo: Link adding commands to the DB
 # ToDO: Add a 'get queued commands from DB' link
 
-def makeCommandFormat(body, commandType, callBack=False):
+def makeCommandFormat(body, commandType, callBack=True):
     CF = {
         "commandType": commandType,
         "body": body,
@@ -59,6 +60,25 @@ def validateDeviceExists(deviceID):
     except Exception as e:
         logging.warning(
             "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
+                                                                                                            traceback.format_exc()))
+
+def validateSupervisorExists(supervisorID):
+    try:
+        Supervisor.get(Supervisor.supervisorID == supervisorID)
+        logging.debug("Validate DID: DID '{}' Validated".format(supervisorID))
+        return True
+    except peewee.IntegrityError as PTE:
+        logging.info(
+            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(supervisorID,
+                                                                                                              PTE,
+                                                                                                              traceback.format_exc()))
+    except peewee.OperationalError as POE:
+        logging.info(
+            "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
+                supervisorID, POE, traceback.format_exc()))
+    except Exception as e:
+        logging.warning(
+            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(supervisorID, e,
                                                                                                             traceback.format_exc()))
 
 
@@ -184,13 +204,17 @@ def updateSupervisor():
     else:
         configStatus = True
 
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
+    if not validateDeviceExists(deviceID=deviceID):
         logging.info("Update Supervisor Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="Unable To Verify DID Existence"), 400
 
+    if not validateSupervisorExists(supervisorID=supervisorID):
+        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
+        return jsonify(userMessage="Unable To Verify SID Existence"), 400
+
     body = {'supervisorType': supervisorType, 'supervisorID': supervisorID, 'customConfig': customConfig,
             "restart": True}
-    CF = makeCommandFormat(body=body, commandType="launcher", callBack=True)
+    CF = makeCommandFormat(body=body, commandType="launcher")
     Command.create(command=CF, deviceOwner=deviceID)
     logging.debug(
         "Update Supervisor Hit: Update Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
@@ -212,12 +236,16 @@ def stopSupervisor():
         logging.info("Stop Supervisor Hit: No DID Provided")
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
+    if not validateDeviceExists(deviceID):
         logging.info("Stop Supervisor Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="Unable To Verify DID Existence"), 400
 
+    if not validateSupervisorExists(supervisorID=supervisorID):
+        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
+        return jsonify(userMessage="Unable To Verify SID Existence"), 400
+
     body = {"supervisorID": supervisorID}
-    CF = makeCommandFormat(body=body, commandType="killSupervisor", callBack=True)
+    CF = makeCommandFormat(body=body, commandType="killSupervisor")
     Command.create(command=CF, deviceOwner=deviceID)
     logging.debug("Stop Supervisor Hit: Stop Supervisor Command Added To Queue")
 
@@ -238,9 +266,13 @@ def getSupervisorTags():
         logging.info("Get Supervisor Tags Hit: No DID Provided")
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
+    if not validateDeviceExists(deviceID):
         logging.info("Get Supervisor Tags Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="Unable To Verify DID Existence"), 400
+
+    if not validateSupervisorExists(supervisorID=supervisorID):
+        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
+        return jsonify(userMessage="Unable To Verify SID Existence"), 400
 
     body = {"supervisorID": supervisorID}
     CF = makeCommandFormat(body=body, commandType="getTags")
@@ -264,9 +296,13 @@ def getSupervisorInfo():
         logging.info("Get Supervisor Info Hit: No DID Provided")
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
+    if not validateDeviceExists(deviceID):
         logging.info("Get Supervisor Info Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="Unable To Verify DID Existence"), 400
+
+    if not validateSupervisorExists(supervisorID=supervisorID):
+        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
+        return jsonify(userMessage="Unable To Verify SID Existence"), 400
 
     body = {"supervisorID": supervisorID}
     CF = makeCommandFormat(body=body, commandType="getSupervisorInfo")

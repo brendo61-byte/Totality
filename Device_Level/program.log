@@ -1,11 +1,38 @@
-2019-09-06 14:36:18,057 - INFO - 
+2019-09-24 16:55:46,149 - INFO - 
 
 Launching Program
-2019-09-06 14:36:18,065 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:18,065 - INFO - All Threads Launched Successfully
-2019-09-06 14:36:18,065 - INFO - Starting Tests ...
-2019-09-06 14:36:18,073 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:18,074 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-24 16:55:46,156 - DEBUG - Preforming Data-Push
+2019-09-24 16:55:46,156 - INFO - All Threads Launched Successfully
+2019-09-24 16:55:46,156 - INFO - Starting Tests ...
+2019-09-24 16:55:46,164 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-24 16:55:46,165 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 10,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-09-24 16:55:46,168 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "True",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 12,
+    "supervisorName": "Little Thanos",
+    "supervisorType": "intMaker"
+}
+
+2019-09-24 16:55:46,169 - INFO - All Launch Supervisors Spawned Successfully
+2019-09-24 16:55:46,186 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
+2019-09-24 16:55:46,187 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-24 16:55:46,187 - DEBUG - New Commands Received.
+Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType': 'intMaker'}, 'callBack': 'True', 'commandType': 'launcher'}]
+2019-09-24 16:55:46,191 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -16,385 +43,103 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-06 14:36:18,079 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "True",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 2,
-    "supervisorName": "Little Thanos",
-    "supervisorType": "intMaker"
-}
-
-2019-09-06 14:36:18,079 - INFO - All Launch Supervisors Spawned Successfully
-2019-09-06 14:36:18,088 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:18,088 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:18,088 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:20,066 - INFO - Device_Level Manager Test:
-2019-09-06 14:36:21,077 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-24 16:55:46,191 - INFO - New Command Passed To Manger
+Command Type: launcher
+Call Back True
+2019-09-24 16:55:48,156 - INFO - Device_Level Manager Test:
+2019-09-24 16:55:49,167 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1086,
+    "supervisorID": 1077,
     "supervisorName": "intMaker",
     "supervisorType": "intMaker"
 }
 
-2019-09-06 14:36:21,081 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-24 16:55:49,171 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1081,
+    "supervisorID": 1079,
     "supervisorName": "TestSupervisor",
     "supervisorType": "intMaker"
 }
 
-2019-09-06 14:36:21,081 - INFO - supervisor Killed. Dead supervisorID: 1086
-2019-09-06 14:36:21,082 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-24 16:55:49,172 - INFO - supervisor Killed. Dead supervisorID: 1077
+2019-09-24 16:55:49,172 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1086,
+    "supervisorID": 1077,
     "supervisorName": "UpdatedSupervisor",
     "supervisorType": "intMaker"
 }
 
-2019-09-06 14:36:21,082 - DEBUG - Starting CleanUp
-2019-09-06 14:36:21,082 - DEBUG - Cleaning Supervisor ID: 1081
-2019-09-06 14:36:21,082 - INFO - supervisor Killed. Dead supervisorID: 1081
-2019-09-06 14:36:23,065 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:23,071 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,083 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,086 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,090 - DEBUG - Cleaning Supervisor ID: 1086
-2019-09-06 14:36:23,090 - INFO - supervisor Killed. Dead supervisorID: 1086
-2019-09-06 14:36:23,093 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:23,096 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,099 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,106 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:23,107 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:23,107 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:23,108 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,111 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,119 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,122 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,131 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,134 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,142 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,145 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,154 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,155 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
-Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1081/localCSV.csv'
+2019-09-24 16:55:49,172 - DEBUG - Starting CleanUp
+2019-09-24 16:55:49,172 - DEBUG - Cleaning Supervisor ID: 1079
+2019-09-24 16:55:49,172 - INFO - supervisor Killed. Dead supervisorID: 1079
+2019-09-24 16:55:51,161 - DEBUG - Preforming Data-Push
+2019-09-24 16:55:51,166 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,178 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,180 - DEBUG - Cleaning Supervisor ID: 1077
+2019-09-24 16:55:51,180 - INFO - supervisor Killed. Dead supervisorID: 1077
+2019-09-24 16:55:51,182 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,191 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,194 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-24 16:55:51,195 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,204 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,208 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,218 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,219 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
+2019-09-24 16:55:51,221 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-24 16:55:51,221 - DEBUG - New Commands Received.
+Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType': 'intMaker'}, 'callBack': 'True', 'commandType': 'launcher'}]
+2019-09-24 16:55:51,222 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,233 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,236 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,246 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,249 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,259 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,262 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,272 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,275 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,285 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,288 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,299 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,300 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
+Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1079/localCSV.csv'
 Traceback (most recent call last):
   File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/dataController.py", line 52, in localCSV
     with open(path, 'a') as csvFile:
-FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1081/localCSV.csv'
+FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1079/localCSV.csv'
 
-2019-09-06 14:36:23,157 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,167 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,169 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,178 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,180 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,189 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,192 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,200 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,203 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,212 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,215 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,223 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,226 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,235 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,238 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,247 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:23,249 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:23,258 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:25,097 - DEBUG - deviceMangerTester: CleanUp Complete
-
-2019-09-06 14:36:25,098 - DEBUG - deviceManagerTester: All Tests Passed Successfully
-
-2019-09-06 14:36:28,113 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:28,131 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:28,132 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:28,132 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:28,263 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:28,267 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,279 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,282 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,291 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,294 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,303 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,306 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,315 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,318 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,327 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,330 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,339 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,342 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,352 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,354 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,363 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,366 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,375 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:28,378 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:28,388 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,140 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:33,153 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:33,154 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:33,154 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:33,392 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:33,396 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,407 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,410 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,418 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,421 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,430 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,433 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,442 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,444 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,453 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,455 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,465 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,468 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,476 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,479 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,488 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,491 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,500 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:33,503 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:33,512 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,161 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:38,177 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:38,177 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:38,177 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:38,515 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:38,520 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,531 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,534 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,548 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,551 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,560 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,562 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,571 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,574 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,582 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,584 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,593 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,596 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,606 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,609 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,618 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,621 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,630 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:38,632 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:38,643 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,182 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:43,197 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:43,197 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:43,197 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:43,644 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:43,648 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,659 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,662 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,671 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,674 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,682 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,685 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,693 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,696 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,705 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,708 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,716 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,719 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,727 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,730 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,739 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,742 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,751 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:43,754 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:43,763 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,203 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:48,223 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:48,224 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:48,224 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:48,763 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:48,766 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,776 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,779 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,788 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,791 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,799 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,802 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,811 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,813 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,822 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,825 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,833 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,836 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,845 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,848 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,858 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,861 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,870 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:48,873 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:48,882 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,232 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:53,250 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:53,251 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:53,251 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:53,887 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:53,890 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,901 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,904 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,912 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,914 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,923 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,925 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,935 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,938 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,945 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,948 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,957 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,959 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,968 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,970 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,978 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,981 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:53,989 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:53,992 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:54,001 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:58,255 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:36:58,271 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:36:58,272 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:36:58,272 - DEBUG - No New Commands To Execute
-2019-09-06 14:36:59,002 - DEBUG - Preforming Data-Push
-2019-09-06 14:36:59,006 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,019 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,022 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,032 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,034 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,042 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,045 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,053 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,056 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,063 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,066 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,075 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,077 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,084 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,087 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,095 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,097 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,106 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:36:59,109 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:36:59,116 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:03,277 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:37:03,291 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:37:03,292 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:37:03,292 - DEBUG - No New Commands To Execute
-2019-09-06 14:37:04,119 - DEBUG - Preforming Data-Push
-2019-09-06 14:37:04,122 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,135 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,138 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,146 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,148 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,157 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,159 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,167 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,169 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,177 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,180 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,189 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,192 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,200 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,203 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,211 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,213 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,222 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,225 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,232 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,235 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,244 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:04,246 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:04,255 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:08,299 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:37:08,317 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:37:08,318 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:37:08,318 - DEBUG - No New Commands To Execute
-2019-09-06 14:37:09,259 - DEBUG - Preforming Data-Push
-2019-09-06 14:37:09,263 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,273 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,277 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,286 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,288 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,296 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,299 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,308 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,311 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,321 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,323 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,332 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,336 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,345 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,348 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,356 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,359 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,367 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:09,370 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:09,377 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:13,327 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:37:13,343 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:37:13,344 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:37:13,344 - DEBUG - No New Commands To Execute
-2019-09-06 14:37:14,381 - DEBUG - Preforming Data-Push
-2019-09-06 14:37:14,386 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,397 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,400 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,408 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,411 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,419 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,422 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,430 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,433 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,442 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,445 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,453 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,456 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,464 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,468 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,476 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,479 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,487 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:14,490 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:14,498 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:18,350 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-06 14:37:18,371 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-09-06 14:37:18,372 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-06 14:37:18,372 - DEBUG - No New Commands To Execute
-2019-09-06 14:37:19,501 - DEBUG - Preforming Data-Push
-2019-09-06 14:37:19,505 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,515 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,518 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,527 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,529 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,538 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,541 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,549 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,552 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,561 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,564 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,572 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,575 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,584 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,587 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,597 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,600 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,610 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-06 14:37:19,613 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-06 14:37:19,623 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,302 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,312 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,315 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,328 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,331 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,342 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,345 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,354 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,357 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,367 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,371 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,381 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,384 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,395 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,398 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,410 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,413 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,426 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,429 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,439 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,442 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,451 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-24 16:55:51,454 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-24 16:55:51,464 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53

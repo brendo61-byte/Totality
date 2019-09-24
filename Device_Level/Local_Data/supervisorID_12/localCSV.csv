@@ -1,0 +1,7 @@
+someInt,supervisorID,supervisorName,deviceID,customConfig,timeStamp(UTC)
+25,12,Little Thanos,1,True,09/24/2019-22:55:46
+11,12,Little Thanos,1,True,09/24/2019-22:55:47
+2,12,Little Thanos,1,True,09/24/2019-22:55:48
+53,12,Little Thanos,1,True,09/24/2019-22:55:49
+45,12,Little Thanos,1,True,09/24/2019-22:55:50
+48,12,Little Thanos,1,True,09/24/2019-22:55:51

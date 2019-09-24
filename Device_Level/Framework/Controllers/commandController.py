@@ -51,7 +51,7 @@ class CommandController(Controller):
             return None
 
     def executeCommands(self, commands):
-        for command in commands.json()["commands"]:
+        for command in commands["commands"]:
             try:
                 commandType = command["commandType"]
                 body = command["body"]

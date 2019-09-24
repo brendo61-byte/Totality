@@ -4,12 +4,12 @@
       "supervisorList": [
         {
           "supervisorType": "intMaker",
-          "supervisorID": 1,
+          "supervisorID": 10,
           "customConfig": "None"
         },
         {
           "supervisorType": "intMaker",
-          "supervisorID": 2,
+          "supervisorID": 12,
           "customConfig": {
             "supervisorName": "Little Thanos"
           }

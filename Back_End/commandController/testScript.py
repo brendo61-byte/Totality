@@ -23,8 +23,6 @@ def testNewSupervisor():
     assert response.status_code == 200
 
 
-"""
-
 # tests that a 400 is returned when a supervisorType is not included in body
 def testNewSupervisorSupervisorTypeFailure():
     body = {
@@ -52,7 +50,7 @@ def testNewSupervisorFalseDeviceIdFailure():
 def testUpdateSupervisor():
     body = {
         "supervisorType": "intMaker",
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1,
         "customConfig": {
             "supervisorName": "Little Thanos"
@@ -64,11 +62,27 @@ def testUpdateSupervisor():
     assert response.status_code == 200
 
 
+# tests that a 400 is returned when trying to update a supervisor with a false ID
+def testUpdateSupervisorFalseSupervisorID():
+    body = {
+        "supervisorType": "intMaker",
+        "supervisorID": 123456789,
+        "deviceID": 1,
+        "customConfig": {
+            "supervisorName": "Little Thanos"
+        }
+    }
+
+    response = requests.post(url=UPDATE_SUPERVISOR, json=body)
+
+    assert response.status_code == 400
+
+
 # tests that a 400 is returned when tyring to update a supervisor with a false device ID
 def testUpdateSupervisorFalseDeviceIDFailure():
     body = {
         "supervisorType": "intMaker",
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1234567890,
         "customConfig": {
             "supervisorName": "Little Thanos"
@@ -83,7 +97,7 @@ def testUpdateSupervisorFalseDeviceIDFailure():
 # tests that a 400 is returned when supervisorType is None
 def testUpdateSupervisorSupervisorTypeFailure():
     body = {
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1,
         "customConfig": {
             "supervisorName": "Little Thanos"
@@ -129,7 +143,7 @@ def testUpdateSupervisorDeviceIDFailure():
 def testUpdateSupervisorCustomConfigFailure():
     body = {
         "supervisorType": "intMaker",
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1
     }
 
@@ -143,7 +157,7 @@ def testUpdateSupervisorCustomConfigFailure():
 # tests that a 200 is returned for supervisor stop command
 def testStopSupervisor():
     body = {
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1
     }
 
@@ -191,7 +205,7 @@ def testStopSupervisordeviceIDFailure():
 # tests that a 200 is returned for get tags
 def testGetSupervisorTags():
     body = {
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1
     }
 
@@ -200,10 +214,11 @@ def testGetSupervisorTags():
     assert response.status_code == 200
 
 
-# tests that a 400 is returned when supervisor ID is None
-def testGetSupervisorTagsIDFailure():
+# tests that a 400 is returned with a false supervisor ID
+def testGetSupervisorTagsFalseSupervisorID():
     body = {
-        "supervisorID": 2
+        "supervisorID": 123456789,
+        "deviceID": 1
     }
 
     response = requests.post(url=GET_TAGS, json=body)
@@ -211,7 +226,18 @@ def testGetSupervisorTagsIDFailure():
     assert response.status_code == 400
 
 
-# tests that a 400 is returned for get tags when deviceId is None
+# tests that a 400 is returned when supervisor ID is None
+def testGetSupervisorTagsIDFailure():
+    body = {
+        "supervisorID": 1
+    }
+
+    response = requests.post(url=GET_TAGS, json=body)
+
+    assert response.status_code == 400
+
+
+# tests that a 400 is returned for get tags when deviceID is None
 def testGetSupervisorTagsDeviceIDFailure():
     body = {
         "deviceID": 1
@@ -227,7 +253,7 @@ def testGetSupervisorTagsDeviceIDFailure():
 # tests that a 200 is returned for supervisor stop command
 def testGetSupervisorInfo():
     body = {
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1
     }
 
@@ -235,11 +261,21 @@ def testGetSupervisorInfo():
 
     assert response.status_code == 200
 
+# tests that a 400 is returned with a false Supervisor ID
+def testGetSupervisorInfoFalseSupervisorID():
+    body = {
+        "supervisorID": 123456789,
+        "deviceID": 1
+    }
+
+    response = requests.post(url=GET_SUPERVISOR_INFO, json=body)
+
+    assert response.status_code == 400
 
 # tests that a 400 is returned for supervisor stop command
 def testGetSupervisorInfoFalseDeviceIDFail():
     body = {
-        "supervisorID": 5,
+        "supervisorID": 1,
         "deviceID": 1234567890
     }
 
@@ -261,7 +297,7 @@ def testGetSupervisorInfoIDFailure():
 # tests that a 400 is returned for supervisor stop command when deviceID is None
 def testGetSupervisorInfoDeviceIdFailure():
     body = {
-        "supervisorID": 5,
+        "supervisorID": 1,
     }
 
     response = requests.post(url=GET_SUPERVISOR_INFO, json=body)
@@ -329,4 +365,3 @@ def testGetCommandsDeviceIdFailure():
     response = requests.post(url=GET_COMMANDS, json=body)
 
     assert response.status_code == 400
-"""

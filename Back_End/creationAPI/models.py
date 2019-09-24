@@ -46,7 +46,6 @@ class Device(BaseModel):
 
 class Command(BaseModel):
     commandID = peewee.AutoField(primary_key=True)
-    refID = peewee.IntegerField(null=True)
     command = peewee.TextField(null=False)  # str of the command dict (see CCAPP)
     timeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # TS of when command was added
     delivery = peewee.IntegerField(default=0,
