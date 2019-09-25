@@ -1,7 +1,0 @@
-someInt,supervisorID,supervisorName,deviceID,customConfig,timeStamp(UTC)
-23,10,intMaker,1,False,09/24/2019-22:55:46
-33,10,intMaker,1,False,09/24/2019-22:55:47
-29,10,intMaker,1,False,09/24/2019-22:55:48
-49,10,intMaker,1,False,09/24/2019-22:55:49
-93,10,intMaker,1,False,09/24/2019-22:55:50
-28,10,intMaker,1,False,09/24/2019-22:55:51

@@ -1,22 +1,21 @@
-2019-09-24 16:55:46,149 - INFO - 
+2019-09-25 13:26:46,610 - INFO - 
 
 Launching Program
-2019-09-24 16:55:46,156 - DEBUG - Preforming Data-Push
-2019-09-24 16:55:46,156 - INFO - All Threads Launched Successfully
-2019-09-24 16:55:46,156 - INFO - Starting Tests ...
-2019-09-24 16:55:46,164 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-24 16:55:46,165 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-25 13:26:46,611 - DEBUG - Preforming Data-Push
+2019-09-25 13:26:46,611 - INFO - All Threads Launched Successfully
+2019-09-25 13:26:46,623 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-25 13:26:46,624 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 10,
+    "supervisorID": 11,
     "supervisorName": "intMaker",
     "supervisorType": "intMaker"
 }
 
-2019-09-24 16:55:46,168 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-25 13:26:46,625 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
@@ -27,12 +26,12 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-24 16:55:46,169 - INFO - All Launch Supervisors Spawned Successfully
-2019-09-24 16:55:46,186 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
-2019-09-24 16:55:46,187 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-24 16:55:46,187 - DEBUG - New Commands Received.
+2019-09-25 13:26:46,625 - INFO - All Launch Supervisors Spawned Successfully
+2019-09-25 13:26:46,641 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
+2019-09-25 13:26:46,641 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-25 13:26:46,641 - DEBUG - New Commands Received.
 Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType': 'intMaker'}, 'callBack': 'True', 'commandType': 'launcher'}]
-2019-09-24 16:55:46,191 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-25 13:26:46,642 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -43,103 +42,48 @@ Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType'
     "supervisorType": "intMaker"
 }
 
-2019-09-24 16:55:46,191 - INFO - New Command Passed To Manger
+2019-09-25 13:26:46,642 - INFO - New Command Passed To Manger
 Command Type: launcher
 Call Back True
-2019-09-24 16:55:48,156 - INFO - Device_Level Manager Test:
-2019-09-24 16:55:49,167 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "False",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 1077,
-    "supervisorName": "intMaker",
-    "supervisorType": "intMaker"
-}
-
-2019-09-24 16:55:49,171 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "True",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 1079,
-    "supervisorName": "TestSupervisor",
-    "supervisorType": "intMaker"
-}
-
-2019-09-24 16:55:49,172 - INFO - supervisor Killed. Dead supervisorID: 1077
-2019-09-24 16:55:49,172 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "True",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 1077,
-    "supervisorName": "UpdatedSupervisor",
-    "supervisorType": "intMaker"
-}
-
-2019-09-24 16:55:49,172 - DEBUG - Starting CleanUp
-2019-09-24 16:55:49,172 - DEBUG - Cleaning Supervisor ID: 1079
-2019-09-24 16:55:49,172 - INFO - supervisor Killed. Dead supervisorID: 1079
-2019-09-24 16:55:51,161 - DEBUG - Preforming Data-Push
-2019-09-24 16:55:51,166 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,178 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,180 - DEBUG - Cleaning Supervisor ID: 1077
-2019-09-24 16:55:51,180 - INFO - supervisor Killed. Dead supervisorID: 1077
-2019-09-24 16:55:51,182 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,191 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,194 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-24 16:55:51,195 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,204 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,208 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,218 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,219 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
-2019-09-24 16:55:51,221 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-24 16:55:51,221 - DEBUG - New Commands Received.
+2019-09-25 13:26:51,616 - DEBUG - Preforming Data-Push
+2019-09-25 13:26:51,620 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,634 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,637 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,647 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-09-25 13:26:51,648 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,651 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,661 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,664 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,666 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
+2019-09-25 13:26:51,666 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-09-25 13:26:51,666 - DEBUG - New Commands Received.
 Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType': 'intMaker'}, 'callBack': 'True', 'commandType': 'launcher'}]
-2019-09-24 16:55:51,222 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,233 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,236 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,246 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,249 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,259 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,262 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,272 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,275 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,285 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,288 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,299 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,300 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
-Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1079/localCSV.csv'
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/dataController.py", line 52, in localCSV
-    with open(path, 'a') as csvFile:
-FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1079/localCSV.csv'
-
-2019-09-24 16:55:51,302 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,312 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,315 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,328 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,331 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,342 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,345 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,354 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,357 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,367 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,371 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,381 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,384 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,395 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,398 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,410 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,413 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,426 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,429 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,439 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,442 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,451 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-24 16:55:51,454 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-24 16:55:51,464 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,675 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,678 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,688 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,691 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,702 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,704 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,714 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,717 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,727 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,729 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,740 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,743 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,753 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,756 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,766 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,769 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,778 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,781 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,791 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,794 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,804 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,807 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,817 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,820 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,829 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,832 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,842 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 13:26:51,845 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-09-25 13:26:51,854 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53

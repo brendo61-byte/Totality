@@ -55,9 +55,12 @@ class DataController(Controller):
 
 
         except FileNotFoundError as FNFE:
-            logging.warning("File Not Error Occurred When Trying To Save Data Locally.\nError Message: {}\n{}".format(FNFE, traceback.format_exc()))
+            logging.warning(
+                "File Not Error Occurred When Trying To Save Data Locally.\nError Message: {}\n{}".format(FNFE,
+                                                                                                          traceback.format_exc()))
         except AttributeError as AE:
-            logging.warning("Attribute Error Occured When Trying To Save Data Locally\nError Message: {}\n{}".format(AE, traceback.format_exc()))
+            logging.warning("Attribute Error Occured When Trying To Save Data Locally\nError Message: {}\n{}".format(AE,
+                                                                                                                     traceback.format_exc()))
         except Exception as E:
             logging.warning("Failed To Save Data Locally.\nError Message: {}\n{}".format(E, traceback.format_exc()))
 
@@ -78,7 +81,6 @@ class DataController(Controller):
             "deviceID": self.deviceID
         }
 
-        print("Hi")
         return body
 
     def kill(self):

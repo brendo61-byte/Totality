@@ -60,6 +60,7 @@ class CommandController(Controller):
                     body["callBack"] = True
 
                 try:
+                    print("Command: {}".format(command))
                     methodToCall = getattr(self.DM, commandType)
                     methodToCall(**body)
 
