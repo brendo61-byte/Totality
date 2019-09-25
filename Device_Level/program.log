@@ -1,10 +1,8 @@
-2019-09-25 13:26:46,610 - INFO - 
+2019-09-25 15:03:30,180 - INFO - 
 
 Launching Program
-2019-09-25 13:26:46,611 - DEBUG - Preforming Data-Push
-2019-09-25 13:26:46,611 - INFO - All Threads Launched Successfully
-2019-09-25 13:26:46,623 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-25 13:26:46,624 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-25 15:03:30,181 - INFO - All Threads Launched Successfully
+2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -15,7 +13,7 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-25 13:26:46,625 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
@@ -26,64 +24,79 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-25 13:26:46,625 - INFO - All Launch Supervisors Spawned Successfully
-2019-09-25 13:26:46,641 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
-2019-09-25 13:26:46,641 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-25 13:26:46,641 - DEBUG - New Commands Received.
-Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType': 'intMaker'}, 'callBack': 'True', 'commandType': 'launcher'}]
-2019-09-25 13:26:46,642 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "False",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 1,
-    "supervisorName": "intMaker",
-    "supervisorType": "intMaker"
-}
+2019-09-25 15:03:30,187 - INFO - All Launch Supervisors Spawned Successfully
+2019-09-25 15:03:35,247 - INFO - New Commands Received.
+Commands: [
+    {
+        "body": {
+            "supervisorID": 1
+        },
+        "callBack": "True",
+        "commandType": "killSupervisor"
+    },
+    {
+        "body": {
+            "supervisorID": 1
+        },
+        "callBack": "True",
+        "commandType": "getSupervisorTags"
+    },
+    {
+        "body": {
+            "supervisorID": 1
+        },
+        "callBack": "True",
+        "commandType": "getSupervisorInfo"
+    },
+    {
+        "body": "None",
+        "callBack": "True",
+        "commandType": "getAllLocalSupervisor"
+    }
+]
+2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
+Command Type: killSupervisor
+callBack: True
+Body: {'supervisorID': 1, 'callBack': True}
+Error Message: 1
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
+    methodToCall(**body)
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 125, in killSupervisor
+    supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 150, in getSupervisorInstance
+    return self.MasterSupervisorDict[supervisorID]
+KeyError: 1
 
-2019-09-25 13:26:46,642 - INFO - New Command Passed To Manger
-Command Type: launcher
-Call Back True
-2019-09-25 13:26:51,616 - DEBUG - Preforming Data-Push
-2019-09-25 13:26:51,620 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,634 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,637 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,647 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-09-25 13:26:51,648 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,651 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,661 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,664 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,666 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 259
-2019-09-25 13:26:51,666 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-09-25 13:26:51,666 - DEBUG - New Commands Received.
-Commands: [{'body': {'customConfig': 'None', 'supervisorID': 1, 'supervisorType': 'intMaker'}, 'callBack': 'True', 'commandType': 'launcher'}]
-2019-09-25 13:26:51,675 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,678 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,688 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,691 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,702 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,704 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,714 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,717 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,727 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,729 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,740 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,743 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,753 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,756 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,766 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,769 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,778 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,781 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,791 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,794 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,804 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,807 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,817 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,820 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,829 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,832 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,842 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-09-25 13:26:51,845 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-09-25 13:26:51,854 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
+Command Type: getSupervisorTags
+callBack: True
+Body: {'supervisorID': 1, 'callBack': True}
+Error Message: 1
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
+    methodToCall(**body)
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 132, in getSupervisorTags
+    supervisor = self.MasterSupervisorDict[supervisorID]
+KeyError: 1
+
+2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
+Command Type: getSupervisorInfo
+callBack: True
+Body: {'supervisorID': 1, 'callBack': True}
+Error Message: 1
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
+    methodToCall(**body)
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 136, in getSupervisorInfo
+    supervisor = self.MasterSupervisorDict[supervisorID]
+KeyError: 1
+
+2019-09-25 15:03:35,248 - WARNING - Exception Decoding Command. Command Failed
+Error Message: 'str' object does not support item assignment
+Full Json Command: {'body': 'None', 'callBack': 'True', 'commandType': 'getAllLocalSupervisor'}
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 77, in executeCommands
+    body["callBack"] = True
+TypeError: 'str' object does not support item assignment
+

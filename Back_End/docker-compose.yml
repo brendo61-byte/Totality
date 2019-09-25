@@ -26,14 +26,26 @@ services:
     ports:
       - "8801:8801"
 
+#  db:
+#   container_name: db
+#   image: mysql:5.6
+#   restart: always
+#   environment:
+#     MYSQL_ROOT_PASSWORD: example
+#     MYSQL_USER: root
+#     MYSQL_HOST: localhost
+#     MYSQL_DATABASE: IoT
+#   ports:
+#     - "3306:3306"
+
   db:
-   container_name: db
-   image: mysql:5.6
-   restart: always
-   environment:
-     MYSQL_ROOT_PASSWORD: example
-     MYSQL_USER: root
-     MYSQL_HOST: localhost
-     MYSQL_DATABASE: IoT
-   ports:
-     - "3306:3306"
+    container_name: db
+    build: ./DataBase/
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: root
+      MYSQL_HOST: localhost
+      MYSQL_DATABASE: IoT
+    ports:
+      - "3306:3306"

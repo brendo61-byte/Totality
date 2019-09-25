@@ -11,7 +11,7 @@ import random
 import peewee
 
 app = Flask(__name__)
-logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
+logging.basicConfig(level="INFO", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 """
@@ -62,6 +62,7 @@ def validateDeviceExists(deviceID):
             "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
                                                                                                             traceback.format_exc()))
 
+
 def validateSupervisorExists(supervisorID):
     try:
         Supervisor.get(Supervisor.supervisorID == supervisorID)
@@ -69,17 +70,19 @@ def validateSupervisorExists(supervisorID):
         return True
     except peewee.IntegrityError as PTE:
         logging.info(
-            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(supervisorID,
-                                                                                                              PTE,
-                                                                                                              traceback.format_exc()))
+            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(
+                supervisorID,
+                PTE,
+                traceback.format_exc()))
     except peewee.OperationalError as POE:
         logging.info(
             "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
                 supervisorID, POE, traceback.format_exc()))
     except Exception as e:
         logging.warning(
-            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(supervisorID, e,
-                                                                                                            traceback.format_exc()))
+            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(
+                supervisorID, e,
+                traceback.format_exc()))
 
 
 def validateCommandAuth(token):
@@ -275,7 +278,7 @@ def getSupervisorTags():
         return jsonify(userMessage="Unable To Verify SID Existence"), 400
 
     body = {"supervisorID": supervisorID}
-    CF = makeCommandFormat(body=body, commandType="getTags")
+    CF = makeCommandFormat(body=body, commandType="getSupervisorTags")
     Command.create(command=CF, deviceOwner=deviceID)
     logging.debug("Get Supervisor Tags Hit: Get Supervisor Tags Command Added To Queue")
 
@@ -329,7 +332,7 @@ def getAllLocalSupervisor():
     body = str(None)
     CF = makeCommandFormat(body=body, commandType="getAllLocalSupervisor", callBack=True)
     Command.create(command=CF, deviceOwner=deviceID)
-    logging.debug("Get All Local Supervisors Hit: Get All Local Supervisors: ")
+    logging.debug("Get All Local Supervisors Hit: Get All Local Supervisors Command Added To Queue")
 
     return jsonify(userMessage="Get ALL Supervisor Info Command Added To Queue"), 200
 
@@ -349,17 +352,19 @@ def convertCommandsToDict(query, deviceID):
     logging.debug("Get Commands  Hit: Parsing commands")
     try:
         for entry in query:
-            command = str(entry.command).replace("'", "\"")
-            logging.debug("Get Commands: DID no. {} has new command.\nCommand: {}".format(deviceID, command))
-            # entry.delivery = 1
-            # entry.save()
-            commandList.append(json.loads(command))
+            if entry.delivery == 0:
+                command = str(entry.command).replace("'", "\"")
+                logging.debug("Get Commands: DID no. {} has new command.\nCommand: {}".format(deviceID, command))
+                entry.delivery = 1
+                entry.save()
+                commandList.append(json.loads(command))
 
     except Exception as e:
         logging.warning(
-            "Get Commands: Unable to parse query to get DID no. commands\nException: {}\nTraceBack: {}".format(deviceID,
-                                                                                                               e,
-                                                                                                               traceback.format_exc()))
+            "Get Commands: Unable to parse query to get DID no. {} commands\nException: {}\nTraceBack: {}".format(
+                deviceID,
+                e,
+                traceback.format_exc()))
 
     logging.debug("Get Commands Hit: Command List for DID no. {}:\nCL:{}".format(deviceID, commandList))
 
