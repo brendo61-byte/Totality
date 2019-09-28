@@ -6,13 +6,6 @@
           "supervisorType": "intMaker",
           "supervisorID": 11,
           "customConfig": "None"
-        },
-        {
-          "supervisorType": "intMaker",
-          "supervisorID": 12,
-          "customConfig": {
-            "supervisorName": "Little Thanos"
-          }
         }
       ]
     }

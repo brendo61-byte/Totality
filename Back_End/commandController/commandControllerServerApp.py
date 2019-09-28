@@ -9,6 +9,7 @@ import traceback
 import json
 import random
 import peewee
+import ast
 
 app = Flask(__name__)
 logging.basicConfig(level="INFO", filename='program.log', filemode='w',
@@ -145,18 +146,18 @@ def newSupervisor():
             userMesage="New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
                 e, traceback.format_exc())), 400
 
-    try:
-        q = Supervisor.select().where(Supervisor.refID == refID)
+    # try:
+    q = Supervisor.select().where(Supervisor.refID == refID)
 
-        for entry in q:
-            supervisorID = entry.supervisorID
-            entry.refID = 0
-            entry.save()
-            logging.debug("New Supervisor Hit: SupervisorID assigned: {}".format(supervisorID))
+    for entry in q:
+        supervisorID = entry.supervisorID
+        entry.refID = 0
+        entry.save()
+        logging.debug("New Supervisor Hit: SupervisorID assigned: {}".format(supervisorID))
 
-    except Exception as e:
-        logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
-            e, traceback.format_exc()))
+    # except Exception as e:
+    #     logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+    #         e, traceback.format_exc()))
 
         return jsonify(
             userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
@@ -349,22 +350,24 @@ def generateDeviceCommands(deviceID):
 
 def convertCommandsToDict(query, deviceID):
     commandList = []
+    backUpCommand = None
     logging.debug("Get Commands  Hit: Parsing commands")
     try:
         for entry in query:
             if entry.delivery == 0:
                 command = str(entry.command).replace("'", "\"")
+                backUpCommand = command
                 logging.debug("Get Commands: DID no. {} has new command.\nCommand: {}".format(deviceID, command))
                 entry.delivery = 1
                 entry.save()
-                commandList.append(json.loads(command))
+                commandList.append(ast.literal_eval(command))
 
     except Exception as e:
         logging.warning(
-            "Get Commands: Unable to parse query to get DID no. {} commands\nException: {}\nTraceBack: {}".format(
+            "Get Commands: Unable to parse query to get DID no. {} commands\nException: {}\nTraceBack: {}\nCommand: {}".format(
                 deviceID,
                 e,
-                traceback.format_exc()))
+                traceback.format_exc(), backUpCommand))
 
     logging.debug("Get Commands Hit: Command List for DID no. {}:\nCL:{}".format(deviceID, commandList))
 

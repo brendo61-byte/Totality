@@ -1,8 +1,8 @@
-2019-09-25 15:03:30,180 - INFO - 
+2019-09-25 16:06:56,688 - INFO - 
 
 Launching Program
-2019-09-25 15:03:30,181 - INFO - All Threads Launched Successfully
-2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
+2019-09-25 16:06:56,690 - INFO - All Threads Launched Successfully
+2019-09-25 16:06:56,693 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -13,90 +13,58 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "True",
+2019-09-25 16:06:56,693 - INFO - All Launch Supervisors Spawned Successfully
+2019-09-25 16:06:56,716 - INFO - New Commands Received.
+Commands: [
+    {
+        "body": {
+            "customConfig": "None",
+            "supervisorID": null,
+            "supervisorType": "intMaker"
+        },
+        "callBack": "True",
+        "commandType": "launcher"
+    },
+    {
+        "body": {
+            "customConfig": {
+                "supervisorName": "Little Thanos"
+            },
+            "restart": true,
+            "supervisorID": 6,
+            "supervisorType": "intMaker"
+        },
+        "callBack": "True",
+        "commandType": "launcher"
+    }
+]
+2019-09-25 16:06:56,716 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 12,
-    "supervisorName": "Little Thanos",
+    "supervisorID": null,
+    "supervisorName": "intMaker",
     "supervisorType": "intMaker"
 }
 
-2019-09-25 15:03:30,187 - INFO - All Launch Supervisors Spawned Successfully
-2019-09-25 15:03:35,247 - INFO - New Commands Received.
-Commands: [
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "killSupervisor"
-    },
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "getSupervisorTags"
-    },
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "getSupervisorInfo"
-    },
-    {
-        "body": "None",
-        "callBack": "True",
-        "commandType": "getAllLocalSupervisor"
-    }
-]
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: killSupervisor
+2019-09-25 16:06:56,716 - INFO - New Command Passed To Manger
+Command Type: launcher
+Call Back True
+2019-09-25 16:06:56,717 - WARNING - Failed To Pass New Command To Manager
+Command Type: launcher
 callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
+Body: {'customConfig': {'supervisorName': 'Little Thanos'}, 'restart': True, 'supervisorID': 6, 'supervisorType': 'intMaker', 'callBack': True}
+Error Message: 6
 Traceback (most recent call last):
   File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
     methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 125, in killSupervisor
-    supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 150, in getSupervisorInstance
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 64, in launcher
+    customConfig=customConfig, restart=restart)
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 85, in makeSupervisor
+    config["delay"] = self.getSupervisorInstance(supervisorID=supervisorID).getSupervisorInfo()["samplePeriod"]
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 155, in getSupervisorInstance
     return self.MasterSupervisorDict[supervisorID]
-KeyError: 1
-
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: getSupervisorTags
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 132, in getSupervisorTags
-    supervisor = self.MasterSupervisorDict[supervisorID]
-KeyError: 1
-
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: getSupervisorInfo
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 136, in getSupervisorInfo
-    supervisor = self.MasterSupervisorDict[supervisorID]
-KeyError: 1
-
-2019-09-25 15:03:35,248 - WARNING - Exception Decoding Command. Command Failed
-Error Message: 'str' object does not support item assignment
-Full Json Command: {'body': 'None', 'callBack': 'True', 'commandType': 'getAllLocalSupervisor'}
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 77, in executeCommands
-    body["callBack"] = True
-TypeError: 'str' object does not support item assignment
+KeyError: 6
 
