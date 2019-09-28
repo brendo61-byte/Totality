@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+echo $1
+
 CLEAN () {
     printf "\nStopping All Containers\n"
     docker stop $(docker ps -q)
@@ -37,7 +39,6 @@ SEED () {
     printf "\nSeeding DB With New Customer And New Device"
     python3 seed.py
 }
-
 
 if [ $1 = "start" ];
 then

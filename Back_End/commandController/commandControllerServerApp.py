@@ -12,7 +12,7 @@ import peewee
 import ast
 
 app = Flask(__name__)
-logging.basicConfig(level="INFO", filename='program.log', filemode='w',
+logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 """
@@ -97,11 +97,11 @@ def validateDeviceAuth(token):
 
 
 def genRefID():
-    refID = random.randint(0, 2 ** 32)
+    refID = random.randint(0, 2147483645)
     q = Supervisor.select().where(Supervisor.refID == refID)
 
     while q.exists():
-        refID = random.randint(0, 2 ** 32)
+        refID = random.randint(0, 2147483645)
         q = Supervisor.select().where(Supervisor.refID == refID)
 
     return refID
@@ -137,7 +137,7 @@ def newSupervisor():
 
     try:
         Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType)
-        logging.debug("New Supervisor Hit: Supervisor Created in DB")
+        logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
 
     except Exception as e:
         logging.info("New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
@@ -159,9 +159,10 @@ def newSupervisor():
     #     logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
     #         e, traceback.format_exc()))
 
-        return jsonify(
-            userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
-                e, traceback.format_exc())), 400
+    #    return jsonify(
+    #        userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+    #            e, traceback.format_exc())), 400
+
     try:
 
         body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID,

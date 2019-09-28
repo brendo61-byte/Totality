@@ -132,15 +132,15 @@ class deviceManager:
 
         logging.info("supervisor Killed. Dead supervisorID: {}".format(supervisorID))
 
-    def getSupervisorTags(self, supervisorID, callBack=False):
+    def getSupervisorTags(self, supervisorID, callBack):
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorTags()
 
-    def getSupervisorInfo(self, supervisorID, callBack=False):
+    def getSupervisorInfo(self, supervisorID, callBack):
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorInfo()
 
-    def getAllLocalSupervisors(self, callBack=False):
+    def getAllLocalSupervisors(self, callBack):
         allInfo = {}
 
         for ID in self.MasterSupervisorDict.keys():
