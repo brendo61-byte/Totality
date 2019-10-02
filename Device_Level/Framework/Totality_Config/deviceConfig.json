@@ -20,7 +20,7 @@
       "updateInterval": 5
     }
   },
-  "logLevel": "INFO",
+  "logLevel": "DEBUG",
   "test": "False",
   "deviceID": 1,
   "threadLimit": 10

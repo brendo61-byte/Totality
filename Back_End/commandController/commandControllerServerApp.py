@@ -357,6 +357,11 @@ def convertCommandsToDict(query, deviceID):
         for entry in query:
             if entry.delivery == 0:
                 command = str(entry.command).replace("'", "\"")
+                command = ast.literal_eval(command)
+                command["commandID"] = entry.commandID
+                command = str(command)
+                # This is dumb but we need to put the commandID into the package for the device to ref it for call back
+
                 backUpCommand = command
                 logging.debug("Get Commands: DID no. {} has new command.\nCommand: {}".format(deviceID, command))
                 entry.delivery = 1
