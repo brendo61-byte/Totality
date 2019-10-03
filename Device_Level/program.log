@@ -1,8 +1,9 @@
-2019-09-25 15:03:30,180 - INFO - 
+2019-10-02 16:35:07,068 - INFO - 
 
 Launching Program
-2019-09-25 15:03:30,181 - INFO - All Threads Launched Successfully
-2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-02 16:35:07,069 - DEBUG - Preforming Data-Push
+2019-10-02 16:35:07,069 - INFO - All Threads Launched Successfully
+2019-10-02 16:35:07,074 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -13,90 +14,34 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "True",
+2019-10-02 16:35:07,074 - INFO - All Launch Supervisors Spawned Successfully
+2019-10-02 16:35:07,077 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-02 16:35:07,103 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 282
+2019-10-02 16:35:07,104 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-02 16:35:07,104 - INFO - New Commands Received.
+Commands: [
+    {
+        "body": {
+            "customConfig": "None",
+            "supervisorID": 1,
+            "supervisorType": "intMaker"
+        },
+        "callBack": "True",
+        "commandID": 1,
+        "commandType": "launcher"
+    }
+]
+2019-10-02 16:35:07,105 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 12,
-    "supervisorName": "Little Thanos",
+    "supervisorID": 1,
+    "supervisorName": "intMaker",
     "supervisorType": "intMaker"
 }
 
-2019-09-25 15:03:30,187 - INFO - All Launch Supervisors Spawned Successfully
-2019-09-25 15:03:35,247 - INFO - New Commands Received.
-Commands: [
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "killSupervisor"
-    },
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "getSupervisorTags"
-    },
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "getSupervisorInfo"
-    },
-    {
-        "body": "None",
-        "callBack": "True",
-        "commandType": "getAllLocalSupervisor"
-    }
-]
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: killSupervisor
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 125, in killSupervisor
-    supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 150, in getSupervisorInstance
-    return self.MasterSupervisorDict[supervisorID]
-KeyError: 1
-
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: getSupervisorTags
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 132, in getSupervisorTags
-    supervisor = self.MasterSupervisorDict[supervisorID]
-KeyError: 1
-
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: getSupervisorInfo
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 136, in getSupervisorInfo
-    supervisor = self.MasterSupervisorDict[supervisorID]
-KeyError: 1
-
-2019-09-25 15:03:35,248 - WARNING - Exception Decoding Command. Command Failed
-Error Message: 'str' object does not support item assignment
-Full Json Command: {'body': 'None', 'callBack': 'True', 'commandType': 'getAllLocalSupervisor'}
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 77, in executeCommands
-    body["callBack"] = True
-TypeError: 'str' object does not support item assignment
-
+2019-10-02 16:35:07,105 - INFO - New Command Passed To Manger
+Command Type: launcher
+Call Back True

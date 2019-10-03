@@ -121,6 +121,10 @@ class deviceManager:
         supervisorClass = getattr(module, supervisorType)
         return supervisorClass
 
+    # ToDo: Want a way to stop a supervisor AND to kill one
+    # This killing means that it is removed from the start-up config
+    # Stopping, as the name implies only stops it
+    # A restart command could then start that supervisor back up
     def killSupervisor(self, supervisorID, callBack=False):
         supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
         supervisor.operational = False
@@ -128,15 +132,15 @@ class deviceManager:
 
         logging.info("supervisor Killed. Dead supervisorID: {}".format(supervisorID))
 
-    def getSupervisorTags(self, supervisorID, callBack=False):
+    def getSupervisorTags(self, supervisorID, callBack):
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorTags()
 
-    def getSupervisorInfo(self, supervisorID, callBack=False):
+    def getSupervisorInfo(self, supervisorID, callBack):
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorInfo()
 
-    def getAllLocalSupervisors(self, callBack=False):
+    def getAllLocalSupervisors(self, callBack):
         allInfo = {}
 
         for ID in self.MasterSupervisorDict.keys():
@@ -147,4 +151,5 @@ class deviceManager:
         return allInfo
 
     def getSupervisorInstance(self, supervisorID):
+        print("Supervisor ID: {}\nMASTER LIST: {}".format(supervisorID, self.MasterSupervisorDict))
         return self.MasterSupervisorDict[supervisorID]

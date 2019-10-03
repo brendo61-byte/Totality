@@ -5,7 +5,6 @@ import random
 import datetime
 import time
 
-
 class intMaker(Supervisor):
     """
     Note: that the class name is EXACTLY the same of the file its in and the same as its corresponding config file -- class 'intMaker' in file 'intMaker.py' with
@@ -79,6 +78,7 @@ class intMaker(Supervisor):
         time.sleep(self.delay)
         while self.operational:
             someInt = random.randint(self.lowEnd, self.highEnd)  # Replace this later on with a Fake Totality
+
             timeStamp = datetime.datetime.utcnow()
 
             # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
