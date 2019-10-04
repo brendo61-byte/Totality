@@ -24,43 +24,45 @@ See those respective classes or the README for what they do.
 
 if __name__ == '__main__':
     try:
+        config = None
         with open(CONFIG_PATH) as configFile:
             config = json.load(configFile)
-            DID = config["deviceID"]
-            logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
-            logging.info("\n\nLaunching Program")
-            pipe = dataPipe.DataPipe()
-            DM = deviceManager(pipe=pipe, deviceID=DID, test=config["test"], threadLimit=config["threadLimit"])
 
-            useLauncher = False
-            if config["launcher"]["args"] != 'None' and bool(config["launcher"]["args"]):
-                launcher = Launcher(**config["launcher"]["args"], deviceManager=DM)
-                useLauncher = True
+        DID = config["deviceID"]
+        logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+        logging.info("\n\nLaunching Program")
+        pipe = dataPipe.DataPipe()
+        DM = deviceManager(pipe=pipe, deviceID=DID, test=config["test"], threadLimit=config["threadLimit"], configPath=CONFIG_PATH)
 
-            commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
-            dataController = DataController(**config["dataControl"]["args"], pipe=pipe, DM=DM, deviceID=DID)
+        useLauncher = False
+        if config["launcher"]["args"] != 'None' and bool(config["launcher"]["args"]):
+            launcher = Launcher(**config["launcher"]["args"], deviceManager=DM)
+            useLauncher = True
 
-            if useLauncher:
-                LT = Thread(target=launcher.starter, name="Launcher_Thread")
-                LT.start()
+        commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
+        dataController = DataController(**config["dataControl"]["args"], pipe=pipe, DM=DM, deviceID=DID)
 
-            CCThread = Thread(target=commandController.starter, name="CC_Thread")
-            DCThread = Thread(target=dataController.starter, name="DC_Thread")
+        if useLauncher:
+            LT = Thread(target=launcher.starter, name="Launcher_Thread")
+            LT.start()
 
-            CCThread.start()
-            DCThread.start()
+        CCThread = Thread(target=commandController.starter, name="CC_Thread")
+        DCThread = Thread(target=dataController.starter, name="DC_Thread")
 
-            logging.info("All Threads Launched Successfully")
-            print("All Threads Launched Successfully")
+        CCThread.start()
+        DCThread.start()
 
-            if config["test"] == "True":
-                logging.info("Starting Tests ...")
-                print("Starting Tests ...")
-                time.sleep(2)
-                tester = DMT(DM=DM)
-                logging.info("Device_Level Manager Test:")
-                print("Device_Level Manager Test:")
-                tester.starer()
+        logging.info("All Threads Launched Successfully")
+        print("All Threads Launched Successfully")
+
+        if config["test"] == "True":
+            logging.info("Starting Tests ...")
+            print("Starting Tests ...")
+            time.sleep(2)
+            tester = DMT(DM=DM)
+            logging.info("Device_Level Manager Test:")
+            print("Device_Level Manager Test:")
+            tester.starer()
 
 
     except KeyError as KE:

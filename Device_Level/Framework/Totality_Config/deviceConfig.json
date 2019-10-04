@@ -1,27 +1,27 @@
 {
-  "launcher": {
-    "args": {
-      "supervisorList": [
-        {
-          "supervisorType": "intMaker",
-          "supervisorID": 11,
-          "customConfig": "None"
+    "launcher": {
+        "args": {
+            "supervisorList": [
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 11,
+                    "customConfig": "None"
+                }
+            ]
         }
-      ]
-    }
-  },
-  "commandControl": {
-    "args": {
-      "heartBeatInterval": 5
-    }
-  },
-  "dataControl": {
-    "args": {
-      "updateInterval": 5
-    }
-  },
-  "logLevel": "DEBUG",
-  "test": "False",
-  "deviceID": 1,
-  "threadLimit": 10
+    },
+    "commandControl": {
+        "args": {
+            "heartBeatInterval": 5
+        }
+    },
+    "dataControl": {
+        "args": {
+            "updateInterval": 5
+        }
+    },
+    "logLevel": "DEBUG",
+    "test": "True",
+    "deviceID": 1,
+    "threadLimit": 10
 }

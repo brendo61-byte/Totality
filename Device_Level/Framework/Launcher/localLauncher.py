@@ -13,7 +13,6 @@ If there is a bad config passed in for a supervisorr then it will catch the erro
 NOTE: If the base config is used for a supervisorr it WILL work (b/c you have to test that it will - therefor only custom configs can cause supervisorr spawning to fail)
 """
 
-
 class Launcher(Controller):
     def __init__(self, supervisorList, deviceManager):
         self.supervisorListList = supervisorList
@@ -21,30 +20,28 @@ class Launcher(Controller):
 
     def spawnSupervisor(self):
         status = True
-        try:
-            for supervisorConfig in self.supervisorListList:
+        for supervisorConfig in self.supervisorListList:
+
+            try:
+
                 self.deviceManager.launcher(**supervisorConfig)
 
-        except KeyError as KE:
-            logging.critical(
-                "Key Error Occurred While Trying To supervisorr. supervisorr Config: {}.\nError Message: {}\n\n{}".format(None, KE, traceback.format_exc()))
-
-        except TypeError as TE:
-            logging.critical(
-                "Key Error Occurred While Trying To Start supervisorr. supervisorr Config: {}.\nError Message: {}\n\n{}".format(None, TE, traceback.format_exc()))
-
-        except FileNotFoundError as FNFE:
-            logging.critical(
-                "File Not Found Error Occurred While Trying To Start supervisorr. supervisorr Config: {}.\nError Message: {}\n\n{}".format(None, FNFE,
-                                                                                                                                 traceback.format_exc()))
-
-        except Exception as e:
-            logging.critical("Failed To Start supervisorr. supervisorr Config: {}.\nError Message: {}\n\n{}".format(None, e, traceback.format_exc()))
+            except Exception as e:
+                status = False
+                logging.critical(
+                    "Failed To Start supervisor. supervisor Config: {}.\nError Message: {}\n\n{}".format(
+                        supervisorConfig,
+                        e,
+                        traceback.format_exc()))
 
         if status:
             logging.info("All Launch Supervisors Spawned Successfully")
         else:
-            logging.warning("Launch supervisorr Spanning Complete. Some Supervisors Did Not Spawn Successfully. See logs")
+            print("ERROR: Unable to spawn launch supervisors. See Logs.")
+
+
+            logging.warning(
+                "Launch supervisorr Spanning Complete. Some Supervisors Did Not Spawn Successfully. See logs")
 
     def starter(self):
         self.spawnSupervisor()
