@@ -31,6 +31,7 @@ class DataController(Controller):
             logging.debug("Preforming Data-Push")
             while not self.pipe.empty():
                 package = self.pipe.get()
+                # Magic happens here
 
                 # Put data wherever it needs to go
                 # This means locally
