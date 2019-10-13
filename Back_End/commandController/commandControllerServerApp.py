@@ -111,6 +111,7 @@ def genRefID():
 def newSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
+    # ToDo: Remove get.DID
     deviceID = data.get('deviceID')
     customConfig = data.get('customConfig')
     configStatus = True
@@ -126,7 +127,9 @@ def newSupervisor():
         customConfig = str(customConfig)
         configStatus = False
 
+    # ToDo : Remove this
     if not validateDeviceExists(validateDeviceExists(deviceID)):
+        # ToDo: single string then pass
         logging.info("New Supervisor Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="New Supervisor Hit: Unable To Verify DID Existence"), 400
 
@@ -137,6 +140,7 @@ def newSupervisor():
 
     try:
         Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType)
+        # ToDo: Use fsting (python 3.6) - cleaner way of putting variables in strings
         logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
 
     except Exception as e:
@@ -146,6 +150,7 @@ def newSupervisor():
             userMesage="New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
                 e, traceback.format_exc())), 400
 
+    # ToDo: Use get command
     # try:
     q = Supervisor.select().where(Supervisor.refID == refID)
 
@@ -165,7 +170,7 @@ def newSupervisor():
 
     try:
 
-        body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID,
+        body = {"supervisorType": supervisorType, "globalID": supervisorID, "deviceID": deviceID,
                 "customConfig": customConfig}
         CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True)).replace("'", "\'")
         Command.create(command=CF, deviceOwner=deviceID)

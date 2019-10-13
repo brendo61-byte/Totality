@@ -4,8 +4,9 @@
             "supervisorList": [
                 {
                     "supervisorType": "intMaker",
-                    "supervisorID": 11,
-                    "customConfig": "None"
+                    "supervisorID": 1,
+                    "customConfig": "None",
+                    "globalID": 0
                 }
             ]
         }
@@ -22,6 +23,6 @@
     },
     "logLevel": "DEBUG",
     "test": "True",
-    "deviceID": 1,
-    "threadLimit": 10
+    "threadLimit": 10,
+    "deviceID": 1
 }

@@ -31,6 +31,7 @@ def newCustomer():
         logging.info("New Customer Hit: No Name Provided")
         return jsonify(userMessage="Please Provide A Valid Name"), 400
     if address is None:
+        # Todo: Use email too
         logging.info("New Customer Hit: No Address Provided")
         return jsonify(userMessage="Please Provide A Valid Address"), 400
     if phone is None or not validPhoneNumber(phone_nuber=phone):
@@ -177,7 +178,7 @@ def getDeviceInfo():
             "dataControllerPeriod": device.dataControllerPeriod,
             "commandControllerPeriod": device.commandControllerPeriod,
             "missedCommands": device.missedCommands,
-            "ccommandTimeWindow": device.commandTimeWindow.strftime("%m/%d/%Y, %H:%M:%S"),
+            "commandTimeWindow": device.commandTimeWindow.strftime("%m/%d/%Y, %H:%M:%S"),
             "status": device.status
         }
 

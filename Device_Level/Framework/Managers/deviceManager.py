@@ -49,6 +49,7 @@ FileNotFoundError)
 class deviceManager:
     def __init__(self, pipe, deviceID, test, threadLimit, configPath):
         self.MasterSupervisorDict = {}
+        self.NAT = {}
         self.datapipe = pipe
         self.configPath = configPath
         self.deviceID = deviceID
@@ -56,6 +57,12 @@ class deviceManager:
         self.storageSet()
         if test == "True":
             self.storageReset()
+
+    def getNAT(self):
+        return self.NAT
+
+    def updateNAT(self, key, val):
+        self.NAT[key] = val
 
     def storageSet(self):
         if not os.path.isdir("Local_Data"):
@@ -66,28 +73,81 @@ class deviceManager:
         os.system("rm -r Local_Data")
         os.system("mkdir Local_Data")
 
-    def launcher(self, supervisorType, supervisorID, customConfig=None, restart=False, callBack=False):
+    def getSupervisorID(self):
+        return len(self.MasterSupervisorDict) + 1
+
+    def launcher(self, supervisorType, supervisorID=None, globalID=0, customConfig=None, restart=False, callBack=False):
+        if callBack:
+            globalID = supervisorID
+            supervisorID = self.NAT[globalID]
+
+        if supervisorID == None or supervisorID == 0:
+            supervisorID = self.getSupervisorID()
+
         if len(self.MasterSupervisorDict) >= self.threadLimit:
             SupervisorThreadLimit()
             # ToDo: Test This --- exception CLass updated --- deviceConfig --- Update README
 
         supervisor = self.makeSupervisor(supervisorType=supervisorType, supervisorID=supervisorID,
-                                         customConfig=customConfig, restart=restart)
+                                         customConfig=customConfig, restart=restart, globalID=globalID)
         self.MasterSupervisorDict[supervisorID] = supervisor
+
+        if globalID != 0:
+            print("HERE")
+            self.NAT[globalID] = supervisorID
+            self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=supervisorID)
+
         self.dirSetUp(supervisorID=supervisorID, supervisor=supervisor)
 
         thread = Thread(target=supervisor.getData, name=supervisorID)
 
         if callBack:
             self.addSupervisorToConf(supervisorType=supervisorType, supervisorID=supervisorID,
-                                     customConfig=customConfig)
+                                     customConfig=customConfig, globalID=globalID)
 
         thread.start()
 
         logging.info("New supervisor Spawned. supervisor Info: {}\n".format(
             json.dumps(supervisor.getSupervisorInfo(), indent=4, sort_keys=True)))
 
-    def addSupervisorToConf(self, supervisorType, supervisorID, customConfig=None):
+    def updateSupervisorConfGlobalID(self, globalID, supervisorID):
+        raw = open(self.configPath, "r")
+        confRaw = json.load(raw)
+        conf = confRaw
+        raw.close()
+
+        with open(self.configPath, "r+") as confFile:
+            tempconf = confRaw["launcher"]["args"]["supervisorList"]
+            temp = tempconf
+            tempSupervisor = True
+
+            for entry in temp:
+                if entry.get("supervisorID") == supervisorID:
+                    tempconf.remove(entry)
+                    entry["globalID"] = globalID
+                    tempconf.append(entry)
+                    tempSupervisor = False
+                    break
+
+            if not tempSupervisor:
+                conf["launcher"]["args"]["supervisorList"] = tempconf
+                try:
+                    json.dump(conf, confFile, indent=4)
+                    # ToDo: How to deal with failed updated conf file?
+                except Exception as e:
+                    logging.warning(
+                        "Unable to update deviceConfig.json file. Resetting to previous state.\nError: {}\nTraceBack: {}".format(
+                            e, traceback.format_exc()))
+                    try:
+                        json.dump(confRaw, confFile, indent=4)
+                        return ConfigurationUpdateFailure
+                    except Exception as e:
+                        logging.critical(
+                            "Unable to revert deviceConfig.json to previous state. It is now broken :(\nError: {}\nTraceBack: {}".format(
+                                e, traceback.format_exc()))
+                        return ConfigurationBackupFailure
+
+    def addSupervisorToConf(self, supervisorType, supervisorID, globalID, customConfig=None):
         raw = open(self.configPath, "r")
         confRaw = json.load(raw)
         raw.close()
@@ -99,6 +159,7 @@ class deviceManager:
                 body["supervisorType"] = supervisorType
                 body["supervisorID"] = supervisorID
                 body["customConfig"] = customConfig
+                body["globalID"] = globalID
 
                 supervisorList = conf["launcher"]["args"]["supervisorList"]
                 supervisorList.append(body)
@@ -112,12 +173,14 @@ class deviceManager:
                         e, traceback.format_exc()))
                 try:
                     json.dump(confRaw, confFile, indent=4)
+                    return ConfigurationUpdateFailure
                 except Exception as e:
                     logging.critical(
                         "Unable to revert deviceConfig.json to previous state. It is now broken :(\nError: {}\nTraceBack: {}".format(
                             e, traceback.format_exc()))
+                    return ConfigurationBackupFailure
 
-    def removeSupervisorFromConf(self, supervisorID):
+    def removeSupervisorFromConf(self, globalID):
         raw = open(self.configPath, "r")
         confRaw = json.load(raw)
         raw.close()
@@ -129,29 +192,34 @@ class deviceManager:
                 supervisorList = conf["launcher"]["args"]["supervisorList"]
                 tempList = supervisorList
 
-                for entry in supervisorList:
-                    if entry.get("supervisorID") == supervisorID:
+                for entry in tempList:
+                    if entry.get("globalID") == globalID:
                         supervisorList.remove(entry)
 
                 conf["launcher"]["args"]["supervisorList"] = supervisorList
 
                 json.dump(conf, confFile, indent=4)
                 # ToDo: How to deal with failed updated conf file?
-                # ToDo: Test this
             except Exception as e:
                 logging.warning(
                     "Unable to update deviceConfig.json file. Resetting to previous state.\nError: {}\nTraceBack: {}".format(
                         e, traceback.format_exc()))
+
                 try:
                     json.dump(confRaw, confFile, indent=4)
+                    return ConfigurationUpdateFailure
+
                 except Exception as e:
                     logging.critical(
                         "Unable to revert deviceConfig.json to previous state. It is now broken :(\nError: {}\nTraceBack: {}".format(
                             e, traceback.format_exc()))
 
-    def makeSupervisor(self, supervisorType, supervisorID, customConfig, restart):
+                    return ConfigurationBackupFailure
+
+    def makeSupervisor(self, supervisorType, supervisorID, globalID, customConfig, restart):
         config = self.getConfig(supervisorType=supervisorType)
         config['supervisorID'] = supervisorID
+        config["globalID"] = globalID
 
         if customConfig != 'None' and bool(customConfig):
             config['tags']['customConfig'] = 'True'
@@ -198,11 +266,6 @@ class deviceManager:
         module = importlib.import_module(moduleName)
         supervisorClass = getattr(module, supervisorType)
         return supervisorClass
-
-        # ToDo: Want a way to stop a supervisor AND to kill one
-        # This killing means that it is removed from the start-up config
-        # Stopping, as the name implies only stops it
-        # A restart command could then start that supervisor back up
 
     def killSupervisor(self, supervisorID, callBack=False):
         supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
