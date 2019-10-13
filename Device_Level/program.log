@@ -3548,3 +3548,812 @@ TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/P
 2019-10-12 18:29:09,377 - WARNING - Unable To Push Package To DB.
 Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060e2150>: Failed to establish a new connection: [Errno 61] Connection refused'))
 TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:13,868 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:13,870 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6650>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1060b6650>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6650>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6650>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:14,381 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:14,386 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:14,387 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2e90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:14,389 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:14,390 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6710>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:14,393 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:14,394 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10721ba50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:14,396 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:14,397 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10721b7d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:14,400 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:14,401 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720c690>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:18,879 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:18,881 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1061c7950>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:19,406 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:19,411 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:19,412 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720c250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:19,414 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:19,415 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060ccf10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:19,417 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:19,418 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6d90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:19,420 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:19,421 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10721bdd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:19,423 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:19,424 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2090>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:23,887 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:23,889 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7dd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1061c7dd0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7dd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7dd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:24,428 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:24,432 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:24,433 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060e2210>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:24,436 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:24,437 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6290>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:24,440 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:24,441 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2f50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:24,443 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:24,444 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:24,447 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:24,448 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060ccc50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:28,898 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:28,899 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c79d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1061c79d0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c79d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c79d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:29,450 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:29,454 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:29,456 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720c090>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:29,458 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:29,459 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c3950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:29,462 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:29,463 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720cf10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:29,465 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:29,466 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c7c90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:29,468 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:29,468 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1055457d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:33,906 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:33,908 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1061b6610>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:34,471 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:34,476 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:34,477 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2a10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:34,480 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:34,481 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061c3e90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:34,483 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:34,484 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060e2290>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:34,487 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:34,488 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:34,490 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:34,490 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b24d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:38,913 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:38,914 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6890>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1061b6890>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6890>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6890>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:39,495 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:39,500 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:39,501 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060ccd50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:39,504 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:39,505 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720c050>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:39,508 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:39,509 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061bda50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:39,511 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:39,512 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061bf8d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:39,514 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:39,515 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061bfb50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:43,920 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:43,921 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720cdd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10720cdd0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720cdd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720cdd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:44,517 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:44,521 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:44,522 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6210>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:44,525 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:44,526 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2510>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:44,528 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:44,529 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060ccf90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:44,531 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:44,532 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061bde10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:44,534 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:44,535 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060e2090>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:48,929 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:48,931 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6710>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1060b6710>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6710>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1060b6710>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:49,538 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:49,543 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:49,544 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2f50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:49,547 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:49,548 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:49,550 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:49,551 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720c690>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:49,553 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:49,554 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6cd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:49,556 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:49,557 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061bd750>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:53,938 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:53,940 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107222950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x107222950>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107222950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107222950>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-12 18:29:54,560 - DEBUG - Preforming Data-Push
+2019-10-12 18:29:54,564 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:54,565 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b6590>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:54,568 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:54,569 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720c290>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:54,571 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:54,572 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061a3e90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:54,574 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:54,576 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061bd790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:54,578 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-12 18:29:54,579 - WARNING - Unable To Push Package To DB.
+Exception: HTTPConnectionPool(host='localhost', port=8801): Max retries exceeded with url: /device/dataPush (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061b2890>: Failed to establish a new connection: [Errno 61] Connection refused'))
+TraceBack: <module 'traceback' from '/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/traceback.py'>
+2019-10-12 18:29:58,943 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-12 18:29:58,944 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107222dd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x107222dd0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107222dd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107222dd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
