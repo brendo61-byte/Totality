@@ -78,22 +78,27 @@ class deviceManager:
 
     def launcher(self, supervisorType, supervisorID=None, globalID=0, customConfig=None, restart=False, callBack=False):
         if callBack:
+            logging.info("Supervisor being created with global SID: {}".format(globalID))
             globalID = supervisorID
             supervisorID = self.NAT[globalID]
 
         if supervisorID == None or supervisorID == 0:
+            logging.info("Supervisor does not have a local SID")
             supervisorID = self.getSupervisorID()
+            logging.info("Generated supervisorID is: {}".format(supervisorID))
 
         if len(self.MasterSupervisorDict) >= self.threadLimit:
             SupervisorThreadLimit()
             # ToDo: Test This --- exception CLass updated --- deviceConfig --- Update README
+            # ToDo: What am I doing with this? --- Should be to check that > 10 supervisors are running
+            # ToDo: Okay what are we doing when this happens --- IDK. but we should not spin up the 11th supervisor
+            # ToDo: Hey that 10 is not hardcoded and is in config but yea 10 should be a good number for RasPis
 
         supervisor = self.makeSupervisor(supervisorType=supervisorType, supervisorID=supervisorID,
                                          customConfig=customConfig, restart=restart, globalID=globalID)
         self.MasterSupervisorDict[supervisorID] = supervisor
 
         if globalID != 0:
-            print("HERE")
             self.NAT[globalID] = supervisorID
             self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=supervisorID)
 
