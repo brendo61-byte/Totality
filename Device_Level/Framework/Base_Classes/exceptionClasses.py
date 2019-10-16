@@ -4,3 +4,11 @@ class SupervisorUniqueError(BaseException):
 
 class SupervisorThreadLimit(BaseException):
     pass
+
+
+class ConfigurationUpdateFailure(BaseException):
+    pass
+
+
+class ConfigurationBackupFailure(BaseException):
+    pass

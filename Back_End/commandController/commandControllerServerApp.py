@@ -111,6 +111,7 @@ def genRefID():
 def newSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
+    # ToDo: Remove get.DID
     deviceID = data.get('deviceID')
     customConfig = data.get('customConfig')
     configStatus = True
@@ -126,7 +127,9 @@ def newSupervisor():
         customConfig = str(customConfig)
         configStatus = False
 
+    # ToDo : Remove this
     if not validateDeviceExists(validateDeviceExists(deviceID)):
+        # ToDo: single string then pass
         logging.info("New Supervisor Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="New Supervisor Hit: Unable To Verify DID Existence"), 400
 
@@ -137,35 +140,28 @@ def newSupervisor():
 
     try:
         Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType)
+        # ToDo: Use fsting (python 3.6) - cleaner way of putting variables in strings
         logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
 
     except Exception as e:
-        logging.info("New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
-            e, traceback.format_exc()))
-        return jsonify(
-            userMesage="New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
-                e, traceback.format_exc())), 400
+        statement = "New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc())
+        logging.info(statement)
+        return jsonify(userMesage=statement), 400
 
-    # try:
-    q = Supervisor.select().where(Supervisor.refID == refID)
+    try:
+        supervisorID = Supervisor.get.where(Supervisor.refID == refID).supervisorID
 
-    for entry in q:
-        supervisorID = entry.supervisorID
-        entry.refID = 0
-        entry.save()
-        logging.debug("New Supervisor Hit: SupervisorID assigned: {}".format(supervisorID))
-
-    # except Exception as e:
-    #     logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
-    #         e, traceback.format_exc()))
-
-    #    return jsonify(
-    #        userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
-    #            e, traceback.format_exc())), 400
+    except Exception as e:
+        statement = "New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(e,
+                                                                                                                  traceback.format_exc())
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+        # ToDo: How to handle a new supervisor being created if the command is not passed to the device
 
     try:
 
-        body = {"supervisorType": supervisorType, "supervisorID": supervisorID, "deviceID": deviceID,
+        body = {"supervisorType": supervisorType, "globalID": supervisorID, "deviceID": deviceID,
                 "customConfig": customConfig}
         CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True)).replace("'", "\'")
         Command.create(command=CF, deviceOwner=deviceID)

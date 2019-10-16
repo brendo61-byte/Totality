@@ -1,27 +1,86 @@
-2019-10-04 00:43:29,061 - INFO - 
+2019-10-16 13:42:31,937 - INFO - 
 
 Launching Program
-2019-10-04 00:43:29,069 - DEBUG - Preforming Data-Push
-2019-10-04 00:43:29,069 - INFO - All Threads Launched Successfully
-2019-10-04 00:43:29,069 - INFO - Starting Tests ...
-2019-10-04 00:43:29,076 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-16 13:42:31,943 - INFO - Supervisor does not have a local SID
+2019-10-16 13:42:31,944 - DEBUG - Preforming Data-Push
+2019-10-16 13:42:31,944 - INFO - All Threads Launched Successfully
+2019-10-16 13:42:31,945 - INFO - Starting Tests ...
+2019-10-16 13:42:31,953 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 11,
+    "supervisorID": 1,
     "supervisorName": "intMaker",
     "supervisorType": "intMaker"
 }
 
-2019-10-04 00:43:29,076 - INFO - All Launch Supervisors Spawned Successfully
-2019-10-04 00:43:29,077 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-10-04 00:43:29,096 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-10-04 00:43:29,096 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-10-04 00:43:29,097 - DEBUG - No New Commands To Execute
-2019-10-04 00:43:31,072 - INFO - Device_Level Manager Test:
-2019-10-04 00:43:32,084 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-16 13:42:31,953 - INFO - All Launch Supervisors Spawned Successfully
+2019-10-16 13:42:31,954 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-16 13:42:31,957 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1026a8390>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1026a8390>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1026a8390>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 38, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1026a8390>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+2019-10-16 13:42:33,950 - INFO - Device_Level Manager Test:
+2019-10-16 13:42:34,959 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -32,19 +91,19 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-10-04 00:43:32,089 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-16 13:42:34,963 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 1092,
+    "supervisorID": 1096,
     "supervisorName": "TestSupervisor",
     "supervisorType": "intMaker"
 }
 
-2019-10-04 00:43:32,089 - INFO - supervisor Killed. Dead supervisorID: 1028
-2019-10-04 00:43:32,089 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-16 13:42:34,963 - INFO - supervisor Killed. Dead supervisorID: 1028
+2019-10-16 13:42:34,964 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
@@ -55,57 +114,6 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-10-04 00:43:32,089 - DEBUG - Starting CleanUp
-2019-10-04 00:43:32,089 - DEBUG - Cleaning Supervisor ID: 1092
-2019-10-04 00:43:32,090 - INFO - supervisor Killed. Dead supervisorID: 1092
-2019-10-04 00:43:34,071 - DEBUG - Preforming Data-Push
-2019-10-04 00:43:34,075 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,088 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,091 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,095 - DEBUG - Cleaning Supervisor ID: 1028
-2019-10-04 00:43:34,095 - INFO - supervisor Killed. Dead supervisorID: 1028
-2019-10-04 00:43:34,101 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-10-04 00:43:34,102 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,105 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,116 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-10-04 00:43:34,117 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-10-04 00:43:34,117 - DEBUG - No New Commands To Execute
-2019-10-04 00:43:34,118 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,120 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,130 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,133 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,142 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,143 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
-Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1092/localCSV.csv'
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/dataController.py", line 52, in localCSV
-    with open(path, 'a') as csvFile:
-FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1092/localCSV.csv'
-
-2019-10-04 00:43:34,145 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,155 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,157 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,166 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,169 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,179 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:34,182 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:34,191 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:36,104 - DEBUG - deviceMangerTester: CleanUp Complete
-
-2019-10-04 00:43:36,104 - DEBUG - deviceManagerTester: All Tests Passed Successfully
-
-2019-10-04 00:43:39,126 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-10-04 00:43:39,147 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-10-04 00:43:39,147 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-10-04 00:43:39,147 - DEBUG - No New Commands To Execute
-2019-10-04 00:43:39,193 - DEBUG - Preforming Data-Push
-2019-10-04 00:43:39,198 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:39,213 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:39,215 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:39,225 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:39,228 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:39,240 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:39,243 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:39,253 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
-2019-10-04 00:43:39,255 - DEBUG - Starting new HTTP connection (1): localhost:8801
-2019-10-04 00:43:39,265 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-16 13:42:34,964 - DEBUG - Starting CleanUp
+2019-10-16 13:42:34,964 - DEBUG - Cleaning Supervisor ID: 1096
+2019-10-16 13:42:34,964 - INFO - supervisor Killed. Dead supervisorID: 1096

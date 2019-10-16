@@ -20,6 +20,12 @@ class Supervisor:
     def getSupervisorID(self):
         return
 
+    def getGlobalID(self):
+        return
+
+    def updateGlobalID(self, globalID):
+        return
+
     def monitor(self, data):
         return None
 
