@@ -1,8 +1,10 @@
-2019-09-25 15:03:30,180 - INFO - 
+2019-10-04 00:43:29,061 - INFO - 
 
 Launching Program
-2019-09-25 15:03:30,181 - INFO - All Threads Launched Successfully
-2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-04 00:43:29,069 - DEBUG - Preforming Data-Push
+2019-10-04 00:43:29,069 - INFO - All Threads Launched Successfully
+2019-10-04 00:43:29,069 - INFO - Starting Tests ...
+2019-10-04 00:43:29,076 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -13,90 +15,97 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-09-25 15:03:30,186 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-04 00:43:29,076 - INFO - All Launch Supervisors Spawned Successfully
+2019-10-04 00:43:29,077 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-04 00:43:29,096 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-10-04 00:43:29,096 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-04 00:43:29,097 - DEBUG - No New Commands To Execute
+2019-10-04 00:43:31,072 - INFO - Device_Level Manager Test:
+2019-10-04 00:43:32,084 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 1028,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-04 00:43:32,089 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "True",
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "supervisorID": 12,
-    "supervisorName": "Little Thanos",
+    "supervisorID": 1092,
+    "supervisorName": "TestSupervisor",
     "supervisorType": "intMaker"
 }
 
-2019-09-25 15:03:30,187 - INFO - All Launch Supervisors Spawned Successfully
-2019-09-25 15:03:35,247 - INFO - New Commands Received.
-Commands: [
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "killSupervisor"
-    },
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "getSupervisorTags"
-    },
-    {
-        "body": {
-            "supervisorID": 1
-        },
-        "callBack": "True",
-        "commandType": "getSupervisorInfo"
-    },
-    {
-        "body": "None",
-        "callBack": "True",
-        "commandType": "getAllLocalSupervisor"
-    }
-]
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: killSupervisor
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 125, in killSupervisor
-    supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 150, in getSupervisorInstance
-    return self.MasterSupervisorDict[supervisorID]
-KeyError: 1
+2019-10-04 00:43:32,089 - INFO - supervisor Killed. Dead supervisorID: 1028
+2019-10-04 00:43:32,089 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "True",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 1028,
+    "supervisorName": "UpdatedSupervisor",
+    "supervisorType": "intMaker"
+}
 
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: getSupervisorTags
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
+2019-10-04 00:43:32,089 - DEBUG - Starting CleanUp
+2019-10-04 00:43:32,089 - DEBUG - Cleaning Supervisor ID: 1092
+2019-10-04 00:43:32,090 - INFO - supervisor Killed. Dead supervisorID: 1092
+2019-10-04 00:43:34,071 - DEBUG - Preforming Data-Push
+2019-10-04 00:43:34,075 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,088 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,091 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,095 - DEBUG - Cleaning Supervisor ID: 1028
+2019-10-04 00:43:34,095 - INFO - supervisor Killed. Dead supervisorID: 1028
+2019-10-04 00:43:34,101 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-04 00:43:34,102 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,105 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,116 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-10-04 00:43:34,117 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-04 00:43:34,117 - DEBUG - No New Commands To Execute
+2019-10-04 00:43:34,118 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,120 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,130 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,133 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,142 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,143 - WARNING - File Not Error Occurred When Trying To Save Data Locally.
+Error Message: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1092/localCSV.csv'
 Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 132, in getSupervisorTags
-    supervisor = self.MasterSupervisorDict[supervisorID]
-KeyError: 1
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/dataController.py", line 52, in localCSV
+    with open(path, 'a') as csvFile:
+FileNotFoundError: [Errno 2] No such file or directory: 'Local_Data/SupervisorId_1092/localCSV.csv'
 
-2019-09-25 15:03:35,248 - WARNING - Failed To Pass New Command To Manager
-Command Type: getSupervisorInfo
-callBack: True
-Body: {'supervisorID': 1, 'callBack': True}
-Error Message: 1
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 82, in executeCommands
-    methodToCall(**body)
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Managers/deviceManager.py", line 136, in getSupervisorInfo
-    supervisor = self.MasterSupervisorDict[supervisorID]
-KeyError: 1
+2019-10-04 00:43:34,145 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,155 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,157 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,166 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,169 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,179 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:34,182 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:34,191 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:36,104 - DEBUG - deviceMangerTester: CleanUp Complete
 
-2019-09-25 15:03:35,248 - WARNING - Exception Decoding Command. Command Failed
-Error Message: 'str' object does not support item assignment
-Full Json Command: {'body': 'None', 'callBack': 'True', 'commandType': 'getAllLocalSupervisor'}
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 77, in executeCommands
-    body["callBack"] = True
-TypeError: 'str' object does not support item assignment
+2019-10-04 00:43:36,104 - DEBUG - deviceManagerTester: All Tests Passed Successfully
 
+2019-10-04 00:43:39,126 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-04 00:43:39,147 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-10-04 00:43:39,147 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-04 00:43:39,147 - DEBUG - No New Commands To Execute
+2019-10-04 00:43:39,193 - DEBUG - Preforming Data-Push
+2019-10-04 00:43:39,198 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:39,213 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:39,215 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:39,225 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:39,228 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:39,240 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:39,243 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:39,253 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53
+2019-10-04 00:43:39,255 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-04 00:43:39,265 - DEBUG - http://localhost:8801 "POST /device/dataPush HTTP/1.1" 200 53

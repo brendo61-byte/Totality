@@ -23,6 +23,7 @@ def testNewSupervisor():
     assert response.status_code == 200
 
 
+"""
 # tests that a 400 is returned when a supervisorType is not included in body
 def testNewSupervisorSupervisorTypeFailure():
     body = {
@@ -46,6 +47,8 @@ def testNewSupervisorFalseDeviceIdFailure():
 
 ### TESTS FOR UPDATE supervisor ###
 
+
+
 # tests that a 200 is returned when tyring to update a supervisor
 def testUpdateSupervisor():
     body = {
@@ -60,6 +63,7 @@ def testUpdateSupervisor():
     response = requests.post(url=UPDATE_SUPERVISOR, json=body)
 
     assert response.status_code == 200
+
 
 
 # tests that a 400 is returned when trying to update a supervisor with a false ID
@@ -154,6 +158,8 @@ def testUpdateSupervisorCustomConfigFailure():
 
 ### TESTS FOR STOP supervisor ##
 
+
+
 # tests that a 200 is returned for supervisor stop command
 def testStopSupervisor():
     body = {
@@ -164,6 +170,7 @@ def testStopSupervisor():
     response = requests.post(url=STOP_SUPERVISOR, json=body)
 
     assert response.status_code == 200
+
 
 
 # tests that a 400 is returned for supervisor stop command when a false deviceId is provided
@@ -365,3 +372,4 @@ def testGetCommandsDeviceIdFailure():
     response = requests.post(url=GET_COMMANDS, json=body)
 
     assert response.status_code == 400
+"""

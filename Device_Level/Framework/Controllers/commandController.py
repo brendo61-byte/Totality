@@ -71,6 +71,15 @@ class CommandController(Controller):
         try:
             commandType = command["commandType"]
             body = command["body"]
+            commandID = command["commandID"]
+            """
+            Hey Wes!
+            
+            Use this commandID as the reference for what command ID you are trying to execute
+            
+            This should be passed as a value into the data controller -- though a package of type callBack
+            
+            """
             callBack = self.checkCallBack(callBackStr=command["callBack"])
             if callBack:
                 print("HERE")

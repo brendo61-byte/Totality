@@ -48,8 +48,11 @@ class Command(BaseModel):
     commandID = peewee.AutoField(primary_key=True)
     command = peewee.TextField(null=False)  # str of the command dict (see CCAPP)
     timeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # TS of when command was added
-    delivery = peewee.IntegerField(default=0,
-                                   null=False)  # If the command has been sent to the device yet. 0=F, 1=T
+    delivery = peewee.IntegerField(default=0, null=False)
+    # 0 = No replay - i.e. was just delivered
+    # 1 = Failed to deploy command
+    # 2 = Successful deployment of command
+    # 3 = Command has timed out
     status = peewee.IntegerField(default=0, null=False)  # If the command has been executed yet. 0=F, 1=T
     deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
                                          null=False)  # Back ref to know who gets the command
