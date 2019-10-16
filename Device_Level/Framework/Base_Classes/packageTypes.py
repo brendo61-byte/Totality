@@ -1,4 +1,5 @@
 from enum import auto
 
-data = auto()
+dataPush = auto()
 callBack = auto()
+requestGlobalID = auto()

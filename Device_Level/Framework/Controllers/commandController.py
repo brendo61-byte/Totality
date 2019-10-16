@@ -80,6 +80,7 @@ class CommandController(Controller):
             This should be passed as a value into the data controller -- though a package of type callBack
             
             """
+
             callBack = self.checkCallBack(callBackStr=command["callBack"])
             if callBack:
                 print("HERE")

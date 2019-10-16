@@ -1,5 +1,6 @@
 from Device_Level.Framework.Base_Classes.supervisor import Supervisor
 from Device_Level.Framework.Base_Classes.package import Package
+from Device_Level.Framework.Base_Classes.packageTypes import dataPush
 
 import random
 import datetime
@@ -114,5 +115,5 @@ class intMaker(Supervisor):
         return None
 
     def package(self, data, timeStamp):
-        package = Package(data=data, tags=self.tags, timeStamp=timeStamp, monitorResponse=self.monitor(data=data), headers=self.headers)
+        package = Package(data=data, tags=self.tags, timeStamp=timeStamp, packageType=dataPush, monitorResponse=self.monitor(data=data), headers=self.headers)
         self.pipe.put(payload=package)

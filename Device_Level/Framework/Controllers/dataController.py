@@ -1,4 +1,5 @@
 from Device_Level.Framework.Base_Classes.controller import Controller
+from Device_Level.Framework.Base_Classes.packageTypes import *
 
 import os
 import csv
@@ -31,13 +32,21 @@ class DataController(Controller):
             logging.debug("Preforming Data-Push")
             while not self.pipe.empty():
                 package = self.pipe.get()
-                # Magic happens here
+                packageType = package.getPackageType()
+                packageTypes = {
+                    dataPush: self.packager(package=package, packageType="dataPush"),
+                    callBack: self.packager(package=package, packageType="callBack"),
+                    requestGlobalID: self.packager(package=package, packageType="requestGlobalID")
+                }
 
-                # Put data wherever it needs to go
-                # This means locally
+                try:
+                    body = packageTypes.get(packageType)
+                    self.post(body=body)
+
+                except:
+                    logging.warning("Invalid package type provided: {}".format(packageType))
+
                 self.localCSV(package=package)
-                # And to a TS-DB
-                self.RDPush(package=package)
 
             time.sleep(self.updateInterval)
 
@@ -65,21 +74,27 @@ class DataController(Controller):
         except Exception as E:
             logging.warning("Failed To Save Data Locally.\nError Message: {}\n{}".format(E, traceback.format_exc()))
 
-    def RDPush(self, package):
-        body = self.packager(package=package)
+    def post(self, body):
         try:
             requests.post(url=RDURL, json=body)
         except Exception as e:
             logging.warning("Unable To Push Package To DB.\nException: {}\nTraceBack: {}".format(e, traceback))
 
-    def packager(self, package):
+    def callBack(self, package):
+        pass
+
+    def requestGlobalID(self, package):
+        pass
+
+    def packager(self, package, packageType):
         body = {
             "data": {
                 "package": package.getData(),
                 "tags": package.getSupervisorTags(),
                 "timeStamp": package.getTimeStamp()
             },
-            "deviceID": self.deviceID
+            "deviceID": self.deviceID,
+            "packageType": packageType
         }
 
         return body
