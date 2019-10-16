@@ -46,6 +46,7 @@ def dataPush():
     data = request.get_json()
     payload = data.get('data')
     deviceID = data.get('deviceID')
+    deviceType = data.get('deviceType')
 
     if payload is None:
         logging.info("Data Push Hit: No Payload Provided")
@@ -59,6 +60,8 @@ def dataPush():
         logging.info("Data Push Hit: Unable To Verify DID Existence")
         return jsonify(userMessage="Data Push Hit: Unable To Verify DID Existence"), 400
 
+
+
     try:
         ReliableDelivery.create(payload=payload, deviceOwner=deviceID)
         logging.debug("Data Push Hit: New Entry Into RD")
@@ -67,6 +70,15 @@ def dataPush():
         logging.warning("Data Push Hit: Unable To Push Data Into RD.\nException: {}\nTraceBack: {}".format(e,
                                                                                                            traceback.format_exc()))
         return jsonify(userMessage="Unable to Push"), 400
+
+@app.route('/device/requestGlobalID')
+def requestGlobalID():
+    data = request.get_json()
+    payload = data.get('data')
+    deviceID = data.get('deviceID')
+    commandID = data.get('commandID')
+
+
 
 
 @app.route('/device/callBack', methods=["POST"])

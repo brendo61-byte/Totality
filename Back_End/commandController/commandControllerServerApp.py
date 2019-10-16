@@ -144,29 +144,20 @@ def newSupervisor():
         logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
 
     except Exception as e:
-        logging.info("New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
-            e, traceback.format_exc()))
-        return jsonify(
-            userMesage="New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
-                e, traceback.format_exc())), 400
+        statement = "New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc())
+        logging.info(statement)
+        return jsonify(userMesage=statement), 400
 
-    # ToDo: Use get command
-    # try:
-    q = Supervisor.select().where(Supervisor.refID == refID)
+    try:
+        supervisorID = Supervisor.get.where(Supervisor.refID == refID).supervisorID
 
-    for entry in q:
-        supervisorID = entry.supervisorID
-        entry.refID = 0
-        entry.save()
-        logging.debug("New Supervisor Hit: SupervisorID assigned: {}".format(supervisorID))
-
-    # except Exception as e:
-    #     logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
-    #         e, traceback.format_exc()))
-
-    #    return jsonify(
-    #        userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
-    #            e, traceback.format_exc())), 400
+    except Exception as e:
+        statement = "New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(e,
+                                                                                                                  traceback.format_exc())
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+        # ToDo: How to handle a new supervisor being created if the command is not passed to the device
 
     try:
 

@@ -1,5 +1,5 @@
 #Totality Documentation
-This REAME me is for Device_Level Info Only!
+This README me is for Device_Level Info Only!
 
 See ../Back_End/README.md for documentation on the back end... This was done deliberately because the device does not need a
 back end to operate.
