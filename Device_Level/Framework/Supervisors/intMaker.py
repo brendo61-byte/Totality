@@ -125,10 +125,5 @@ class intMaker(Supervisor):
         return None
 
     def package(self, data, timeStamp):
-<<<<<<< HEAD
         package = Package(data=data, tags=self.tags, timeStamp=timeStamp, packageType=dataPush, monitorResponse=self.monitor(data=data), headers=self.headers)
-=======
-        package = Package(data=data, tags=self.tags, timeStamp=timeStamp, monitorResponse=self.monitor(data=data),
-                          headers=self.headers)
->>>>>>> auto_config
         self.pipe.put(payload=package)

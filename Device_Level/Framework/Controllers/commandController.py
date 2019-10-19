@@ -26,7 +26,8 @@ class CommandController(Controller):
             commands = self.pullCommands()
             if commands is not None:
                 if bool(commands.get("commands")):
-                    logging.info("New Commands Received.\nCommands: {}".format(json.dumps(commands["commands"], indent=4)))
+                    logging.info(
+                        "New Commands Received.\nCommands: {}".format(json.dumps(commands["commands"], indent=4)))
                     self.commandParser(commands=commands)
                 else:
                     logging.debug("No New Commands To Execute")
@@ -57,9 +58,9 @@ class CommandController(Controller):
     def commandParser(self, commands):
         for command in commands.get("commands"):
             if self.executeCommands(command=command):
-                pass  # Create new success package
+                pass  # Create new success package {"data" = 2, "timeStamp": date time object in UTC, "packageType" callBack} --- add to dataPipe
             else:
-                pass  # Create new fail package
+                pass  # Create new success package {"data" = 1, "timeStamp": date time object in UTC, "packageType" callBack} --- add to dataPipe
 
     def createSuccessPackage(self):
         pass
@@ -71,23 +72,12 @@ class CommandController(Controller):
         try:
             commandType = command["commandType"]
             body = command["body"]
-            commandID = command["commandID"]
-            """
-            Hey Wes!
-            
-            Use this commandID as the reference for what command ID you are trying to execute
-            
-            This should be passed as a value into the data controller -- though a package of type callBack
-            
-            """
 
             callBack = self.checkCallBack(callBackStr=command["callBack"])
             if callBack:
-                print("HERE")
                 body["callBack"] = True
 
             try:
-                print("Command: {}".format(command))
                 methodToCall = getattr(self.DM, commandType)
                 methodToCall(**body)
 

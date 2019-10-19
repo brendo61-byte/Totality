@@ -111,7 +111,6 @@ def genRefID():
 def newSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
-    # ToDo: Remove get.DID
     deviceID = data.get('deviceID')
     customConfig = data.get('customConfig')
     configStatus = True
@@ -164,6 +163,78 @@ def newSupervisor():
         body = {"supervisorType": supervisorType, "globalID": supervisorID, "deviceID": deviceID,
                 "customConfig": customConfig}
         CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True)).replace("'", "\'")
+        Command.create(command=CF, deviceOwner=deviceID)
+        logging.debug(
+            "New Supervisor Hit: New Supervisor Command Added. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
+                supervisorType, supervisorID, deviceID, configStatus))
+
+        return jsonify(userMessage="New Supervisor Hit: New Supervisor Command Added To Queue"), 200
+
+    except Exception as e:
+        logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc()))
+
+        return jsonify(
+            userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+                e, traceback.format_exc())), 400
+
+
+@app.route('/user/device/supervisorRegistration', methods=["POST"])
+def supervisorRegistration():
+    data = request.get_json()
+    supervisorType = data.get('supervisorType')
+    localID = data.get('localID')
+    deviceID = data.get('deviceID')
+    customConfig = data.get('customConfig')
+    configStatus = True
+
+    if supervisorType is None:
+        logging.info("New Supervisor Hit: No Supervisor Type Provided")
+        return jsonify(userMessage="Please Provide A Valid Supervisor Type"), 400
+    if deviceID is None:
+        logging.info("New Supervisor Hit: No DID Type Provided")
+        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
+    if customConfig is None:
+        logging.info("New Supervisor Hit: Using Base Configuration")
+        customConfig = str(customConfig)
+        configStatus = False
+
+    # ToDo : Remove this
+    if not validateDeviceExists(validateDeviceExists(deviceID)):
+        # ToDo: single string then pass
+        logging.info("New Supervisor Hit: Unable To Verify DID Existence")
+        return jsonify(userMessage="New Supervisor Hit: Unable To Verify DID Existence"), 400
+
+    refID = genRefID()
+    logging.debug("New Supervisor Hit: refID generated: {}".format(refID))
+
+    supervisorID = None
+
+    try:
+        Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType)
+        # ToDo: Use fsting (python 3.6) - cleaner way of putting variables in strings
+        logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
+
+    except Exception as e:
+        statement = "New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
+            e, traceback.format_exc())
+        logging.info(statement)
+        return jsonify(userMesage=statement), 400
+
+    try:
+        supervisorID = Supervisor.get.where(Supervisor.refID == refID).supervisorID
+
+    except Exception as e:
+        statement = "New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(e,
+                                                                                                                  traceback.format_exc())
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+        # ToDo: How to handle a new supervisor being created if the command is not passed to the device
+
+    try:
+
+        body = {"globalID": supervisorID, "localID": localID}
+        CF = str(makeCommandFormat(body=body, commandType="supervisorGlobalRegistration", callBack=True)).replace("'", "\'")
         Command.create(command=CF, deviceOwner=deviceID)
         logging.debug(
             "New Supervisor Hit: New Supervisor Command Added. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
@@ -333,6 +404,30 @@ def getAllLocalSupervisor():
     logging.debug("Get All Local Supervisors Hit: Get All Local Supervisors Command Added To Queue")
 
     return jsonify(userMessage="Get ALL Supervisor Info Command Added To Queue"), 200
+
+
+@app.route('/user/device/updateGlobalID', methods=["POST"])
+def updateGlobalID():
+    data = request.get_json()
+    deviceID = data.get('deviceID')
+    localID = data.get('localID')
+
+    if deviceID is None:
+        statement = "Update Global ID Hit: No DID Provided"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+
+    if localID is None:
+        statement = "Update Global ID Hit: No localID Provided"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+
+    if not validateDeviceExists(validateDeviceExists(deviceID)):
+        statement = "Get All Local Supervisors Hit: Unable To Verify DID Existence"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+
+    body = {"localID": localID, "globalID":}
 
 
 def generateDeviceCommands(deviceID):

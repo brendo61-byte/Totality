@@ -8,7 +8,7 @@ import logging
 import traceback
 import requests
 
-RDURL = "http://localhost:8801/device/dataPush"
+RDURL = "http://localhost:8801/device/dataIngestion"
 DESTINATION = "Local_Data/dataRepo.json"
 LOCAL_DATA = 'Local_Data/'
 LOCAL_FILE_NAME = 'localCSV.csv'
@@ -36,7 +36,7 @@ class DataController(Controller):
                 packageTypes = {
                     dataPush: self.packager(package=package, packageType="dataPush"),
                     callBack: self.packager(package=package, packageType="callBack"),
-                    requestGlobalID: self.packager(package=package, packageType="requestGlobalID")
+                    registerSupervisor: self.packager(package=package, packageType="requestGlobalID")
                 }
 
                 try:
@@ -46,7 +46,8 @@ class DataController(Controller):
                 except:
                     logging.warning("Invalid package type provided: {}".format(packageType))
 
-                self.localCSV(package=package)
+                if packageType == dataPush:
+                    self.localCSV(package=package)
 
             time.sleep(self.updateInterval)
 
@@ -63,7 +64,6 @@ class DataController(Controller):
                 writer = csv.writer(csvFile)
                 writer.writerow(dataList)
 
-
         except FileNotFoundError as FNFE:
             logging.warning(
                 "File Not Error Occurred When Trying To Save Data Locally.\nError Message: {}\n{}".format(FNFE,
@@ -79,12 +79,6 @@ class DataController(Controller):
             requests.post(url=RDURL, json=body)
         except Exception as e:
             logging.warning("Unable To Push Package To DB.\nException: {}\nTraceBack: {}".format(e, traceback))
-
-    def callBack(self, package):
-        pass
-
-    def requestGlobalID(self, package):
-        pass
 
     def packager(self, package, packageType):
         body = {

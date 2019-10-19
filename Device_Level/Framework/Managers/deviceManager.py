@@ -1,4 +1,6 @@
 from Device_Level.Framework.Base_Classes.exceptionClasses import *
+from Device_Level.Framework.Base_Classes.package import Package
+from Device_Level.Framework.Base_Classes.packageTypes import registerSupervisor
 from threading import Thread
 from pathlib import Path
 
@@ -8,6 +10,7 @@ import os
 import importlib
 import traceback
 import logging
+import datetime
 
 CONFIG_PATH = 'Framework/Base_Supervisor_Config_Files'
 supervisor_PATH = 'Framework.Supervisors.'
@@ -89,31 +92,39 @@ class deviceManager:
 
         if len(self.MasterSupervisorDict) >= self.threadLimit:
             SupervisorThreadLimit()
-            # ToDo: Test This --- exception CLass updated --- deviceConfig --- Update README
-            # ToDo: What am I doing with this? --- Should be to check that > 10 supervisors are running
-            # ToDo: Okay what are we doing when this happens --- IDK. but we should not spin up the 11th supervisor
-            # ToDo: Hey that 10 is not hardcoded and is in config but yea 10 should be a good number for RasPis
 
         supervisor = self.makeSupervisor(supervisorType=supervisorType, supervisorID=supervisorID,
                                          customConfig=customConfig, restart=restart, globalID=globalID)
         self.MasterSupervisorDict[supervisorID] = supervisor
 
-        if globalID != 0:
+        if callBack:
+            self.addSupervisorToConf(supervisorType=supervisorType, supervisorID=supervisorID,
+                                     customConfig=customConfig, globalID=globalID)
             self.NAT[globalID] = supervisorID
-            self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=supervisorID)
+
+        if globalID == 0:
+            data = {
+                "supervisorType": supervisorType,
+                "deviceID": self.deviceID,
+                "customConfig": customConfig,
+                "localID": supervisorID
+            }
+
+            package = Package(data=data, timeStamp=datetime.datetime.now().utcnow(), packageType=registerSupervisor)
+            self.datapipe.put(payload=package)
 
         self.dirSetUp(supervisorID=supervisorID, supervisor=supervisor)
 
         thread = Thread(target=supervisor.getData, name=supervisorID)
 
-        if callBack:
-            self.addSupervisorToConf(supervisorType=supervisorType, supervisorID=supervisorID,
-                                     customConfig=customConfig, globalID=globalID)
-
         thread.start()
 
         logging.info("New supervisor Spawned. supervisor Info: {}\n".format(
             json.dumps(supervisor.getSupervisorInfo(), indent=4, sort_keys=True)))
+
+    def supervisorGlobalRegistration(self, globalID, supervisorID):
+        self.NAT[globalID] = supervisorID
+        self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=supervisorID)
 
     def updateSupervisorConfGlobalID(self, globalID, supervisorID):
         raw = open(self.configPath, "r")
@@ -272,22 +283,25 @@ class deviceManager:
         supervisorClass = getattr(module, supervisorType)
         return supervisorClass
 
-    def killSupervisor(self, supervisorID, callBack=False):
+    def killSupervisor(self, supervisorID):
+        supervisorID = self.NAT[supervisorID]
         supervisor = self.getSupervisorInstance(supervisorID=supervisorID)
         supervisor.operational = False
         del self.MasterSupervisorDict[supervisorID]
 
         logging.info("supervisor Killed. Dead supervisorID: {}".format(supervisorID))
 
-    def getSupervisorTags(self, supervisorID, callBack=False):
+    def getSupervisorTags(self, supervisorID):
+        supervisorID = self.NAT[supervisorID]
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorTags()
 
-    def getSupervisorInfo(self, supervisorID, callBack=False):
+    def getSupervisorInfo(self, supervisorID):
+        supervisorID = self.NAT[supervisorID]
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorInfo()
 
-    def getAllLocalSupervisors(self, callBack=False):
+    def getAllLocalSupervisors(self,):
         allInfo = {}
 
         for ID in self.MasterSupervisorDict.keys():
@@ -298,4 +312,5 @@ class deviceManager:
         return allInfo
 
     def getSupervisorInstance(self, supervisorID):
+        supervisorID = self.NAT[supervisorID]
         return self.MasterSupervisorDict[supervisorID]

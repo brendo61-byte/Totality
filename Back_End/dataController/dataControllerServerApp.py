@@ -4,8 +4,10 @@ from models import *
 
 import traceback
 import logging
+import requests
 
 app = Flask(__name__)
+COMMAND_URL = "http://localhost:8802/device/commands/supervisorRegistration"
 
 """
 This is the API for data ingestion. This not only means data in terms of readings from senors but also getting information from sensors - like callBacks (see
@@ -41,101 +43,78 @@ def validateDeviceExists(deviceID):
                                                                                                             traceback.format_exc()))
 
 
-@app.route('/device/dataPush', methods=["POST"])
+@app.route('/device/dataIngestion', methods=["POST"])
 def dataPush():
-    data = request.get_json()
-    payload = data.get('data')
-    deviceID = data.get('deviceID')
-    deviceType = data.get('deviceType')
+    package = request.get_json()
+    payload = package.get('data')
+    deviceID = package.get('deviceID')
+    packageType = package.get('packageType')
 
     if payload is None:
-        logging.info("Data Push Hit: No Payload Provided")
-        jsonify(userMessage="Please Provide A Valid Payload"), 400
+        statement = "Data Push Hit: No Payload Provided"
+        logging.info(statement)
+        jsonify(userMessage=statement), 400
 
     if deviceID is None:
-        logging.info("Data Push Hit: No deviceID Provided")
-        jsonify(userMessage="Please Provide A Valid DID"), 400
+        statement = "Data Push Hit: No deviceID Provided"
+        logging.info(statement)
+        jsonify(userMessage=statement), 400
 
     if not validateDeviceExists(deviceID=deviceID):
-        logging.info("Data Push Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Data Push Hit: Unable To Verify DID Existence"), 400
+        statement = "Data Push Hit: Unable To Verify DID Existence"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+
+    packageTypes = {
+        "dataPush": ReliableDelivery(payload=payload, deviceID=deviceID),
+        "callBack": callBack(result=payload.get("status"), commandID=payload.get('commandID')),
+        "registerSupervisor": registerSupervisor(body=payload)
+    }
+
+    statement, status = packageTypes.get(packageType)
+
+    return jsonify(userMessage=statement), status
 
 
-
+def ReliableDelivery(payload, deviceID):
     try:
         ReliableDelivery.create(payload=payload, deviceOwner=deviceID)
         logging.debug("Data Push Hit: New Entry Into RD")
-        return jsonify(userMessage="Payload added to reliable delivery"), 200
+        return "Payload added to reliable delivery", 200
     except Exception as e:
         logging.warning("Data Push Hit: Unable To Push Data Into RD.\nException: {}\nTraceBack: {}".format(e,
                                                                                                            traceback.format_exc()))
-        return jsonify(userMessage="Unable to Push"), 400
 
-@app.route('/device/requestGlobalID')
-def requestGlobalID():
-    data = request.get_json()
-    payload = data.get('data')
-    deviceID = data.get('deviceID')
-    commandID = data.get('commandID')
+        return "Unable to push data into RD", 200
 
 
+def registerSupervisor(body):
+    responce = response = requests.post(url=COMMAND_URL, json=body)
+    if responce.status_code == 200:
+        return "Registration Completed. New global ID will be delivered", 200
+    else:
+        return "Registration Failed.\nInfo: {}".format(responce.raw), 400
 
 
-@app.route('/device/callBack', methods=["POST"])
-def callBack():
-    """
-    Hey Wes. So look at this!
-
-    You need to provide the a dict with keys of payload, deviceID, and commandID
-
-    Note that payload must be a 1 or 2
-    Note that deviceID should be the DID of the sending device
-    Note that commandID need to be the commandID - this way we know that command we are talking about
-
-    :return:
-    """
-    data = request.get_json()
-    payload = data.get('data')
-    deviceID = data.get('deviceID')
-    commandID = data.get('commandID')
-
-    if payload is None:
-        logging.info("Call Back Hit: No Payload Provided")
-        jsonify(userMessage="Please Provide A Valid Payload"), 400
-
-    if deviceID is None:
-        logging.info("Call Back Hit: No deviceID Provided")
-        jsonify(userMessage="Please Provide A Valid DID"), 400
-
-    if not payload == 1 or payload == 2:
-        logging.info("Call Back Hit: Invalid payload value")
-        jsonify(userMessage="Invalid payload"), 400
-
-    if not validateDeviceExists(deviceID=deviceID):
-        logging.info("Call Back Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
+def callBack(result, commandID):
+    if not result == 1 or result == 2:
+        statement = "Call Back Hit: Invalid payload value"
+        logging.info(statement)
+        return statement, 400
 
     try:
-        q = Command.select().where(Command.commandID == commandID)
+        entry = Command.get().where(Command.commandID == commandID)
+        entry.status = payload
+        entry.save()
 
-        if q.exists():
-            for entry in q:
-                if payload == 1:
-                    entry.status = 1
-                if payload == 2:
-                    entry.status = 2
-                entry.save()
-
-                logging.debug("Command ID: {} callBack with status no. {}".format(commandID, commandID))
-                return jsonify(userMessage="Command status updated"), 200
-        else:
-            logging.info("Call Back Hit: Unable to find command ID entry")
-            return jsonify(userMessage="Unable to find command ID"), 400
+        statement = "Command ID: {} callBack with status no. {}".format(commandID, commandID)
+        logging.debug(statement)
+        return statement, 200
 
     except:
-        logging.warning("Call Back Hit: Failed to query database for commands")
-        return jsonify(userMessage="Unable to query database for commands"), 400
-
+        statement = "Call Back Hit: Failed to query database for commands"
+        logging.warning(statement)
+        return statement, 400
 
 
 if __name__ == '__main__':
