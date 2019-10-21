@@ -1,8 +1,10 @@
 import requests
-import datetime
 
-URL = "http://localhost:8801/device/dataPush"
+DATA_URL = "http://localhost:8801/device/dataIngestion"
+CALLBACK_URL = "http://localhost:8801/device/callBack"
 
+
+###Data Ingestion TESTS###
 
 # tests that a 200 is returned when trying to add row in RD
 def testAddData():
@@ -13,7 +15,7 @@ def testAddData():
         "deviceID": 1
     }
 
-    response = requests.post(url=URL, json=body)
+    response = requests.post(url=DATA_URL, json=body)
 
     assert response.status_code == 200
 
@@ -26,7 +28,7 @@ def testAddDataDeviceIDFailure():
         }
     }
 
-    response = requests.post(url=URL, json=body)
+    response = requests.post(url=DATA_URL, json=body)
 
     assert response.status_code == 400
 
@@ -40,7 +42,7 @@ def testAddDataFalseDeviceIDFailure():
         "deviceID": 1234567890
     }
 
-    response = requests.post(url=URL, json=body)
+    response = requests.post(url=DATA_URL, json=body)
 
     assert response.status_code == 400
 
@@ -51,7 +53,7 @@ def testAddDataDataFailure():
         "deviceID": 1
     }
 
-    response = requests.post(url=URL, json=body)
+    response = requests.post(url=DATA_URL, json=body)
 
     assert response.status_code == 400
 
@@ -65,6 +67,9 @@ def testAddDataNonData():
         "deviceID": 1
     }
 
-    response = requests.post(url=URL, json=body)
+    response = requests.post(url=DATA_URL, json=body)
 
     assert response.status_code == 200
+
+###CALL BACK TESTS###
+# ToDo: Write these tests

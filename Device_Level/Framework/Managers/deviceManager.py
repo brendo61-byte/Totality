@@ -50,9 +50,10 @@ FileNotFoundError)
 # Todo: How to monitor and handle when a thread dies
 
 class deviceManager:
-    def __init__(self, pipe, deviceID, test, threadLimit, configPath):
+    def __init__(self, pipe, deviceID, test, threadLimit, configPath, manegementPipe):
         self.MasterSupervisorDict = {}
         self.NAT = {}
+        self.manegementPipe = manegementPipe
         self.datapipe = pipe
         self.configPath = configPath
         self.deviceID = deviceID
@@ -103,6 +104,7 @@ class deviceManager:
             self.NAT[globalID] = supervisorID
 
         if globalID == 0:
+            logging.info("No global ID. Requesting supervisor Registration")
             data = {
                 "supervisorType": supervisorType,
                 "deviceID": self.deviceID,
@@ -111,7 +113,7 @@ class deviceManager:
             }
 
             package = Package(data=data, timeStamp=datetime.datetime.now().utcnow(), packageType=registerSupervisor)
-            self.datapipe.put(payload=package)
+            self.manegementPipe.put(payload=package)
 
         self.dirSetUp(supervisorID=supervisorID, supervisor=supervisor)
 
@@ -122,9 +124,11 @@ class deviceManager:
         logging.info("New supervisor Spawned. supervisor Info: {}\n".format(
             json.dumps(supervisor.getSupervisorInfo(), indent=4, sort_keys=True)))
 
-    def supervisorGlobalRegistration(self, globalID, supervisorID):
-        self.NAT[globalID] = supervisorID
-        self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=supervisorID)
+    def supervisorGlobalRegistration(self, globalID, localID):
+        self.NAT[globalID] = localID
+        self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=localID)
+
+        self.getSupervisorInstance(supervisorID=globalID).updateGlobalID(globalID=globalID)
 
     def updateSupervisorConfGlobalID(self, globalID, supervisorID):
         raw = open(self.configPath, "r")

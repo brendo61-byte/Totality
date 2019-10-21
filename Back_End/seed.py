@@ -9,27 +9,33 @@ NEW_DEVICE = "http://localhost:8803/device/newDevice"
 
 newCustomerBody = {
     "name": "FizzBuzz Inc",
-    "address": "1523 Holiday Drive",
+    "address": "700 Holiday Drive",
     "phone": "314-159-2653",
 }
 
 newDeviceBody = {
-    "name": "Brendon's MEGA Machine",
-    "location": "Planet Drron",
+    "name": "Deep Blue",
+    "location": "Tatooine",
     "customerOwner": 1
 }
 
-
 print("Begin Seeding")
 try:
-    requests.post(url=NEW_CUSTOMER, json=newCustomerBody)
-    print("Seeded New Customer")
+    result = requests.post(url=NEW_CUSTOMER, json=newCustomerBody)
+    if result.status_code == 200:
+        print("Seeded New Customer")
+    else:
+        print("Failed To See New Customer. Now Exiting Seeding Script.\nException: {}".format(e))
+        exit()
 except Exception as e:
     print("Failed To See New Customer. Now Exiting Seeding Script.\nException: {}".format(e))
     exit()
 
 try:
-    requests.post(url=NEW_DEVICE, json=newDeviceBody)
-    print("Seeded New Device")
+    result = requests.post(url=NEW_DEVICE, json=newDeviceBody)
+    if result.status_code == 200:
+        print("Seeded New Device")
+    else:
+        print("Failed To Seed New Customer. Now Exiting Seeding Script.\nException: {}".format(e))
 except Exception as e:
     print("Failed To Seed New Customer. Now Exiting Seeding Script.\nException: {}".format(e))

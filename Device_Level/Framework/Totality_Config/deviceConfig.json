@@ -21,8 +21,13 @@
             "updateInterval": 5
         }
     },
+    "managementController": {
+        "args": {
+            "updateInterval": 1
+        }
+    },
     "logLevel": "DEBUG",
-    "test": "True",
+    "test": "False",
     "threadLimit": 10,
     "deviceID": 1
 }

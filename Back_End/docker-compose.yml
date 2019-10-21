@@ -8,21 +8,27 @@ services:
 #   ports:
 #    - "8801:8801"
 
+  managment_api:
+    container_name: managment_api
+    build: managementAPI/
+    ports:
+      - "8804:8804"
+
   creation_api:
    container_name: creation_api
    build: ./creationAPI/
    ports:
     - "8803:8803"
 
-  command_controller:
-   container_name: command_controller
-   build: ./commandController/
+  command_api:
+   container_name: command_api
+   build: ./commandAPI/
    ports:
     - "8802:8802"
 
-  data_controller:
-    container_name: data_controller
-    build: ./dataController/
+  data_api:
+    container_name: data_api
+    build: ./dataAPI/
     ports:
       - "8801:8801"
 

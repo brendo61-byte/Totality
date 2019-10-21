@@ -1,7 +1,9 @@
 from Device_Level.Framework.Base_Classes import dataPipe
+from Device_Level.Framework.Base_Classes import managementPipe
 from Device_Level.Framework.Managers.deviceManager import deviceManager
 from Device_Level.Framework.Controllers.commandController import CommandController
 from Device_Level.Framework.Controllers.dataController import DataController
+from Device_Level.Framework.Controllers.managmentController import ManagementController
 from Device_Level.Framework.Launcher.localLauncher import Launcher
 
 from Device_Level.Framework.Test_Sweet.deviceMangerTester import DMTest as DMT
@@ -29,10 +31,13 @@ if __name__ == '__main__':
             config = json.load(configFile)
 
         DID = config["deviceID"]
-        logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+        logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='w',
+                            format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("\n\nLaunching Program")
-        pipe = dataPipe.DataPipe()
-        DM = deviceManager(pipe=pipe, deviceID=DID, test=config["test"], threadLimit=config["threadLimit"], configPath=CONFIG_PATH)
+        dataPipe = dataPipe.DataPipe()
+        managementPipe = managementPipe.ManagementPipe()
+        DM = deviceManager(pipe=dataPipe, manegementPipe=managementPipe, deviceID=DID, test=config["test"],
+                           threadLimit=config["threadLimit"], configPath=CONFIG_PATH)
 
         useLauncher = False
         if config["launcher"]["args"] != 'None' and bool(config["launcher"]["args"]):
@@ -40,7 +45,9 @@ if __name__ == '__main__':
             useLauncher = True
 
         commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
-        dataController = DataController(**config["dataControl"]["args"], pipe=pipe, DM=DM, deviceID=DID)
+        dataController = DataController(**config["dataControl"]["args"], pipe=dataPipe, deviceID=DID)
+        managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe,
+                                                    deviceID=DID, DM=DM)
 
         if useLauncher:
             LT = Thread(target=launcher.starter, name="Launcher_Thread")
@@ -48,9 +55,11 @@ if __name__ == '__main__':
 
         CCThread = Thread(target=commandController.starter, name="CC_Thread")
         DCThread = Thread(target=dataController.starter, name="DC_Thread")
+        MCThread = Thread(target=managementController.starter, name="MC_Thread")
 
         CCThread.start()
         DCThread.start()
+        MCThread.start()
 
         logging.info("All Threads Launched Successfully")
         print("All Threads Launched Successfully")
@@ -66,27 +75,44 @@ if __name__ == '__main__':
 
 
     except KeyError as KE:
-        print("Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n\n{}".format(KE, traceback.format_exc()))
-        logging.critical("Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(KE, traceback.format_exc()))
+        print(
+            "Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n\n{}".format(
+                KE, traceback.format_exc()))
+        logging.critical(
+            "Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(
+                KE, traceback.format_exc()))
         exit()
 
     except TypeError as TE:
-        print("Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n\n{}".format(TE, traceback.format_exc()))
-        logging.critical("Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(TE, traceback.format_exc()))
+        print(
+            "Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n\n{}".format(
+                TE, traceback.format_exc()))
+        logging.critical(
+            "Key Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(
+                TE, traceback.format_exc()))
         exit()
 
     except FileNotFoundError as FNFE:
-        print("File Not Found Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(FNFE, traceback.format_exc()))
+        print(
+            "File Not Found Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(
+                FNFE, traceback.format_exc()))
         logging.critical(
-            "File Not Found Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(FNFE, traceback.format_exc()))
+            "File Not Found Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(
+                FNFE, traceback.format_exc()))
         exit()
 
     except NameError as NE:
-        print("Name Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(NE, traceback.format_exc()))
-        logging.critical("Name Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(NE, traceback.format_exc()))
+        print(
+            "Name Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(
+                NE, traceback.format_exc()))
+        logging.critical(
+            "Name Error Occurred While Trying To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(
+                NE, traceback.format_exc()))
         exit()
 
     except Exception as e:
-        print("Failed To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(e, traceback.format_exc()))
-        logging.critical("Failed To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(e, traceback.format_exc()))
+        print("Failed To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(e,
+                                                                                                     traceback.format_exc()))
+        logging.critical("Failed To Start IoT Device_Level. Now Exiting Program.\nError Message: {}\n{}".format(e,
+                                                                                                                traceback.format_exc()))
         exit()

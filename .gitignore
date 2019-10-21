@@ -1,4 +1,4 @@
 .dea
 __pycache__/
-venv/
+/venv
 /Device_Level/Local_Data

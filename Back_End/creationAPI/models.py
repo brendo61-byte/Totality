@@ -37,7 +37,7 @@ class Device(BaseModel):
     commandTimeWindow = peewee.DateTimeField(
         null=False)  # Time that device must check in before missedCommand is incremented.
     status = peewee.IntegerField(default=0, null=False)
-    # Todo: Get the status field working --- though dataController API
+    # Todo: Get the status field working --- though dataAPI API
     # 0=No Connection has not been established,
     # 1=connection stable - missed command periods between 0-3
     # 2=Last known connection was stable - missed 3-9 command periods
@@ -46,6 +46,7 @@ class Device(BaseModel):
 
 class Command(BaseModel):
     commandID = peewee.AutoField(primary_key=True)
+    refID = peewee.IntegerField(null=False)
     command = peewee.TextField(null=False)  # str of the command dict (see CCAPP)
     timeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # TS of when command was added
     delivery = peewee.IntegerField(default=0, null=False)
@@ -74,7 +75,7 @@ class Supervisor(BaseModel):
     supervisorID = peewee.AutoField(primary_key=True)  # Supervisor ID
     samplePeriod = peewee.IntegerField(default=1, null=False)
     deviceOwner = peewee.ForeignKeyField(Device, backref='intMaker', null=False)
-    customConfig = peewee.IntegerField(default=0, null=False)  # 0=F, 1=T
+    customConfig = peewee.CharField(null=True)
 
 
 def makeTables():
