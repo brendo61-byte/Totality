@@ -4,9 +4,15 @@
             "supervisorList": [
                 {
                     "supervisorType": "intMaker",
+                    "supervisorID": 2,
+                    "customConfig": null,
+                    "globalID": 11
+                },
+                {
+                    "supervisorType": "intMaker",
                     "supervisorID": 1,
-                    "customConfig": "None",
-                    "globalID": 0
+                    "customConfig": null,
+                    "globalID": 12
                 }
             ]
         }

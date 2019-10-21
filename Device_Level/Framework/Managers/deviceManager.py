@@ -81,18 +81,14 @@ class deviceManager:
         return len(self.MasterSupervisorDict) + 1
 
     def launcher(self, supervisorType, supervisorID=None, globalID=0, customConfig=None, restart=False, callBack=False):
-        if callBack:
-            logging.info("Supervisor being created with global SID: {}".format(globalID))
-            globalID = supervisorID
-            supervisorID = self.NAT[globalID]
+        if len(self.MasterSupervisorDict) >= self.threadLimit:
+            SupervisorThreadLimit()
 
         if supervisorID == None or supervisorID == 0:
+            logging.info("Supervisor being created with global SID: {}".format(globalID))
             logging.info("Supervisor does not have a local SID")
             supervisorID = self.getSupervisorID()
             logging.info("Generated supervisorID is: {}".format(supervisorID))
-
-        if len(self.MasterSupervisorDict) >= self.threadLimit:
-            SupervisorThreadLimit()
 
         supervisor = self.makeSupervisor(supervisorType=supervisorType, supervisorID=supervisorID,
                                          customConfig=customConfig, restart=restart, globalID=globalID)
@@ -128,7 +124,7 @@ class deviceManager:
         self.NAT[globalID] = localID
         self.updateSupervisorConfGlobalID(globalID=globalID, supervisorID=localID)
 
-        self.getSupervisorInstance(supervisorID=globalID).updateGlobalID(globalID=globalID)
+        self.getSupervisorInstanceFromGlobal(globalID=globalID).updateGlobalID(globalID=globalID)
 
     def updateSupervisorConfGlobalID(self, globalID, supervisorID):
         raw = open(self.configPath, "r")
@@ -305,7 +301,7 @@ class deviceManager:
         supervisor = self.MasterSupervisorDict[supervisorID]
         return supervisor.getSupervisorInfo()
 
-    def getAllLocalSupervisors(self,):
+    def getAllLocalSupervisors(self, ):
         allInfo = {}
 
         for ID in self.MasterSupervisorDict.keys():
@@ -316,5 +312,8 @@ class deviceManager:
         return allInfo
 
     def getSupervisorInstance(self, supervisorID):
-        supervisorID = self.NAT[supervisorID]
         return self.MasterSupervisorDict[supervisorID]
+
+    def getSupervisorInstanceFromGlobal(self, globalID):
+        localID = self.NAT[globalID]
+        return self.MasterSupervisorDict[localID]

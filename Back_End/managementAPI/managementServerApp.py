@@ -108,7 +108,7 @@ def supervisorRegistration():
     logging.debug("Supervisor Registration Hit: refID generated: {}".format(refID))
 
     supervisorID = None
-    #ToDo: include local ID into supervisor field - check if supervisor has been registered 
+    #ToDo: include local ID into supervisor field - check if supervisor has been registered
 
     try:
         Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType,

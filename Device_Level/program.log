@@ -1,11 +1,20 @@
-2019-10-20 22:29:19,412 - INFO - 
+2019-10-20 23:53:08,439 - INFO - 
 
 Launching Program
-2019-10-20 22:29:19,413 - DEBUG - Preforming Data-Push
-2019-10-20 22:29:19,414 - DEBUG - Pushing management packets
-2019-10-20 22:29:19,415 - INFO - All Threads Launched Successfully
-2019-10-20 22:29:19,421 - INFO - No global ID. Requesting supervisor Registration
-2019-10-20 22:29:19,422 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-20 23:53:08,441 - DEBUG - Preforming Data-Push
+2019-10-20 23:53:08,442 - INFO - All Threads Launched Successfully
+2019-10-20 23:53:08,449 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 2,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-20 23:53:08,450 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -16,17 +25,8 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-10-20 22:29:19,422 - INFO - All Launch Supervisors Spawned Successfully
-2019-10-20 22:29:19,426 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-10-20 22:29:19,447 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-10-20 22:29:19,447 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-10-20 22:29:19,447 - DEBUG - No New Commands To Execute
-2019-10-20 22:29:20,416 - DEBUG - Pushing management packets
-2019-10-20 22:29:20,420 - DEBUG - Starting new HTTP connection (1): localhost:8804
-2019-10-20 22:29:20,440 - DEBUG - http://localhost:8804 "POST /device/management/supervisorRegistration HTTP/1.1" 200 216
-2019-10-20 22:29:20,441 - DEBUG - Management package returned status 200
-2019-10-20 22:29:20,441 - DEBUG - Attempting to execute management package
-2019-10-20 22:29:20,442 - INFO - New Command Passed To Manger
-Command Type: supervisorGlobalRegistration
-Call Back <enum.auto object at 0x109b6ed50>
-2019-10-20 22:29:21,443 - DEBUG - Pushing management packets
+2019-10-20 23:53:08,450 - INFO - All Launch Supervisors Spawned Successfully
+2019-10-20 23:53:08,454 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-20 23:53:08,475 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-10-20 23:53:08,476 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-20 23:53:08,476 - DEBUG - No New Commands To Execute

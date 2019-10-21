@@ -19,7 +19,6 @@ class ManagementController(Controller):
 
     def starter(self):
         while self.operational:
-            logging.debug("Pushing management packets")
             # ToDo: Should these packets be logged --- well yes but how and where? IS work?
             while not self.pipe.empty():
                 package = self.pipe.get()
@@ -60,7 +59,7 @@ class ManagementController(Controller):
                 methodToCall(**body)
 
                 logging.info(
-                    "New Command Passed To Manger\nCommand Type: {}\nCall Back {}".format(commandType, callBack))
+                    "New Command Passed To Manger\nCommand Type: {}".format(commandType))
 
                 return True
 
@@ -87,7 +86,6 @@ class ManagementController(Controller):
         return self.post(body=self.packager(package=package, packageType=packageType), url=url)
 
     def post(self, body, url):
-        print(body)
         return requests.post(url=url, json=body)
 
     def packager(self, package, packageType):

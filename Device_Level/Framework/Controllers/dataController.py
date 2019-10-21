@@ -29,6 +29,7 @@ class DataController(Controller):
         self.deviceID = deviceID
 
     def starter(self):
+        # ToDo: Have batch uploads
         while self.operational:
             logging.debug("Preforming Data-Push")
             while not self.pipe.empty():
