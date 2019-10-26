@@ -9,7 +9,7 @@ import traceback
 import requests
 
 dataIngestion_URL = "http://localhost:8801/device/dataIngestion"
-callBack_URL = "http://localhost:8801/devicecallBack"
+callBack_URL = "http://localhost:8801/device/callBack"
 
 DESTINATION = "Local_Data/dataRepo.json"
 LOCAL_DATA = 'Local_Data/'
@@ -35,25 +35,26 @@ class DataController(Controller):
             while not self.pipe.empty():
                 package = self.pipe.get()
                 packageType = package.getPackageType()
-                packageTypes = {
-                    dataPush: self.post(package=package, packageType="dataPush", URL=dataIngestion_URL),
-                    callBack: self.post(package=package, packageType="callBack", URL=callBack_URL),
-                }
 
                 try:
-                    packageTypes.get(packageType)
-                except KeyError:
-                    logging.warning("Invalid package type provided: {}".format(packageType))
+
+                    if packageType == dataPush:
+                        self.toDataAPI(package=package, packageType="dataPush", URL=dataIngestion_URL)
+                        self.localCSV(package=package)
+
+                    if packageType == callBack:
+                        self.toDataAPI(package=package, packageType="callBack", URL=callBack_URL)
+
+
                 except Exception as e:
                     logging.warning("Unable To Push Package To DB.\nException: {}\nTraceBack: {}".format(e, traceback))
 
-                if packageType == dataPush:
-                    self.localCSV(package=package)
-
+            print("UPLOAD DONE")
             time.sleep(self.updateInterval)
 
-    def post(self, package, packageType, URL):
-        requests.post(url=URL, json=self.packager(package=package, packageType=packageType))
+    def toDataAPI(self, package, packageType, URL):
+        body = self.packager(package=package, packageType=packageType)
+        requests.post(url=URL, json=body)
 
     def packager(self, package, packageType):
         body = {
@@ -86,8 +87,9 @@ class DataController(Controller):
                 "File Not Error Occurred When Trying To Save Data Locally.\nError Message: {}\n{}".format(FNFE,
                                                                                                           traceback.format_exc()))
         except AttributeError as AE:
-            logging.warning("Attribute Error Occurred When Trying To Save Data Locally\nError Message: {}\n{}".format(AE,
-                                                                                                                     traceback.format_exc()))
+            logging.warning(
+                "Attribute Error Occurred When Trying To Save Data Locally\nError Message: {}\n{}".format(AE,
+                                                                                                          traceback.format_exc()))
         except Exception as E:
             logging.warning("Failed To Save Data Locally.\nError Message: {}\n{}".format(E, traceback.format_exc()))
 

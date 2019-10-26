@@ -4,15 +4,39 @@
             "supervisorList": [
                 {
                     "supervisorType": "intMaker",
-                    "supervisorID": 2,
+                    "supervisorID": 1,
                     "customConfig": null,
-                    "globalID": 11
+                    "globalID": 1
                 },
                 {
                     "supervisorType": "intMaker",
-                    "supervisorID": 1,
+                    "supervisorID": 2,
                     "customConfig": null,
-                    "globalID": 12
+                    "globalID": 1
+                },
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 3,
+                    "customConfig": null,
+                    "globalID": 2
+                },
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 4,
+                    "customConfig": null,
+                    "globalID": 3
+                },
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 5,
+                    "customConfig": null,
+                    "globalID": 1
+                },
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 6,
+                    "customConfig": null,
+                    "globalID": 1
                 }
             ]
         }

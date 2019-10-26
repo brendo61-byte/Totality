@@ -1,10 +1,13 @@
 from Device_Level.Framework.Base_Classes.controller import Controller
+from Device_Level.Framework.Base_Classes.package import Package
+from Device_Level.Framework.Base_Classes.packageTypes import callBack
 
 import requests
 import time
 import logging
 import json
 import traceback
+import datetime
 
 # ToDo: Make this an env variable --- This will be done during/around deployment
 CommandServerEndPoint = 'http://localhost:8802/device/commands/getCommands'
@@ -15,11 +18,12 @@ class CommandController(Controller):
     In future this class will be able to talk to a cloud once a 'heartBeatInterval' to see if new commands need to be run on the device.
     """
 
-    def __init__(self, heartBeatInterval, deviceID, DM):
+    def __init__(self, heartBeatInterval, deviceID, DM, pipe):
         self.operational = True
         self.heartBeatInterval = heartBeatInterval
         self.deviceID = deviceID
         self.DM = DM
+        self.pipe = pipe
 
     def starter(self):
         while self.operational:
@@ -57,16 +61,28 @@ class CommandController(Controller):
 
     def commandParser(self, commands):
         for command in commands.get("commands"):
+            timeStamp = datetime.datetime.utcnow()
+            refID = command.get("refID")
+            if refID is None:
+                logging.warning("No refID passed into command. Aborting command. Command Info: {}".format(command))
+                return
+
             if self.executeCommands(command=command):
-                pass  # Create new success package {"data" = 2, "timeStamp": date time object in UTC, "packageType" callBack} --- add to dataPipe
+                logging.debug("Command Executed Successfully")
+                result = 2  # command executed
+                self.createCallBackPackage(result=result, refID=refID, timeStamp=timeStamp)
+
             else:
-                pass  # Create new success package {"data" = 1, "timeStamp": date time object in UTC, "packageType" callBack} --- add to dataPipe
+                logging.info("Command Failed to execute")
+                result = 1  # command failed to execute
+                self.createCallBackPackage(result=result, refID=refID, timeStamp=timeStamp)
 
-    def createSuccessPackage(self):
-        pass
+    def createCallBackPackage(self, result, refID, timeStamp):
+        data = {"status": result, "refID": refID}
 
-    def createFailPackage(self):
-        pass
+        package = Package(data=data, timeStamp=timeStamp, packageType=callBack)
+        self.pipe.put(payload=package)
+        logging.debug("Call Back Package created for command refID: {}. Return status: {}".format(refID, result))
 
     def executeCommands(self, command):
         try:

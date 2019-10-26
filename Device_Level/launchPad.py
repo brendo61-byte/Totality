@@ -44,7 +44,7 @@ if __name__ == '__main__':
             launcher = Launcher(**config["launcher"]["args"], deviceManager=DM)
             useLauncher = True
 
-        commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
+        commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID, pipe=dataPipe)
         dataController = DataController(**config["dataControl"]["args"], pipe=dataPipe, deviceID=DID)
         managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe,
                                                     deviceID=DID, DM=DM)

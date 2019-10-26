@@ -19,9 +19,11 @@ def testNewSupervisor():
         "supervisorType": "intMaker",
         "deviceID": 1
     }
+
     response = requests.post(url=NEW_SUPERVISOR, json=body)
     assert response.status_code == 200
 
+testNewSupervisor()
 
 """
 # tests that a 400 is returned when a supervisorType is not included in body
