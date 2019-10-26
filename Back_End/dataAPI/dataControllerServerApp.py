@@ -4,7 +4,6 @@ from models import *
 
 import traceback
 import logging
-import requests
 
 app = Flask(__name__)
 
@@ -77,7 +76,7 @@ def dataPush():
 @app.route('/device/callBack', methods=["POST"])
 def callBack():
     package = request.get_json()
-    payload = package.get('data')
+    payload = package.get('data').get("package")
     deviceID = package.get('deviceID')
 
     if payload is None:
@@ -98,26 +97,37 @@ def callBack():
     status = payload.get("status")
     refID = payload.get("refID")
 
-    if not status == 1 or status == 2:
-        statement = "Call Back Hit: Invalid payload value"
+    logging.debug("Package received: {}".format(package))
+
+    if not statusCheck:
+        statement = "Call Back Hit: Invalid payload value. Payload given: {}".format(payload)
         logging.info(statement)
         return jsonify(userMessage=statement), 400
 
     try:
-        entry = Command.get()(Command.refID == refID)
+        entry = Command.get(Command.refID == refID)
         entry.status = status
-        commandID = entry.CommandID
+        commandID = entry.commandID
         entry.refID = 0
         entry.save()
 
-        statement = "Command ID: {} callBack with status no. {}".format(commandID, commandID)
-        logging.debug(statement)
+        statement = "Command ID: {} callBack with status no. {}".format(commandID, status)
+        logging.info(statement)
         return jsonify(userMessage=statement), 200
 
-    except:
-        statement = "Call Back Hit: Failed to query database for commands"
+    except Exception as e:
+        statement = "Call Back Hit: Failed to query database for commands.\nException: {}\nTraceBack: {}".format(e, traceback.format_exc())
         logging.warning(statement)
         return jsonify(userMessage=statement), 400
+
+
+def statusCheck(status):
+    if status == 1:
+        return True
+    if status == 2:
+        return True
+
+    return False
 
 
 if __name__ == '__main__':

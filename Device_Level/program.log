@@ -1,20 +1,9 @@
-2019-10-20 23:53:08,439 - INFO - 
+2019-10-26 15:58:51,196 - INFO - 
 
 Launching Program
-2019-10-20 23:53:08,441 - DEBUG - Preforming Data-Push
-2019-10-20 23:53:08,442 - INFO - All Threads Launched Successfully
-2019-10-20 23:53:08,449 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "False",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 2,
-    "supervisorName": "intMaker",
-    "supervisorType": "intMaker"
-}
-
-2019-10-20 23:53:08,450 - INFO - New supervisor Spawned. supervisor Info: {
+2019-10-26 15:58:51,197 - DEBUG - Preforming Data-Push
+2019-10-26 15:58:51,198 - INFO - All Threads Launched Successfully
+2019-10-26 15:58:51,201 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -25,8 +14,175 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-10-20 23:53:08,450 - INFO - All Launch Supervisors Spawned Successfully
-2019-10-20 23:53:08,454 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-10-20 23:53:08,475 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-10-20 23:53:08,476 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-10-20 23:53:08,476 - DEBUG - No New Commands To Execute
+2019-10-26 15:58:51,202 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 2,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-26 15:58:51,203 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 3,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-26 15:58:51,203 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 4,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-26 15:58:51,204 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 5,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-26 15:58:51,204 - INFO - All Launch Supervisors Spawned Successfully
+2019-10-26 15:58:51,207 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-26 15:58:51,235 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 304
+2019-10-26 15:58:51,236 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-26 15:58:51,236 - INFO - New Commands Received.
+Commands: [
+    {
+        "body": {
+            "customConfig": null,
+            "globalID": 1,
+            "supervisorType": "intMaker"
+        },
+        "callBack": "True",
+        "commandID": 1,
+        "commandType": "launcher",
+        "refID": 1568254475
+    }
+]
+2019-10-26 15:58:51,236 - INFO - Supervisor being created with global SID: 1
+2019-10-26 15:58:51,236 - INFO - Supervisor does not have a local SID
+2019-10-26 15:58:51,236 - INFO - Generated supervisorID is: 6
+2019-10-26 15:58:51,238 - INFO - New supervisor Spawned. supervisor Info: {
+    "customConfig": "False",
+    "deviceID": 1,
+    "highEndInt": 100,
+    "lowEndInt": 0,
+    "samplePeriod": 1,
+    "supervisorID": 6,
+    "supervisorName": "intMaker",
+    "supervisorType": "intMaker"
+}
+
+2019-10-26 15:58:51,238 - INFO - New Command Passed To Manger
+Command Type: launcher
+Call Back True
+2019-10-26 15:58:51,238 - DEBUG - Command Executed Successfully
+2019-10-26 15:58:51,238 - DEBUG - Call Back Package created for command refID: 1568254475. Return status: 2
+2019-10-26 15:58:56,202 - DEBUG - Preforming Data-Push
+2019-10-26 15:58:56,207 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,227 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,231 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,243 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-10-26 15:58:56,259 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,263 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,282 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
+2019-10-26 15:58:56,283 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2019-10-26 15:58:56,284 - DEBUG - No New Commands To Execute
+2019-10-26 15:58:56,294 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,298 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,336 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,340 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,358 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,362 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,385 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,394 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,434 - DEBUG - http://localhost:8801 "POST /device/callBack HTTP/1.1" 200 59
+2019-10-26 15:58:56,438 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,457 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,462 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,486 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,491 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,507 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,511 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,526 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,530 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,556 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,561 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,578 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,582 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,603 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,609 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,625 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,628 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,646 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,651 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,676 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,680 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,700 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,706 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,733 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,740 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,763 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,767 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,790 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,794 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,816 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,823 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,841 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,844 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,858 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,862 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,876 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,879 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,895 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,899 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,914 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,918 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,934 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,938 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,958 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,962 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:56,977 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:56,981 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,020 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,030 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,069 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,075 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,104 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,110 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,136 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,141 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,166 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,171 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,190 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,195 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,219 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,223 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,251 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,256 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,276 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,280 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,308 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,315 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,373 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,377 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,403 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
+2019-10-26 15:58:57,408 - DEBUG - Starting new HTTP connection (1): localhost:8801
+2019-10-26 15:58:57,430 - DEBUG - http://localhost:8801 "POST /device/dataIngestion HTTP/1.1" 200 53
