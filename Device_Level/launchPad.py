@@ -73,13 +73,14 @@ if __name__ == '__main__':
         print("All Threads Launched Successfully")
 
         if config["test"] == "True":
-            logging.info("Starting Tests ...")
-            print("Starting Tests ...")
-            time.sleep(2)
-            tester = DMT(DM=DM)
-            logging.info("Device_Level Manager Test:")
-            print("Device_Level Manager Test:")
-            tester.starer()
+            # logging.info("Starting Tests ...")
+            # print("Starting Tests ...")
+            # time.sleep(2)
+            # tester = DMT(DM=DM)
+            # logging.info("Device_Level Manager Test:")
+            # print("Device_Level Manager Test:")
+            # tester.starer()
+            pass
 
 
     except KeyError as KE:
