@@ -54,9 +54,7 @@ class intMaker(Supervisor):
         # The two above class variables are only relevant for this type of supervisor
 
         self.ADC = Adafruit_ADS1x15.ADS1115()
-        # creation of ADS1115 Sensor
-
-        self.bitVal = self.getBitVal()
+        # ADC1115 Reader Instance
 
         # Supervisors must update tags based on config settings
         self.tags["deviceID"] = self.deviceID
@@ -84,20 +82,24 @@ class intMaker(Supervisor):
         These are the headers to the CSV file that will store data for this supervisor instance
         Program assumes ALL timestamps will be in UTC time -- do this too b/c timezones can be a pain and the UI can adjust this value easily
         """
+
     def getBitVal(self):
-        bitValRaw = 4.096 / (2**15)
-        bitVal = bitValRaw / self.gain
-        return bitVal
+            val = 4.096 / (2 ** 15)
+            val = val / x
+            return val
+
 
     def getData(self):
         time.sleep(self.delay)
         while self.operational:
-            voltage = self.ADCread_adc(self.channel, self.gain) * self.bitVal
+            rawVoltage = self.ADC.read_adc(self.gain, self.channel)
+
 
             timeStamp = datetime.datetime.utcnow()
 
+            # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
             data = {
-                "Voltage (V)": voltage
+                "someInt": someInt
             }
 
             self.package(data=data, timeStamp=timeStamp)

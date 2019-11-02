@@ -1,0 +1,13 @@
+{
+  "samplePeriod": 1,
+  "gain": 1,
+  "channel": 2,
+  "supervisorType": "intMaker",
+  "supervisorName": "intMaker",
+  "tags": {
+    "supervisorName": "None",
+    "supervisorType": "intMaker",
+    "supervisorID": "None",
+    "customConfig": "False"
+  }
+}
