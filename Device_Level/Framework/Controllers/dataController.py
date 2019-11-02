@@ -73,7 +73,7 @@ class DataController(Controller):
 
     def localCSV(self, package):
         payload = package.getPayload()
-        path = os.path.join(LOCAL_DATA, "SupervisorId_" + str(payload["supervisorID"]), LOCAL_FILE_NAME)
+        path = os.path.join(LOCAL_DATA, "SupervisorID_" + str(payload["supervisorID"]), LOCAL_FILE_NAME)
         dataList = []
 
         try:
