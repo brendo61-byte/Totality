@@ -8,7 +8,7 @@ import time
 import Adafruit_ADS1x15
 
 
-class intMaker(Supervisor):
+class ADC1115_Pyra(Supervisor):
     """
     Note: that the class name is EXACTLY the same of the file its in and the same as its corresponding config file -- class 'intMaker' in file 'intMaker.py' with
     'intMaker.json'

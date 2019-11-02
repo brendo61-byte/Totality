@@ -5,19 +5,15 @@ from Framework.Base_Classes.packageTypes import dataPush
 import random
 import datetime
 import time
-import Adafruit_ADS1x15
 
 
 class intMaker(Supervisor):
     """
     Note: that the class name is EXACTLY the same of the file its in and the same as its corresponding config file -- class 'intMaker' in file 'intMaker.py' with
     'intMaker.json'
-
     Note: The base config for EVERY supervisor will contain all information besides supervisor ID - This assumes that the supervisor will be working in an isolated
     local environment - so if that is not the case the fields 'deviceName' and 'deviceID' should be filled out too. See deviceManger in Framework.
-
     Note: EVERY supervisor MUST have a self.info that contains all configuration data.
-
     --- THE BELOW ARGS ARE UNIVERSAL AND ALL supervisorS WILL NEED THEM ---
     samplePeriod: Sleep time between data readings
     supervisorName: The Name Of The supervisor (While The ID Defines The Unique Identity Of The Totality 'deviceName' Is For Human Use)
@@ -29,14 +25,12 @@ class intMaker(Supervisor):
     pipe: An object of the dataPipe class. All supervisors will share the same pipe object -- meaning all supervisors will put data on the same queue
     delay: If a supervisor is 'restarted' then the new supervisor can the old supervisor cannot talk to a device at the same time. To avoid this the new supervisor will wait a full
     sample period of the old supervisor to ensure that it has died. Defaulted to zero
-
     ______________________________________________________________________________________________________________________________________________________________
-
     lowEnd: The min integer that will be randomly generated
     highEnd: The (exclusive) max integer that will be randomly generated
     """
 
-    def __init__(self, gain, channel, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, globalID,
+    def __init__(self, lowEnd, highEnd, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, globalID,
                  tags, pipe, delay=0):
         self.operational = True
         self.samplePeriod = samplePeriod
@@ -49,14 +43,9 @@ class intMaker(Supervisor):
         self.pipe = pipe
         self.delay = delay  # Should always be defaulted to 0
         # The above class variables MUST be present for ALL supervisors
-        self.gain = gain
-        self.channel = channel
+        self.lowEnd = lowEnd
+        self.highEnd = highEnd
         # The two above class variables are only relevant for this type of supervisor
-
-        self.ADC = Adafruit_ADS1x15.ADS1115()
-        # creation of ADS1115 Sensor
-
-        self.bitVal = self.getBitVal()
 
         # Supervisors must update tags based on config settings
         self.tags["deviceID"] = self.deviceID
@@ -69,12 +58,12 @@ class intMaker(Supervisor):
             "supervisorID": self.supervisorID,
             "deviceID": self.deviceID,
             "samplePeriod": self.samplePeriod,
-            "gain": self.gain,
-            "channel": self.channel,
+            "lowEndInt": self.lowEnd,
+            "highEndInt": self.highEnd,
             "customConfig": self.tags["customConfig"]
         }
 
-        self.headers = ["Voltage (V)", "supervisorID", "supervisorName", "deviceID", "customConfig",
+        self.headers = ["someInt", "supervisorID", "supervisorName", "deviceID", "customConfig",
                         "timeStamp(UTC)"]
         """
                 ALL Supervisors need a headers list
@@ -84,20 +73,17 @@ class intMaker(Supervisor):
         These are the headers to the CSV file that will store data for this supervisor instance
         Program assumes ALL timestamps will be in UTC time -- do this too b/c timezones can be a pain and the UI can adjust this value easily
         """
-    def getBitVal(self):
-        bitValRaw = 4.096 / (2**15)
-        bitVal = bitValRaw / self.gain
-        return bitVal
 
     def getData(self):
         time.sleep(self.delay)
         while self.operational:
-            voltage = self.ADCread_adc(self.channel, self.gain) * self.bitVal
+            someInt = random.randint(self.lowEnd, self.highEnd)  # Replace this later on with a Fake Totality
 
             timeStamp = datetime.datetime.utcnow()
 
+            # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
             data = {
-                "Voltage (V)": voltage
+                "someInt": someInt
             }
 
             self.package(data=data, timeStamp=timeStamp)
@@ -128,7 +114,6 @@ class intMaker(Supervisor):
         In future this method will be able to evaluate data that was just collected to see if something but be done.
         Ex: Check battery voltage to see if it's low and the system needs to be turned off
         Ex: Check if a reading is out of a set threshold and someone/thing needs to be notified
-
         That sort of stuff will go here
         """
         return None

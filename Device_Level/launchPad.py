@@ -53,13 +53,14 @@ if __name__ == '__main__':
             LT = Thread(target=launcher.starter, name="Launcher_Thread")
             LT.start()
 
-        CCThread = Thread(target=commandController.starter, name="CC_Thread")
-        DCThread = Thread(target=dataController.starter, name="DC_Thread")
-        MCThread = Thread(target=managementController.starter, name="MC_Thread")
+        if config["localOnly"] == "True":
+            CCThread = Thread(target=commandController.starter, name="CC_Thread")
+            DCThread = Thread(target=dataController.starter, name="DC_Thread")
+            MCThread = Thread(target=managementController.starter, name="MC_Thread")
 
-        CCThread.start()
-        DCThread.start()
-        MCThread.start()
+            CCThread.start()
+            DCThread.start()
+            MCThread.start()
 
         logging.info("All Threads Launched Successfully")
         print("All Threads Launched Successfully")
