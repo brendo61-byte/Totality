@@ -52,7 +52,6 @@ class DataController(Controller):
                 except Exception as e:
                     logging.warning("Unable To Push Package To DB.\nException: {}\nTraceBack: {}".format(e, traceback))
 
-            print("UPLOAD DONE")
             time.sleep(self.updateInterval)
 
     def toDataAPI(self, package, packageType, URL):
