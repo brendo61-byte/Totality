@@ -53,7 +53,7 @@ if __name__ == '__main__':
             LT = Thread(target=launcher.starter, name="Launcher_Thread")
             LT.start()
 
-        if config["localOnly"] == "True":
+        if config["localOnly"] == "False":
             CCThread = Thread(target=commandController.starter, name="CC_Thread")
             DCThread = Thread(target=dataController.starter, name="DC_Thread")
             MCThread = Thread(target=managementController.starter, name="MC_Thread")
