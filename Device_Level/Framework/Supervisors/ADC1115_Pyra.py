@@ -83,10 +83,9 @@ class ADC1115_Pyra(Supervisor):
         """
 
     def getBitVal(self):
-            val = 4.096 / (2 ** 15)
-            val = val / x
-            return val
-
+        bitValRaw = 4.096 / (2 ** 15)
+        bitVal = bitValRaw / self.gain
+        return bitVal
 
     def getData(self):
         time.sleep(self.delay)
