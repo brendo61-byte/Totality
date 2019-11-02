@@ -93,12 +93,15 @@ class ADC1115_Pyra(Supervisor):
         while self.operational:
             rawVoltage = self.ADC.read_adc(self.gain, self.channel)
 
+            voltageFloat = rawVoltage * self.getBitVal()
+
+            voltageSigFigs = round(voltageFloat, 2)
 
             timeStamp = datetime.datetime.utcnow()
 
             # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
             data = {
-                "someInt": someInt
+                "Voltage (V)": voltageSigFigs
             }
 
             self.package(data=data, timeStamp=timeStamp)
