@@ -2,8 +2,8 @@
   "samplePeriod": 1,
   "gain": 1,
   "channel": 2,
-  "supervisorType": "intMaker",
-  "supervisorName": "intMaker",
+  "supervisorType": "ADC1115_Pyra",
+  "supervisorName": "ADC1115_Pyra",
   "tags": {
     "supervisorName": "None",
     "supervisorType": "intMaker",
