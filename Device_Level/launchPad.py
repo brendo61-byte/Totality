@@ -44,16 +44,17 @@ if __name__ == '__main__':
             launcher = Launcher(**config["launcher"]["args"], deviceManager=DM)
             useLauncher = True
 
-        commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID, pipe=dataPipe)
-        dataController = DataController(**config["dataControl"]["args"], pipe=dataPipe, deviceID=DID)
-        managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe,
-                                                    deviceID=DID, DM=DM)
-
         if useLauncher:
             LT = Thread(target=launcher.starter, name="Launcher_Thread")
             LT.start()
 
         if config["localOnly"] == "False":
+            commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID,
+                                                  pipe=dataPipe)
+            dataController = DataController(**config["dataControl"]["args"], pipe=dataPipe, deviceID=DID)
+            managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe,
+                                                        deviceID=DID, DM=DM)
+
             CCThread = Thread(target=commandController.starter, name="CC_Thread")
             DCThread = Thread(target=dataController.starter, name="DC_Thread")
             MCThread = Thread(target=managementController.starter, name="MC_Thread")
@@ -61,6 +62,12 @@ if __name__ == '__main__':
             CCThread.start()
             DCThread.start()
             MCThread.start()
+
+        else:
+            dataController = DataController(**config["dataControl"]["args"], pipe=dataPipe, deviceID=DID,
+                                            localOnly=True)
+            DCThread = Thread(target=dataController.starter, name="DC_Thread")
+            DCThread.start()
 
         logging.info("All Threads Launched Successfully")
         print("All Threads Launched Successfully")

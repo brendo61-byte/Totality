@@ -22,11 +22,12 @@ class DataController(Controller):
     NOTE: Uploading to an InfluxDB will be implemented later
     """
 
-    def __init__(self, pipe, updateInterval, deviceID):
+    def __init__(self, pipe, updateInterval, deviceID, localOnly=False):
         self.operational = True
         self.pipe = pipe
         self.updateInterval = updateInterval
         self.deviceID = deviceID
+        self.localOnly = localOnly
 
     def starter(self):
         # ToDo: Have batch uploads
@@ -39,11 +40,13 @@ class DataController(Controller):
                 try:
 
                     if packageType == dataPush:
-                        self.toDataAPI(package=package, packageType="dataPush", URL=dataIngestion_URL)
+                        if not self.localOnly:
+                            self.toDataAPI(package=package, packageType="dataPush", URL=dataIngestion_URL)
                         self.localCSV(package=package)
 
                     if packageType == callBack:
-                        self.toDataAPI(package=package, packageType="callBack", URL=callBack_URL)
+                        if not self.localOnly:
+                            self.toDataAPI(package=package, packageType="callBack", URL=callBack_URL)
 
 
                 except Exception as e:
