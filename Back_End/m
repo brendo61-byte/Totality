@@ -40,6 +40,31 @@ SEED () {
     python3 seed.py
 }
 
+DB () {
+    printf "\nEntering mySQL DB"
+    docker exec -it db bash
+}
+
+CREATION () {
+    printf "\nEntering Creaiton API"
+    docker exec -it creation_api bash
+}
+
+DATA () {
+    printf "\nEntering Data API"
+    docker exec -it data_api bash
+}
+
+MANAGMENT () {
+    printf "\nEntering Managment API"
+    docker exec -it managment_api bash
+}
+
+COMMAND () {
+    printf "\nEntering Command API"
+    docker exec -it command_api bash
+}
+
 if [ $1 = "start" ];
 then
     START
@@ -73,6 +98,31 @@ then
 if [ $1 = "seed" ];
 then
     SEED
+    fi
+
+if [ $1 = "db" ];
+then
+    DB
+    fi
+
+if [ $1 = "management" ];
+then
+    MANAGMENT
+    fi
+
+if [ $1 = "command" ];
+then
+    COMMAND
+    fi
+
+if [ $1 = "data" ];
+then
+    DATA
+    fi
+
+if [ $1 = "creation" ];
+then
+    CREATION
     fi
 
 if [ $1 = "help" ];

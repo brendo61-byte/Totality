@@ -55,9 +55,8 @@ class Command(BaseModel):
     # 2 = Successful deployment of command
     # 3 = Command has timed out
     status = peewee.IntegerField(default=0, null=False)  # If the command has been executed yet. 0=F, 1=T
-    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
+    deviceOwner = peewee.ForeignKeyField(Device, backref='command',
                                          null=False)  # Back ref to know who gets the command
-    # ToDo: Need security to determine if someone has privileges to give command to said device
 
 
 class ReliableDelivery(BaseModel):
@@ -74,15 +73,23 @@ class Supervisor(BaseModel):
     supervisorType = peewee.CharField(null=False)
     supervisorID = peewee.AutoField(primary_key=True)  # Supervisor ID
     samplePeriod = peewee.IntegerField(default=1, null=False)
-    deviceOwner = peewee.ForeignKeyField(Device, backref='intMaker', null=False)
+    deviceOwner = peewee.ForeignKeyField(Device, backref='supervisor', null=False)
     customConfig = peewee.CharField(null=True)
 
+class CustomerKeys(BaseModel):
+    key = peewee.CharField(null=False)
+    customerOwner = peewee.ForeignKeyField(Customer, backref='customerKeys')  # IDs who owns the device
+
+class SessionKeys(BaseModel):
+    sessionKey = peewee.CharField(null=False)
+    customerOwner = peewee.ForeignKeyField(Customer, backref='SessionKeys')  # IDs who owns the device
+    endLifeTime = peewee.IntegerField(null=False)
 
 def makeTables():
     retires = 5
     while retires >= 0:
         try:
-            models = [Customer, Device, ReliableDelivery, Supervisor, Command]
+            models = [Customer, Device, ReliableDelivery, Supervisor, Command, CustomerKeys, SessionKeys]
             db.create_tables(models, safe=True)
             break
         except:
