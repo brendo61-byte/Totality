@@ -5,6 +5,8 @@ from Framework.Base_Classes.packageTypes import dataPush
 import datetime
 import time
 import Adafruit_ADS1x15
+import logging
+import traceback
 
 
 class ADC1115_Pyra(Supervisor):
@@ -90,20 +92,24 @@ class ADC1115_Pyra(Supervisor):
     def getData(self):
         time.sleep(self.delay)
         while self.operational:
-            rawVoltage = self.ADC.read_adc(self.gain, self.channel)
+            try:
+                rawVoltage = self.ADC.read_adc(self.gain, self.channel)
 
-            voltageFloat = rawVoltage * self.getBitVal()
+                voltageFloat = rawVoltage * self.getBitVal()
 
-            voltageSigFigs = round(voltageFloat, 2)
+                voltageSigFigs = round(voltageFloat, 2)
+            except Exception as e:
+                logging.info("Unable to read from ADS1115\nException\nTraceBack".format(e, traceback.format_exc()))
+                voltageSigFigs = None
 
             timeStamp = datetime.datetime.utcnow()
 
-            # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
-            data = {
-                "Voltage (V)": voltageSigFigs
-            }
+            if voltageSigFigs is not None:
+                data = {
+                    "Voltage (V)": voltageSigFigs
+                }
 
-            self.package(data=data, timeStamp=timeStamp)
+                self.package(data=data, timeStamp=timeStamp)
 
             time.sleep(self.samplePeriod)
 
