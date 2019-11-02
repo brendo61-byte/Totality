@@ -6,37 +6,13 @@
                     "supervisorType": "intMaker",
                     "supervisorID": 1,
                     "customConfig": null,
-                    "globalID": 1
+                    "globalID": 0
                 },
                 {
-                    "supervisorType": "intMaker",
+                    "supervisorType": "ADC1115_Pyra",
                     "supervisorID": 2,
                     "customConfig": null,
-                    "globalID": 1
-                },
-                {
-                    "supervisorType": "intMaker",
-                    "supervisorID": 3,
-                    "customConfig": null,
-                    "globalID": 2
-                },
-                {
-                    "supervisorType": "intMaker",
-                    "supervisorID": 4,
-                    "customConfig": null,
-                    "globalID": 3
-                },
-                {
-                    "supervisorType": "intMaker",
-                    "supervisorID": 5,
-                    "customConfig": null,
-                    "globalID": 1
-                },
-                {
-                    "supervisorType": "intMaker",
-                    "supervisorID": 6,
-                    "customConfig": null,
-                    "globalID": 1
+                    "globalID": 0
                 }
             ]
         }
