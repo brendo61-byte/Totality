@@ -1,6 +1,6 @@
-from Device_Level.Framework.Base_Classes.supervisor import Supervisor
-from Device_Level.Framework.Base_Classes.package import Package
-from Device_Level.Framework.Base_Classes.packageTypes import dataPush
+from Framework.Base_Classes.supervisor import Supervisor
+from Framework.Base_Classes.package import Package
+from Framework.Base_Classes.packageTypes import dataPush
 
 import random
 import datetime

@@ -1,6 +1,6 @@
-from Device_Level.Framework.Base_Classes.controller import Controller
-from Device_Level.Framework.Base_Classes.package import Package
-from Device_Level.Framework.Base_Classes.packageTypes import callBack
+from Framework.Base_Classes.controller import Controller
+from Framework.Base_Classes.package import Package
+from Framework.Base_Classes.packageTypes import callBack
 
 import requests
 import time

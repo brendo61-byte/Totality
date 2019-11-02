@@ -1,12 +1,12 @@
-from Device_Level.Framework.Base_Classes import dataPipe
-from Device_Level.Framework.Base_Classes import managementPipe
-from Device_Level.Framework.Managers.deviceManager import deviceManager
-from Device_Level.Framework.Controllers.commandController import CommandController
-from Device_Level.Framework.Controllers.dataController import DataController
-from Device_Level.Framework.Controllers.managmentController import ManagementController
-from Device_Level.Framework.Launcher.localLauncher import Launcher
+from Framework.Base_Classes import dataPipe
+from Framework.Base_Classes import managementPipe
+from Framework.Managers.deviceManager import deviceManager
+from Framework.Controllers.commandController import CommandController
+from Framework.Controllers.dataController import DataController
+from Framework.Controllers.managmentController import ManagementController
+from Framework.Launcher.localLauncher import Launcher
 
-from Device_Level.Framework.Test_Sweet.deviceMangerTester import DMTest as DMT
+from Framework.Test_Sweet.deviceMangerTester import DMTest as DMT
 
 from threading import Thread
 

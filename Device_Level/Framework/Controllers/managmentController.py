@@ -1,5 +1,5 @@
-from Device_Level.Framework.Base_Classes.controller import Controller
-from Device_Level.Framework.Base_Classes.packageTypes import *
+from Framework.Base_Classes.controller import Controller
+from Framework.Base_Classes.packageTypes import *
 
 import requests
 import logging

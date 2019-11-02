@@ -1,5 +1,5 @@
-from Device_Level.Framework.Base_Classes.tester import Tester
-from Device_Level.Framework.Base_Classes.exceptionClasses import *
+from Framework.Base_Classes.tester import Tester
+from Framework.Base_Classes.exceptionClasses import *
 
 import json
 import traceback

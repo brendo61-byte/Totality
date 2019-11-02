@@ -1,6 +1,6 @@
-from Device_Level.Framework.Base_Classes.exceptionClasses import *
-from Device_Level.Framework.Base_Classes.package import Package
-from Device_Level.Framework.Base_Classes.packageTypes import registerSupervisor
+from Framework.Base_Classes.exceptionClasses import *
+from Framework.Base_Classes.package import Package
+from Framework.Base_Classes.packageTypes import registerSupervisor
 from threading import Thread
 from pathlib import Path
 
