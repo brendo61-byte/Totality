@@ -29,6 +29,24 @@ needs to be set up too.
 
 # ToDO: Add a 'get queued commands from DB' link
 
+def authenticateSessionKey(key):
+    try:
+        sessionEntry = SessionKeys.get(SessionKeys.sessionKey == key)
+
+        if datetime.datetime.utcnow().timestamp() < sessionEntry.endLifeTime:
+            CID = sessionEntry.customerOwner
+            return CID
+    except:
+        return False
+
+def deviceOwnerShip(CID, DID):
+    try:
+        fetchedCID = Device.get(Device.deviceID == DID).customerOwner
+        if fetchedCID == CID:
+            return True
+    except:
+        return False
+
 def makeCommandFormat(body, commandType, callBack=True, refID=None):
     CF = {
         "commandType": commandType,
@@ -43,24 +61,24 @@ def makeCommandFormat(body, commandType, callBack=True, refID=None):
     return CF
 
 
-def validateDeviceExists(deviceID):
-    try:
-        Device.get(Device.deviceID == deviceID)
-        logging.debug("Validate DID: DID '{}' Validated".format(deviceID))
-        return True
-    except peewee.IntegrityError as PTE:
-        logging.info(
-            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID,
-                                                                                                              PTE,
-                                                                                                              traceback.format_exc()))
-    except peewee.OperationalError as POE:
-        logging.info(
-            "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
-                deviceID, POE, traceback.format_exc()))
-    except Exception as e:
-        logging.warning(
-            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
-                                                                                                            traceback.format_exc()))
+# def validateDeviceExists(deviceID):
+#     try:
+#         Device.get(Device.deviceID == deviceID)
+#         logging.debug("Validate DID: DID '{}' Validated".format(deviceID))
+#         return True
+#     except peewee.IntegrityError as PTE:
+#         logging.info(
+#             "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID,
+#                                                                                                               PTE,
+#                                                                                                               traceback.format_exc()))
+#     except peewee.OperationalError as POE:
+#         logging.info(
+#             "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
+#                 deviceID, POE, traceback.format_exc()))
+#     except Exception as e:
+#         logging.warning(
+#             "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
+#                                                                                                             traceback.format_exc()))
 
 
 def validateSupervisorExists(supervisorID):
@@ -125,18 +143,20 @@ def newSupervisor():
     customConfig = data.get('customConfig')
 
     if supervisorType is None:
-        logging.info("New Supervisor Hit: No Supervisor Type Provided")
-        return jsonify(userMessage="Please Provide A Valid Supervisor Type"), 400
+        statement ="New Supervisor Hit: No Supervisor Type Provided"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
     if deviceID is None:
-        logging.info("New Supervisor Hit: No DID Type Provided")
-        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
+        statement = "New Supervisor Hit: No DID Type Provided"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
     if customConfig is None:
         logging.info("New Supervisor Hit: Using Base Configuration")
 
     if not validateDeviceExists(validateDeviceExists(deviceID)):
-        # ToDo: single string then pass
-        logging.info("New Supervisor Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="New Supervisor Hit: Unable To Verify DID Existence"), 400
+        statement = "New Supervisor Hit: Unable To Verify DID Existence"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
 
     refID = genSupervisorRefID()
     logging.debug("New Supervisor Hit: refID generated: {}".format(refID))

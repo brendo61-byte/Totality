@@ -64,7 +64,7 @@ if __name__ == '__main__':
         logging.info("All Threads Launched Successfully")
         print("All Threads Launched Successfully")
 
-        if config["test"] == "True":
+        if config["test"]:
             logging.info("Starting Tests ...")
             print("Starting Tests ...")
             time.sleep(2)

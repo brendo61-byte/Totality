@@ -8,6 +8,12 @@ services:
 #   ports:
 #    - "8801:8801"
 
+  key_api:
+    container_name: key_api
+    build: keyAPI/
+    ports:
+      - "8805:8805"
+
   managment_api:
     container_name: managment_api
     build: managementAPI/

@@ -6,17 +6,77 @@ import logging
 import traceback
 import datetime
 import re
+import requests
 import secrets
 
 app = Flask(__name__)
 
-"""
-This API handles the creation of customers and devices. This also means dropping customers and devices too. The idea is that you have customers and customers own
-actual (actual hardware). 
-"""
-
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
+
+loginURL = 'http://key_api:8805/keyAPI/generateSessionKey'
+authenticationURL = 'http://key_api:8805/keyAPI/authenticateSessionKey'
+deviceOwnershipURL = 'http://key_api:8805/keyAPI/deviceOwnerShip'
+
+
+def login(key, name):
+    body = {
+        "key": key,
+        "name": name
+    }
+
+    try:
+        response = requests.post(url=loginURL, json=body)
+
+        info = response.json()
+        data = info.get("data")
+        if data:
+            return data
+        else:
+            logging.info("Failed to login customer. Reason: {}".format(info.get("userMessage")))
+    except Exception as e:
+        logging.warning("Failed to reach login key API\nException {}\nTraceBack {}".format(e, traceback.format_exc()))
+
+
+def authenticateSessionKey(key):
+    body = {
+        "key": key
+    }
+
+    try:
+        response = requests.post(url=authenticationURL, json=body)
+
+        info = response.json()
+        data = info.get("data")
+
+        if data:
+            return data
+        else:
+            logging.info("Failed to authenticate Session Key. Reason: {}".format(info.get("userMessage")))
+    except Exception as e:
+        logging.warning(
+            "Failed to reach authentication key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
+
+
+def deviceOwnerShip(CID, DID):
+    body = {
+        "CID": CID,
+        "DID": DID
+    }
+
+    try:
+        response = requests.post(url=deviceOwnershipURL, json=body)
+
+        info = response.json()
+        data = info.get("data")
+
+        if data:
+            return data
+        else:
+            logging.info("CID {} attempted to access non-associated DID {}\nKey API response: {}".format(CID, DID, info.get("userMessage")))
+    except Exception as e:
+        logging.warning(
+            "Failed to reach Device Ownership key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
 @app.route('/customer/newCustomer', methods=["POST"])
@@ -54,7 +114,7 @@ def newCustomer():
 
         logging.info("New Customer Hit: Success. New Customer Has Been Created. Name: {}".format(name))
         return jsonify(
-            userMessage="Customer Has Been Created\nCustomer ID: {}\nLogin Key: {}".format(CID, key)), 200
+            userMessage="Customer Has Been Created. Customer ID: {}".format(CID), data=key), 200
     except Exception as e:
         logging.warning(
             "New Customer Hit: Unable To Create Customer In DB.\nException: {}\nTrackBack: {}".format(e, traceback))
@@ -71,41 +131,13 @@ def customerLogin():
     customerName = request.get_json().get("name")
     key = request.get_json().get("key")
 
-    if customerName is None:
-        logging.info("Login Hit: No customerName Provided")
-        return jsonify(userMessage="Please Provide A Valid Customer Name"), 400
-
-    if key is None:
-        logging.info("Login Hit: No customerName Provided")
-        return jsonify(userMessage="Please Provide A Valid Login Key"), 400
-
-    try:
-        ownerID = CustomerKeys.get(CustomerKeys.key == key).customerOwner
-        if Customer.get(Customer.customerID == ownerID).name == customerName:
-            sessionKey = secrets.token_urlsafe()
-            expiration = datetime.datetime.utcnow().timestamp() + 3600
-            # Todo: Session Key duration should be read in from a configuration file
-
-            SessionKeys.create(sessionKey=sessionKey, customerOwner=ownerID, endLifeTime=expiration)
-
-            logging.info("Login Hit: {}, CID no. {}, has logged in.")
-
-            return jsonify(userMessage="Login Successful.\nSessionKey: {}".format(sessionKey))
-    except Exception as e:
-        logging.info(
-            "Login Hit: Unable to log a customer in.\nException: {}\nTraceBack: {}".format(e, traceback.format_exc()))
-        return jsonify(userMessage="Unable to log Customer in"), 400
-
-
-def authenticateSessionKey(key):
-    try:
-        sessionEntry = SessionKeys.get(SessionKeys.sessionKey == key)
-
-        if datetime.datetime.utcnow().timestamp() < sessionEntry.endLifeTime:
-            CID = sessionEntry.customerOwner
-            return CID
-    except:
-        return False
+    sessionKey = login(key=key, name=customerName)
+    if sessionKey:
+        logging.info("Customer '{}' has logged in".format(customerName))
+        return jsonify(userMessage="Login Successful", data=sessionKey)
+    else:
+        logging.info("Customer '{}' has failed to login".format(customerName))
+        return jsonify(userMessage="Incorrect Customer Name or Login Key")
 
 
 @app.route('/customer/dropCustomer', methods=["POST"])
@@ -124,24 +156,18 @@ def dropCustomer():
         logging.info("Drop Customer Hit: Customer Has Been Deleted. Customer ID: {}".format(CID))
         return jsonify(userMessage="Customer Has Been Deleted. All Associated Devices Removed")
     except Exception as e:
-        logging.warning("Drop Customer Hit: Unable To Drop Customer. CID: {}.\nException: {}\nTraceBack".format(CID, e,
-                                                                                                                traceback.format_exc()))
+        logging.warning(
+            "Drop Customer Hit: Unable To Drop Customer. CID: {}.\nException: {}\nTraceBack".format(CID, e, traceback.format_exc()))
         return jsonify(userMessage="Please Provide A True CID")
 
 
-@app.route('/customer/getCustomer', methods=["POST"])
-def getCustomerInfo():
-    key = request.get_json().get("key")
-
+@app.route('/customer/getCustomer/<string:key>', methods=["GET"])
+def getCustomerInfo(key):
     CID = authenticateSessionKey(key=key)
 
     if not CID:
-        logging.info("Drop Customer Hit: Unable to validate sessionKey")
+        logging.info("Get Customer Hit: Unable to validate sessionKey")
         return jsonify(userMessage="Unable to validate Session Key"), 400
-
-    if CID is None:
-        logging.info("Get Customer Hit: No CID Provided")
-        return jsonify(userMessage="Please Provide A Valid CID"), 400
 
     try:
         customerToGetInfo = Customer.get(Customer.customerID == CID)
@@ -154,11 +180,41 @@ def getCustomerInfo():
         return jsonify(userMessage=body), 200
     except Exception as e:
         logging.warning(
-            "Get Customer Hit: Unable To Get Customer Info. CID: {}\nException: {}\nTraceBack: {}".format(CID, e,
-                                                                                                          traceback.format_exc()))
+            "Get Customer Hit: Unable To Get Customer Info. CID: {}\nException: {}\nTraceBack: {}".format(CID, e, traceback.format_exc()))
         return jsonify(userMessage="Please Provide A Valid CID"), 400
 
-# ToDo: Need a 'list all devices URL'
+
+@app.route('/customer/getAllDevices/<string:key>', methods=["GET"])
+def getAllDevices(key):
+    CID = authenticateSessionKey(key=key)
+
+    if not CID:
+        logging.info("Get All Devices Hit: Unable to validate sessionKey")
+        return jsonify(userMessage="Unable to validate Session Key"), 400
+
+    try:
+        deviceList = []
+        q = Device.select().where(Device.customerOwner == CID)
+
+        for entry in q:
+            data = {
+                "name": entry.name,
+                "location": entry.location,
+                "Device ID": entry.deviceID
+            }
+            deviceList.append(data)
+
+        if deviceList:
+            return jsonify(userMessage=str(deviceList)), 200
+        else:
+            return jsonify(userMessage="No devices associated with your account"), 200
+    except Exception as e:
+        logging.warning(
+            "Get All Devices Hit: Failed to query DB for devices associated to customer ID {}\nException: {}\nTrackBack: {}".format(CID, e,
+                                                                                                                                    traceback.format_exc()))
+        return jsonify(userMessage="Unable to query database for devices"), 400
+
+
 @app.route('/device/newDevice', methods=["POST"])
 def newDevice():
     key = request.get_json().get("key")
@@ -187,25 +243,20 @@ def newDevice():
         return jsonify(userMessage="Please Provide A Valid Location"), 400
 
     try:
-        Device.create(name=name, location=location, latitude=latitude, longitude=longitude,
+        Device.create(name=name,
+                      location=location,
+                      latitude=latitude,
+                      longitude=longitude,
                       dataControllerPeriod=dataControllerPeriod,
-                      commandControllerPeriod=commandControllerPeriod, commandTimeWindow=commandTimeWindow,
+                      commandControllerPeriod=commandControllerPeriod,
+                      commandTimeWindow=commandTimeWindow,
                       customerOwner=CID)
         logging.info(
             "New Device Hit: Success. New Device Has Been Created. Name: {}\nUnder Customer ID: {}".format(name, CID))
-        return jsonify(userMessage="Successful Device Creation."), 200
+        return jsonify(userMessage="Successful Device Creation"), 200
     except Exception as e:
         logging.warning("Error In Device Creation.\nException: {}\nTraceBack: {}".format(e, traceback.format_exc()))
         return jsonify(userMessage="Error In Device Creation"), 400
-
-
-def deviceOwnerShip(CID, DID):
-    try:
-        fetchedCID = Device.get(Device.deviceID == DID).customerOwner
-        if fetchedCID == CID:
-            return True
-    except:
-        return False
 
 
 @app.route('/device/dropDevice', methods=["POST"])
@@ -225,6 +276,7 @@ def dropDevice():
 
     if not deviceOwnerShip(CID=CID, DID=DID):
         logging.info("Device Drop Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
+        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
     try:
         device = Device.get(Device.deviceID == DID)
@@ -233,20 +285,17 @@ def dropDevice():
         logging.info("Drop Device Hit: Device Has Been Deleted. DID: {}".format(DID))
         return jsonify(userMessage="Device Has Been Deleted"), 200
     except Exception as e:
-        logging.warning("Drop Device Hit: Unable To Delete Device. DID: {}\nException: {}\nTraceBack: {}".format(DID, e,
-                                                                                                                 traceback.format_exc()))
+        logging.warning(
+            "Drop Device Hit: Unable To Delete Device. DID: {}\nException: {}\nTraceBack: {}".format(DID, e, traceback.format_exc()))
         return jsonify(userMessage="Please Provide A True Device ID"), 400
 
 
-@app.route('/device/getDeviceInfo', methods=["POST"])
-def getDeviceInfo():
-    DID = request.get_json().get("DID")
-    key = request.get_json().get("key")
-
+@app.route('/device/getDeviceInfo/<string:key>/<int:DID>', methods=["GET"])
+def getDeviceInfo(key, DID):
     CID = authenticateSessionKey(key=key)
 
     if not CID:
-        logging.info("Drop Customer Hit: Unable to validate sessionKey")
+        logging.info("Get Customer Hit: Unable to validate sessionKey")
         return jsonify(userMessage="Unable to validate Session Key"), 400
 
     if DID is None:

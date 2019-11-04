@@ -33,7 +33,7 @@
         }
     },
     "logLevel": "DEBUG",
-    "test": "False",
+    "test": false,
     "threadLimit": 10,
     "deviceID": 1
 }

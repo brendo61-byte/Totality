@@ -1,9 +1,11 @@
-2019-10-20 23:53:08,439 - INFO - 
+2019-11-03 14:46:12,414 - INFO - 
 
 Launching Program
-2019-10-20 23:53:08,441 - DEBUG - Preforming Data-Push
-2019-10-20 23:53:08,442 - INFO - All Threads Launched Successfully
-2019-10-20 23:53:08,449 - INFO - New supervisor Spawned. supervisor Info: {
+2019-11-03 14:46:12,414 - INFO - No Local Data directory found. Creating new directory now.
+2019-11-03 14:46:12,419 - DEBUG - Preforming Data-Push
+2019-11-03 14:46:12,419 - INFO - All Threads Launched Successfully
+2019-11-03 14:46:12,428 - DEBUG - Starting new HTTP connection (1): localhost:8802
+2019-11-03 14:46:12,428 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -14,7 +16,7 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-10-20 23:53:08,450 - INFO - New supervisor Spawned. supervisor Info: {
+2019-11-03 14:46:12,435 - INFO - New supervisor Spawned. supervisor Info: {
     "customConfig": "False",
     "deviceID": 1,
     "highEndInt": 100,
@@ -25,8 +27,65 @@ Launching Program
     "supervisorType": "intMaker"
 }
 
-2019-10-20 23:53:08,450 - INFO - All Launch Supervisors Spawned Successfully
-2019-10-20 23:53:08,454 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-10-20 23:53:08,475 - DEBUG - http://localhost:8802 "POST /device/commands/getCommands HTTP/1.1" 200 46
-2019-10-20 23:53:08,476 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2019-10-20 23:53:08,476 - DEBUG - No New Commands To Execute
+2019-11-03 14:46:12,435 - INFO - All Launch Supervisors Spawned Successfully
+2019-11-03 14:46:12,437 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused'))
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
+    conn = self._new_conn()
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 39, in pullCommands
+    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused'))
+

@@ -1,4 +1,9 @@
 .dea
 __pycache__/
+Device_Level/Framework/Controllers/__pycache__/
+Device_Level/Framework/Base_Classes/__pycache__/
+Device_Level/Framework/Supervisors/__pycache__/
+Device_Level/Framework/Test_Sweet/__pycache__/
+Device_Level/Framework/Launcher/__pycache__/
 /venv
 /Device_Level/Local_Data

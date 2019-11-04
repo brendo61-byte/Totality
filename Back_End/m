@@ -65,6 +65,11 @@ COMMAND () {
     docker exec -it command_api bash
 }
 
+KEY () {
+    printf "\nEntering Key API"
+    docker exec -it key_api bash
+}
+
 if [ $1 = "start" ];
 then
     START
@@ -123,6 +128,11 @@ then
 if [ $1 = "creation" ];
 then
     CREATION
+    fi
+
+if [ $1 = "key" ];
+then
+    KEY
     fi
 
 if [ $1 = "help" ];
