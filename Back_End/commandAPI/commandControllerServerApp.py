@@ -8,11 +8,17 @@ import logging
 import traceback
 import random
 import peewee
+import requests
 import ast
 
 app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
+
+loginURL = 'http://key_api:8805/keyAPI/generateSessionKey'
+authenticationURL = 'http://key_api:8805/keyAPI/authenticateSessionKey'
+deviceOwnershipURL = 'http://key_api:8805/keyAPI/deviceOwnerShip'
+supervisorAuth = 'http://key_api:8805/keyAPI/supervisorAuth'
 
 """
 This is the API for pushing new commands and pulling queued commands. There are a number of features that need to be added (see the #ToDo's around). Commands added
@@ -29,24 +35,6 @@ needs to be set up too.
 
 # ToDO: Add a 'get queued commands from DB' link
 
-def authenticateSessionKey(key):
-    try:
-        sessionEntry = SessionKeys.get(SessionKeys.sessionKey == key)
-
-        if datetime.datetime.utcnow().timestamp() < sessionEntry.endLifeTime:
-            CID = sessionEntry.customerOwner
-            return CID
-    except:
-        return False
-
-def deviceOwnerShip(CID, DID):
-    try:
-        fetchedCID = Device.get(Device.deviceID == DID).customerOwner
-        if fetchedCID == CID:
-            return True
-    except:
-        return False
-
 def makeCommandFormat(body, commandType, callBack=True, refID=None):
     CF = {
         "commandType": commandType,
@@ -61,56 +49,66 @@ def makeCommandFormat(body, commandType, callBack=True, refID=None):
     return CF
 
 
-# def validateDeviceExists(deviceID):
-#     try:
-#         Device.get(Device.deviceID == deviceID)
-#         logging.debug("Validate DID: DID '{}' Validated".format(deviceID))
-#         return True
-#     except peewee.IntegrityError as PTE:
-#         logging.info(
-#             "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(deviceID,
-#                                                                                                               PTE,
-#                                                                                                               traceback.format_exc()))
-#     except peewee.OperationalError as POE:
-#         logging.info(
-#             "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
-#                 deviceID, POE, traceback.format_exc()))
-#     except Exception as e:
-#         logging.warning(
-#             "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
-#                                                                                                             traceback.format_exc()))
+def authenticateSessionKey(key):
+    body = {
+        "key": key
+    }
 
-
-def validateSupervisorExists(supervisorID):
     try:
-        Supervisor.get(Supervisor.supervisorID == supervisorID)
-        logging.debug("Validate DID: DID '{}' Validated".format(supervisorID))
-        return True
-    except peewee.IntegrityError as PTE:
-        logging.info(
-            "Validate DID: DID '{}' Failed Validation. Integrity Error.\nException: {}\nTraceBack: {}".format(
-                supervisorID,
-                PTE,
-                traceback.format_exc()))
-    except peewee.OperationalError as POE:
-        logging.info(
-            "Validate DID: DID '{}' Failed Validation. Operational Error.\nException: {}\nTraceBack: {}".format(
-                supervisorID, POE, traceback.format_exc()))
+        response = requests.post(url=authenticationURL, json=body)
+
+        info = response.json()
+        data = info.get("data")
+
+        if data:
+            return data
+        else:
+            logging.info("Failed to authenticate Session Key. Reason: {}".format(info.get("userMessage")))
     except Exception as e:
         logging.warning(
-            "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(
-                supervisorID, e,
-                traceback.format_exc()))
+            "Failed to reach authentication key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
-def validateCommandAuth(token):
-    # ToDo: Ensure whoever is trying make commands is authorized to do so
-    return True
+def deviceOwnerShip(CID, DID):
+    body = {
+        "CID": CID,
+        "DID": DID
+    }
+
+    try:
+        response = requests.post(url=deviceOwnershipURL, json=body)
+
+        info = response.json()
+        data = info.get("data")
+
+        if data:
+            return data
+        else:
+            logging.info("CID {} attempted to access non-associated DID {}\nKey API response: {}".format(CID, DID, info.get("userMessage")))
+    except Exception as e:
+        logging.warning(
+            "Failed to reach Device Ownership key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
-def validateDeviceAuth(token):
-    # ToDo: Ensure whoever is trying to get commands is authorized to do so
-    return True
+def validateSupervisorAuthorization(DID, SID, CID):
+    body = {
+        "SID": SID,
+        "DID": DID
+    }
+
+    try:
+        response = requests.post(url=supervisorAuth, json=body)
+
+        info = response.json()
+        data = info.get("data")
+
+        if data:
+            return data
+        else:
+            logging.info("CID {} attempted to access non-associated SID {}\nKey API response: {}".format(CID, SID, info.get("userMessage")))
+    except Exception as e:
+        logging.warning(
+            "Failed to reach Device Ownership key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
 def genSupervisorRefID():
@@ -139,24 +137,33 @@ def genCommandRefID():
 def newSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
-    deviceID = data.get('deviceID')
     customConfig = data.get('customConfig')
 
-    if supervisorType is None:
-        statement ="New Supervisor Hit: No Supervisor Type Provided"
-        logging.info(statement)
-        return jsonify(userMessage=statement), 400
-    if deviceID is None:
+    key = request.get_json().get("key")
+    DID = request.get_json().get("DID")
+
+    CID = authenticateSessionKey(key=key)
+
+    if not CID:
+        logging.info("Get All Devices Hit: Unable to validate sessionKey")
+        return jsonify(userMessage="Unable to validate Session Key"), 400
+
+    if DID is None:
         statement = "New Supervisor Hit: No DID Type Provided"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
-    if customConfig is None:
-        logging.info("New Supervisor Hit: Using Base Configuration")
 
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
-        statement = "New Supervisor Hit: Unable To Verify DID Existence"
+    if not deviceOwnerShip(CID=CID, DID=DID):
+        logging.info("Device Drop Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
+        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
+
+    if supervisorType is None:
+        statement = "New Supervisor Hit: No Supervisor Type Provided"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
+
+    if customConfig is None:
+        logging.info("New Supervisor Hit: Using Base Configuration")
 
     refID = genSupervisorRefID()
     logging.debug("New Supervisor Hit: refID generated: {}".format(refID))
@@ -164,7 +171,7 @@ def newSupervisor():
     supervisorID = None
 
     try:
-        Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType, customConfig=str(customConfig))
+        Supervisor.create(deviceOwner=DID, refID=refID, supervisorType=supervisorType, customConfig=str(customConfig))
         # ToDo: Use fsting (python 3.6) - cleaner way of putting variables in strings
         logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
 
@@ -191,15 +198,15 @@ def newSupervisor():
 
     try:
 
-        body = {"supervisorType": supervisorType, "globalID": supervisorID, "deviceID": deviceID,
+        body = {"supervisorType": supervisorType, "globalID": supervisorID, "deviceID": DID,
                 "customConfig": customConfig}
 
         refID = genCommandRefID()
         CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True, refID=refID)).replace("'", "\'")
-        Command.create(command=CF, deviceOwner=deviceID, refID=refID)
+        Command.create(command=CF, deviceOwner=DID, refID=refID)
         logging.debug(
             "New Supervisor Hit: New Supervisor Command Added. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
-                supervisorType, supervisorID, deviceID, customConfig))
+                supervisorType, supervisorID, DID, customConfig))
 
         return jsonify(userMessage="New Supervisor Hit: New Supervisor Command Added To Queue"), 200
 
@@ -216,37 +223,43 @@ def newSupervisor():
 def updateSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
-    supervisorID = data.get('supervisorID')
-    deviceID = data.get('deviceID')
     customConfig = data.get('customConfig')
+
+    key = data.get("key")
+    DID = data.get("DID")
+    SID = data.get("SID")
+
+    CID = authenticateSessionKey(key=key)
+
+    if not CID:
+        logging.info("Update Supervisor Hit: Unable to validate sessionKey")
+        return jsonify(userMessage="Unable to validate Session Key"), 400
+
+    if DID is None:
+        statement = "Update Supervisor Hit: No DID Type Provided"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+
+    if not deviceOwnerShip(CID=CID, DID=DID):
+        logging.info("Update Supervisor Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
+        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
+
+    if not validateSupervisorAuthorization(SID=SID, DID=DID, CID=CID):
+        logging.info("Update Supervisor Hit: Unauthorized access on SID {} from CID {}".format(SID, CID))
+        return jsonify(userMessage="Please Provide a Valid Supervisor ID"), 400
 
     if supervisorType is None:
         logging.info("Update Supervisor Hit: No Supervisor Type Provided")
         return jsonify(userMessage="Please Provide A Valid Supervisor ID"), 400
-    if supervisorID is None:
-        logging.info("Update Supervisor Hit: No Supervisor ID Provided")
-        return jsonify(userMessage="Please Provide A Valid Supervisor Type"), 400
-    if deviceID is None:
-        logging.info("Update Supervisor Hit: No DID Provided")
-        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
+
     if customConfig is None:
-        configStatus = False
         logging.info("Update Supervisor Hit: No Custom Configuration Provided")
         return jsonify(userMessage="Please Provide A Valid Custom Configuration"), 400
-    else:
-        configStatus = True
-
-    if not validateDeviceExists(deviceID=deviceID):
-        logging.info("Update Supervisor Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
-
-    if not validateSupervisorExists(supervisorID=supervisorID):
-        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
-        return jsonify(userMessage="Unable To Verify SID Existence"), 400
 
     try:
-        entry = Supervisor.get(Supervisor.supervisorID == supervisorID)
+        entry = Supervisor.get(Supervisor.supervisorID == DID)
         entry.customConfig = str(customConfig)
+        entry.customConfig = 'True'
         entry.save()
 
     except:
@@ -254,15 +267,15 @@ def updateSupervisor():
         logging.warning(statement)
         return jsonify(userMessage=statement), 400
 
-    body = {'supervisorType': supervisorType, 'supervisorID': supervisorID, 'customConfig': customConfig,
+    body = {'supervisorType': supervisorType, 'supervisorID': SID, 'customConfig': customConfig,
             "restart": True}
 
     refID = genCommandRefID()
     CF = makeCommandFormat(body=body, commandType="launcher", callBack=True, refID=refID)
-    Command.create(command=CF, deviceOwner=deviceID, refID=refID)
+    Command.create(command=CF, deviceOwner=DID, refID=refID)
     logging.debug(
         "Update Supervisor Hit: Update Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
-            supervisorType, supervisorID, deviceID, configStatus))
+            supervisorType, SID, DID, configStatus))
 
     return jsonify(userMessage="Update Supervisor Command Added To Queue."), 200
 
@@ -270,116 +283,36 @@ def updateSupervisor():
 @app.route('/user/device/stopSupervisor', methods=["POST"])
 def stopSupervisor():
     data = request.get_json()
-    supervisorID = data.get('supervisorID')
-    deviceID = data.get('deviceID')
 
-    if supervisorID is None:
-        logging.info("Stop Supervisor Hit: No Supervisor ID Provided")
-        return jsonify(userMessage="Please Provide A Valid Supervisor ID"), 400
-    if deviceID is None:
-        logging.info("Stop Supervisor Hit: No DID Provided")
+    DID = data.get("DID")
+    key = data.get("key")
+    SID = data.get("SID")
+
+    CID = authenticateSessionKey(key=key)
+
+    if not CID:
+        logging.info("Drop Customer Hit: Unable to validate sessionKey")
+        return jsonify(userMessage="Unable to validate Session Key"), 400
+
+    if DID is None:
+        logging.info("Drop Device Hit: No DID Provided")
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateDeviceExists(deviceID):
-        logging.info("Stop Supervisor Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
+    if not deviceOwnerShip(CID=CID, DID=DID):
+        logging.info("Device Drop Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
+        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateSupervisorExists(supervisorID=supervisorID):
-        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
-        return jsonify(userMessage="Unable To Verify SID Existence"), 400
+    if not validateSupervisorAuthorization(SID=SID, DID=DID, CID=CID):
+        logging.info("Update Supervisor Hit: Unauthorized access on SID {} from CID {}".format(SID, CID))
+        return jsonify(userMessage="Please Provide a Valid Supervisor ID"), 400
 
-    body = {"supervisorID": supervisorID}
+    body = {"supervisorID": SID}
     refID = genCommandRefID()
     CF = makeCommandFormat(body=body, commandType="killSupervisor", callBack=True, refID=refID)
-    Command.create(command=CF, deviceOwner=deviceID, refID=refID)
+    Command.create(command=CF, deviceOwner=DID, refID=refID)
     logging.debug("Stop Supervisor Hit: Stop Supervisor Command Added To Queue")
 
-    return jsonify(userMessage="Stop Supervisor Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID,
-                                                                                                           supervisorID)), 200
-
-
-@app.route('/user/device/getSupervisorTags', methods=["POST"])
-def getSupervisorTags():
-    data = request.get_json()
-    supervisorID = data.get('supervisorID')
-    deviceID = data.get('deviceID')
-
-    if supervisorID is None:
-        logging.info("Get Supervisor Tags Hit: No Supervisor ID Provided")
-        return jsonify(userMessage="Please Provide A Valid Supervisor ID"), 400
-    if deviceID is None:
-        logging.info("Get Supervisor Tags Hit: No DID Provided")
-        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
-
-    if not validateDeviceExists(deviceID):
-        logging.info("Get Supervisor Tags Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
-
-    if not validateSupervisorExists(supervisorID=supervisorID):
-        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
-        return jsonify(userMessage="Unable To Verify SID Existence"), 400
-
-    body = {"supervisorID": supervisorID}
-    refID = genCommandRefID()
-    CF = makeCommandFormat(body=body, commandType="getSupervisorTags", callBack=True, refID=refID)
-    Command.create(command=CF, deviceOwner=deviceID, refID=refID)
-    logging.debug("Get Supervisor Tags Hit: Get Supervisor Tags Command Added To Queue")
-
-    return jsonify(
-        userMessage="Get Tags Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID, supervisorID)), 200
-
-
-@app.route('/user/device/getSupervisorInfo', methods=["POST"])
-def getSupervisorInfo():
-    data = request.get_json()
-    supervisorID = data.get('supervisorID')
-    deviceID = data.get('deviceID')
-
-    if supervisorID is None:
-        logging.info("Get Supervisor Info Hit: No Supervisor ID Provided")
-        return jsonify(userMessage="Please Provide A Valid Supervisor ID"), 400
-    if deviceID is None:
-        logging.info("Get Supervisor Info Hit: No DID Provided")
-        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
-
-    if not validateDeviceExists(deviceID):
-        logging.info("Get Supervisor Info Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
-
-    if not validateSupervisorExists(supervisorID=supervisorID):
-        logging.info("Update Supervisor Hit: Unable To Verify SID Existence")
-        return jsonify(userMessage="Unable To Verify SID Existence"), 400
-
-    body = {"supervisorID": supervisorID}
-    refID = genCommandRefID()
-    CF = makeCommandFormat(body=body, commandType="getSupervisorInfo", callBack=True, refID=refID)
-    Command.create(command=CF, deviceOwner=deviceID, refID=refID)
-    logging.debug("Get Supervisor Info Hit: Get Supervisor Info: Get Supervisor Info Command Added To Queue")
-
-    return jsonify(userMessage="Get Supervisor Info Command Added To Queue. DID: {}, Supervisor ID: {}".format(deviceID,
-                                                                                                               supervisorID)), 200
-
-
-@app.route('/user/device/getAllLocalSupervisors', methods=["POST"])
-def getAllLocalSupervisor():
-    data = request.get_json()
-    deviceID = data.get('deviceID')
-
-    if deviceID is None:
-        logging.info("Get All Local Supervisors Hit: No DID Provided")
-        return jsonify(userMessage="Please Provide A Valid Device ID"), 400
-
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
-        logging.info("Get All Local Supervisors Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
-
-    body = str(None)
-    refID = genCommandRefID()
-    CF = makeCommandFormat(body=body, commandType="getAllLocalSupervisor", callBack=True, refID=refID)
-    Command.create(command=CF, deviceOwner=deviceID, refID=refID)
-    logging.debug("Get All Local Supervisors Hit: Get All Local Supervisors Command Added To Queue")
-
-    return jsonify(userMessage="Get ALL Supervisor Info Command Added To Queue"), 200
+    return jsonify(userMessage="Stop Supervisor Command Added To Queue. DID: {}, Supervisor ID: {}".format(DID, SID)), 200
 
 
 def generateDeviceCommands(deviceID):

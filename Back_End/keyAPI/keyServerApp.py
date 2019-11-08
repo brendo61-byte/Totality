@@ -54,11 +54,32 @@ def deviceOwnerShip():
         return jsonify(usermessage=statement, data=False), 400
 
 
+@app.route('/keyAPI/supervisorAuth', methods=["POST"])
+def supervisorAuth():
+    SID = request.get_json().get("SID")
+    DID = request.get_json().get("DID")
+
+    try:
+        fetchedDID = Supervisor.get(Supervisor.deviceOwner == SID).deviceOwner
+
+        if int("{}".format(fetchedDID)) == DID:
+            logging.debug("DID {} authorized to access SID {}".format(DID, SID))
+            return jsonify(usermessage="Ownership check passed", data=True), 200
+        else:
+            statement = "Ownership check failed"
+            logging.info(statement + ". DID {} tried to access non-associated supervisor ID {}".format(DID, SID))
+            return jsonify(usermessage=statement, data=False), 400
+    except Exception as e:
+        statement = "Failed to query database"
+        logging.warning(statement + "\nException: {}\nTraceBack".format(e, traceback.format_exc()))
+        return jsonify(usermessage=statement, data=False), 400
+
+
 @app.route('/keyAPI/generateSessionKey', methods=["POST"])
 def generateSessionKey():
     customerName = request.get_json().get("name")
     key = request.get_json().get("key")
-    #ToDo: Remove redundant/expired session Keys
+    # ToDo: Remove redundant/expired session Keys
 
     if customerName is None:
         logging.debug("Login Hit: No customerName Provided")
