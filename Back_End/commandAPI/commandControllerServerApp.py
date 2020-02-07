@@ -10,15 +10,18 @@ import random
 import peewee
 import requests
 import ast
+import os
 
 app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-loginURL = 'http://key_api:8805/keyAPI/generateSessionKey'
-authenticationURL = 'http://key_api:8805/keyAPI/authenticateSessionKey'
-deviceOwnershipURL = 'http://key_api:8805/keyAPI/deviceOwnerShip'
-supervisorAuth = 'http://key_api:8805/keyAPI/supervisorAuth'
+nginxHostName = os.environ.get("nginxHostName", "nginxIoT")
+
+loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxHostName))
+authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxHostName))
+deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxHostName))
+supervisorAuth = os.environ.get('supervisorAuth', 'http://{}/keyAPI/supervisorAuth'.format(nginxHostName))
 
 """
 This is the API for pushing new commands and pulling queued commands. There are a number of features that need to be added (see the #ToDo's around). Commands added
@@ -133,7 +136,7 @@ def genCommandRefID():
     return refID
 
 
-@app.route('/user/device/newSupervisor', methods=["POST"])
+@app.route('/command/user/device/newSupervisor', methods=["POST"])
 def newSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
@@ -219,7 +222,7 @@ def newSupervisor():
                 e, traceback.format_exc())), 400
 
 
-@app.route('/user/device/updateSupervisor', methods=["POST"])
+@app.route('/command/user/device/updateSupervisor', methods=["POST"])
 def updateSupervisor():
     data = request.get_json()
     supervisorType = data.get('supervisorType')
@@ -280,7 +283,7 @@ def updateSupervisor():
     return jsonify(userMessage="Update Supervisor Command Added To Queue."), 200
 
 
-@app.route('/user/device/stopSupervisor', methods=["POST"])
+@app.route('/command/user/device/stopSupervisor', methods=["POST"])
 def stopSupervisor():
     data = request.get_json()
 
@@ -356,17 +359,13 @@ def convertCommandsToDict(query, deviceID):
     return commandList
 
 
-@app.route('/device/commands/getCommands', methods=["POST"])
+@app.route('/command/device/getCommands', methods=["POST"])
 def deviceGetCommands():
     deviceID = request.get_json().get("deviceID")
 
     if deviceID is None:
         logging.info("Get Commands Hit: No DID Provided")
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
-
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
-        logging.info("Get Commands Hit: Unable To Verify DID Existence")
-        return jsonify(userMessage="Unable To Verify DID Existence"), 400
 
     try:
         device = Device.get(Device.deviceID == deviceID)
@@ -377,9 +376,9 @@ def deviceGetCommands():
         device.save()
     except Exception as e:
         logging.warning(
-            "Get Commands Hit: Could Not Update Device In Data Base. DID: {}\nException: {}\nTraceBack: {}".format(
+            "Get Commands Hit: Could Not Get Device Commands In Data Base. DID: {}\nException: {}\nTraceBack: {}".format(
                 deviceID, e, traceback.format_exc()))
-        return jsonify(userMessge="Unable To Update Device In Data Base"), 400
+        return jsonify(userMessge="Unable To Get Device Commands In Data Base"), 400
 
     commandList = generateDeviceCommands(deviceID=deviceID)
 

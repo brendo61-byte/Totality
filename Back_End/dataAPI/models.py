@@ -3,11 +3,13 @@ import os
 import datetime
 import time
 
-db_test = os.environ.get("TEST", False)
-if db_test:
-    db = peewee.MySQLDatabase("IoT", host='localhost', port=3306, user='root', passwd='example')
-else:
-    db = peewee.MySQLDatabase("IoT", host='db', port=3306, user='root', passwd='example')
+db_name = os.environ.get("db_name", "IoT")
+db_host = os.environ.get("db_host", "db")
+db_post = int(os.environ.get("db_port"))
+db_user = os.environ.get("db_user")
+db_paswd = os.environ.get("db_paswd")
+
+db = peewee.MySQLDatabase(db_name, host=db_host, port=db_post, user=db_user, passwd=db_paswd)
 
 
 class BaseModel(peewee.Model):
@@ -59,14 +61,6 @@ class Command(BaseModel):
                                          null=False)  # Back ref to know who gets the command
 
 
-class ReliableDelivery(BaseModel):
-    timeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # when payload was put into Db
-    payload = peewee.CharField(null=False)  # payload for delivery
-    delivery = peewee.IntegerField(default=0)  # if the payload has been successfully sent. 0=F, 1=T
-    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
-                                         null=False)  # Back ref to know who owns the payload
-
-
 class Supervisor(BaseModel):
     name = peewee.CharField(null=True)
     refID = peewee.IntegerField(null=True)
@@ -76,14 +70,31 @@ class Supervisor(BaseModel):
     deviceOwner = peewee.ForeignKeyField(Device, backref='supervisor', null=False)
     customConfig = peewee.CharField(null=True)
 
+
+class ReliableDelivery(BaseModel):
+    inputTimeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # when payload was put into Db
+
+    timeStamp = peewee.CharField()  # when data was collected in local time
+    dataType = peewee.CharField()  # what type of data it is
+    units = peewee.CharField()  # units data is measured in
+    data = peewee.FloatField()  # the data its self
+    sensorType = peewee.CharField()  # the supervisor type that generated this data
+    supervisorID = peewee.ForeignKeyField(Supervisor, backref='reliableDelivery', null=False)  # globalID of supervisor
+
+    deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
+                                         null=False)  # Back ref to know who owns the payload
+
+
 class CustomerKeys(BaseModel):
     key = peewee.CharField(null=False)
     customerOwner = peewee.ForeignKeyField(Customer, backref='customerKeys')  # IDs who owns the device
+
 
 class SessionKeys(BaseModel):
     sessionKey = peewee.CharField(null=False)
     customerOwner = peewee.ForeignKeyField(Customer, backref='SessionKeys')  # IDs who owns the device
     endLifeTime = peewee.IntegerField(null=False)
+
 
 def makeTables():
     retires = 5

@@ -43,11 +43,6 @@ def genCommandRefID():
     return refID
 
 
-def validateDeviceAuth(token):
-    # ToDo: Ensure whoever is trying to get commands is authorized to do so
-    return True
-
-
 def validateDeviceExists(deviceID):
     try:
         Device.get(Device.deviceID == deviceID)
@@ -65,7 +60,6 @@ def validateDeviceExists(deviceID):
     except Exception as e:
         logging.warning(
             "Validate DID: DID '{}' Failed Validation. Unknown Error.\nException: {}\nTraceBack: {}".format(deviceID, e,
-
                                                                                                             traceback.format_exc()))
 
 
@@ -80,7 +74,7 @@ def genSupervisorRefID():
     return refID
 
 
-@app.route('/device/management/supervisorRegistration', methods=["POST"])
+@app.route('/management/device/supervisorRegistration', methods=["POST"])
 def supervisorRegistration():
     package = request.get_json()
     data = package.get("data").get("package")
@@ -99,7 +93,7 @@ def supervisorRegistration():
     if customConfig is None:
         logging.info("Supervisor Registration Hit: Using Base Configuration")
 
-    if not validateDeviceExists(validateDeviceExists(deviceID)):
+    if not validateDeviceExists(deviceID=deviceID):
         statement = "Supervisor Registration Hit: Unable To Verify DID Existence"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
@@ -108,7 +102,7 @@ def supervisorRegistration():
     logging.debug("Supervisor Registration Hit: refID generated: {}".format(refID))
 
     supervisorID = None
-    #ToDo: include local ID into supervisor field - check if supervisor has been registered
+    # ToDo: include local ID into supervisor field - check if supervisor has been registered
 
     try:
         Supervisor.create(deviceOwner=deviceID, refID=refID, supervisorType=supervisorType,

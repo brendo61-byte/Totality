@@ -23,6 +23,11 @@ FORGROUND () {
 	docker-compose up
 }
 
+REBUILDFRONT () {
+    printf "\nStarting Docker Network With Rebuild Images (Not In Background)\n"
+	docker-compose up --build
+}
+
 STOP () {
     printf "\nStopping Docker Network\n"
 	docker-compose down
@@ -83,6 +88,11 @@ then
 if [ $1 = "start-b" ];
 then
     REBUILD
+    fi
+
+if [ $1 = "start-bs" ];
+then
+    REBUILDFRONT
     fi
 
 if [ $1 = "stop" ];

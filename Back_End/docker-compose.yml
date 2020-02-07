@@ -2,62 +2,75 @@ version: '3.3'
 
 services:
 
-#  data_controller:
-#   container_name: data_controller
-#   build: ./data_controller/
-#   ports:
-#    - "8801:8801"
-
-  key_api:
-    container_name: key_api
-    build: keyAPI/
+  data_api:
+    container_name: data_api
+    restart: always
+    hostname: data_api
+    build: ./dataAPI/
+    expose:
+      - 8801
     ports:
-      - "8805:8805"
+    - "8809:8809"
+    env_file:
+      - models.env
+
+  command_api:
+    container_name: command_api
+    restart: always
+    hostname: command_api
+    build: ./commandAPI/
+    expose:
+      - 8802
+    env_file:
+      - models.env
+
+  creation_api:
+    container_name: creation_api
+    restart: always
+    hostname: creation_api
+    build: ./creationAPI/
+    expose:
+      - 8803
+    env_file:
+      - models.env
 
   managment_api:
     container_name: managment_api
+    restart: always
+    hostname: managment_api
     build: managementAPI/
+    expose:
+      - 8804
+    env_file:
+      - models.env
+
+  key_api:
+    container_name: key_api
+    restart: always
+    hostname: key_api
+    build: keyAPI/
+    expose:
+      - 8805
+    env_file:
+      - models.env
+
+  nginx:
+    build: ./nginx
+    restart: always
+    hostname: nginx
+    container_name: nginxIoT
     ports:
-      - "8804:8804"
-
-  creation_api:
-   container_name: creation_api
-   build: ./creationAPI/
-   ports:
-    - "8803:8803"
-
-  command_api:
-   container_name: command_api
-   build: ./commandAPI/
-   ports:
-    - "8802:8802"
-
-  data_api:
-    container_name: data_api
-    build: ./dataAPI/
-    ports:
-      - "8801:8801"
-
-#  db:
-#   container_name: db
-#   image: mysql:5.6
-#   restart: always
-#   environment:
-#     MYSQL_ROOT_PASSWORD: example
-#     MYSQL_USER: root
-#     MYSQL_HOST: localhost
-#     MYSQL_DATABASE: IoT
-#   ports:
-#     - "3306:3306"
+      - "80:80"
 
   db:
     container_name: db
     build: ./DataBase/
     restart: always
+    hostname: db
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_USER: root
       MYSQL_HOST: localhost
       MYSQL_DATABASE: IoT
-    ports:
-      - "3306:3306"
+    expose:
+      - 3306

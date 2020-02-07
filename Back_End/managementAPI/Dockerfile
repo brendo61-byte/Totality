@@ -3,7 +3,9 @@ ADD managementServerApp.py /
 ADD models.py /
 ADD requirements.txt /
 ADD m /
+ADD app.ini /
+ADD run.py /
 WORKDIR /
 RUN pip install -r requirements.txt
 RUN chmod +x m
-CMD ["python", "managementServerApp.py"]
+CMD ["uwsgi", "app.ini"]

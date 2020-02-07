@@ -8,15 +8,18 @@ import datetime
 import re
 import requests
 import secrets
+import os
 
 app = Flask(__name__)
 
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-loginURL = 'http://key_api:8805/keyAPI/generateSessionKey'
-authenticationURL = 'http://key_api:8805/keyAPI/authenticateSessionKey'
-deviceOwnershipURL = 'http://key_api:8805/keyAPI/deviceOwnerShip'
+nginxHostName = os.environ.get("nginxHostName", "nginxIoT")
+
+loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxHostName))
+authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxHostName))
+deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxHostName))
 
 
 def login(key, name):
@@ -79,7 +82,7 @@ def deviceOwnerShip(CID, DID):
             "Failed to reach Device Ownership key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
-@app.route('/customer/newCustomer', methods=["POST"])
+@app.route('/creation/customer/newCustomer', methods=["POST"])
 def newCustomer():
     data = request.get_json()
     name = data.get("name")
@@ -126,7 +129,7 @@ def validPhoneNumber(phone_nuber):
     return pattern.match(phone_nuber) is not None
 
 
-@app.route('/customer/login', methods=["POST"])
+@app.route('/creation/customer/login', methods=["POST"])
 def customerLogin():
     customerName = request.get_json().get("name")
     key = request.get_json().get("key")
@@ -161,7 +164,7 @@ def dropCustomer():
         return jsonify(userMessage="Please Provide A True CID")
 
 
-@app.route('/customer/getCustomer/<string:key>', methods=["GET"])
+@app.route('/creation/customer/getCustomer/<string:key>', methods=["GET"])
 def getCustomerInfo(key):
     CID = authenticateSessionKey(key=key)
 
@@ -184,7 +187,7 @@ def getCustomerInfo(key):
         return jsonify(userMessage="Please Provide A Valid CID"), 400
 
 
-@app.route('/customer/getAllDevices/<string:key>', methods=["GET"])
+@app.route('/creation/customer/getAllDevices/<string:key>', methods=["GET"])
 def getAllDevices(key):
     CID = authenticateSessionKey(key=key)
 
@@ -215,7 +218,7 @@ def getAllDevices(key):
         return jsonify(userMessage="Unable to query database for devices"), 400
 
 
-@app.route('/device/newDevice', methods=["POST"])
+@app.route('/creation/device/newDevice', methods=["POST"])
 def newDevice():
     key = request.get_json().get("key")
 
@@ -259,7 +262,7 @@ def newDevice():
         return jsonify(userMessage="Error In Device Creation"), 400
 
 
-@app.route('/device/dropDevice', methods=["POST"])
+@app.route('/creation/device/dropDevice', methods=["POST"])
 def dropDevice():
     DID = request.get_json().get("DID")
     key = request.get_json().get("key")
@@ -290,7 +293,7 @@ def dropDevice():
         return jsonify(userMessage="Please Provide A True Device ID"), 400
 
 
-@app.route('/device/getDeviceInfo/<string:key>/<int:DID>', methods=["GET"])
+@app.route('/creation/device/getDeviceInfo/<string:key>/<int:DID>', methods=["GET"])
 def getDeviceInfo(key, DID):
     CID = authenticateSessionKey(key=key)
 
