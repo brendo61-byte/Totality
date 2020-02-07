@@ -1,33 +1,39 @@
 {
-  "launcher": {
-    "args": {
-      "supervisorList": [
-        {
-          "supervisorType": "intMaker",
-          "supervisorID": 1,
-          "customConfig": "None"
-        },
-        {
-          "supervisorType": "intMaker",
-          "supervisorID": 2,
-          "customConfig": {
-            "supervisorName": "Little Thanos"
-          }
+    "launcher": {
+        "args": {
+            "supervisorList": [
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 2,
+                    "customConfig": null,
+                    "globalID": 11
+                },
+                {
+                    "supervisorType": "intMaker",
+                    "supervisorID": 1,
+                    "customConfig": null,
+                    "globalID": 12
+                }
+            ]
         }
-      ]
-    }
-  },
-  "commandControl": {
-    "args": {
-      "heartBeatInterval": 5
-    }
-  },
-  "dataControl": {
-    "args": {
-      "updateInterval": 5
-    }
-  },
-  "logLevel": "DEBUG",
-  "test": "True",
-  "deviceID": 1
+    },
+    "commandControl": {
+        "args": {
+            "heartBeatInterval": 5
+        }
+    },
+    "dataControl": {
+        "args": {
+            "updateInterval": 5
+        }
+    },
+    "managementController": {
+        "args": {
+            "updateInterval": 1
+        }
+    },
+    "logLevel": "DEBUG",
+    "test": false,
+    "threadLimit": 10,
+    "deviceID": 1
 }

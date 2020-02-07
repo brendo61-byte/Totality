@@ -1,5 +1,6 @@
 from Device_Level.Framework.Base_Classes.supervisor import Supervisor
 from Device_Level.Framework.Base_Classes.package import Package
+from Device_Level.Framework.Base_Classes.packageTypes import dataPush
 
 import random
 import datetime
@@ -20,7 +21,8 @@ class intMaker(Supervisor):
     samplePeriod: Sleep time between data readings
     supervisorName: The Name Of The supervisor (While The ID Defines The Unique Identity Of The Totality 'deviceName' Is For Human Use)
     supervisorType: Names The Type Of supervisor
-    supervisorID: The ID Of The supervisor
+    supervisorID: The ID Of The supervisor -- this is a local refrence only
+    globalID: The ID of supervisor as dedicated by the database.
     deviceID: ID to know device
     tags: A json of descriptive tags Defining The supervisor
     pipe: An object of the dataPipe class. All supervisors will share the same pipe object -- meaning all supervisors will put data on the same queue
@@ -33,13 +35,15 @@ class intMaker(Supervisor):
     highEnd: The (exclusive) max integer that will be randomly generated
     """
 
-    def __init__(self, lowEnd, highEnd, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, tags, pipe, delay=0):
+    def __init__(self, lowEnd, highEnd, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, globalID,
+                 tags, pipe, delay=0):
         self.operational = True
         self.samplePeriod = samplePeriod
         self.supervisorName = supervisorName
         self.supervisorType = supervisorType
         self.supervisorID = supervisorID
         self.deviceID = deviceID
+        self.globalID = globalID
         self.tags = tags
         self.pipe = pipe
         self.delay = delay  # Should always be defaulted to 0
@@ -79,6 +83,7 @@ class intMaker(Supervisor):
         time.sleep(self.delay)
         while self.operational:
             someInt = random.randint(self.lowEnd, self.highEnd)  # Replace this later on with a Fake Totality
+
             timeStamp = datetime.datetime.utcnow()
 
             # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
@@ -102,6 +107,12 @@ class intMaker(Supervisor):
     def getSupervisorID(self):
         return self.supervisorID
 
+    def getGlobalID(self):
+        return self.globalID()
+
+    def updateGlobalID(self, globalID):
+        self.globalID = globalID
+
     def monitor(self, data):
         # ToDo: Figure out how to implement monitor
         """
@@ -114,5 +125,6 @@ class intMaker(Supervisor):
         return None
 
     def package(self, data, timeStamp):
-        package = Package(data=data, tags=self.tags, timeStamp=timeStamp, monitorResponse=self.monitor(data=data), headers=self.headers)
+        package = Package(data=data, tags=self.tags, timeStamp=timeStamp, packageType=dataPush,
+                          monitorResponse=self.monitor(data=data), headers=self.headers)
         self.pipe.put(payload=package)

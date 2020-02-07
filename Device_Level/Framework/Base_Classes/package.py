@@ -3,14 +3,15 @@ class Package:
     A convenient means of transporting data internal with all needed information to upload to Influx, save as a CSV, or do whatever is needed
     """
 
-    def __init__(self, data, tags, timeStamp, headers, monitorResponse=None):
+    def __init__(self, data, timeStamp, packageType, tags=None, headers=0, monitorResponse=None):
         self.data = data
         self.tags = tags
         self.timeStamp = timeStamp
+        self.packageType = packageType
         self.headers = headers
         self.monitor = monitorResponse
 
-    def getPayload(self):
+    def getPayload(self):  # Payload if for
         payload = {
             "timeStamp(UTC)": self.timeStamp.strftime("%m/%d/%Y-%H:%M:%S"),
             "supervisorID": self.tags["supervisorID"],
@@ -36,6 +37,9 @@ class Package:
 
     def getTimeStamp(self):
         return self.timeStamp.strftime("%m/%d/%Y-%H:%M:%S")
+
+    def getPackageType(self):
+        return self.packageType
 
     def getSupervisorHeaders(self):
         return self.headers
