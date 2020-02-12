@@ -102,7 +102,6 @@ def generateSessionKey():
             return jsonify(userMessage="Customer has logged in", data=sessionKey), 200
         else:
             return jsonify(userMessage="Customer Login Failed. Incorrect key", data=False), 400
-            # ToDo: When would this case occur?
 
     except Exception as e:
         statement = "Unable to parse database to login customer"

@@ -1,4 +1,5 @@
-from Device_Level.Framework.Base_Classes.controller import Controller
+# from Device_Level.Framework.Base_Classes.controller import Controller
+from Framework.Base_Classes.controller import Controller
 
 import logging
 import json

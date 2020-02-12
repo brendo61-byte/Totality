@@ -15,11 +15,11 @@ app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-nginxHostName = os.environ.get("nginxHostName", "nginxIoT")
+nginxIPAdder= os.environ.get("nginxIPAddr", "172.28.1.6")
 
-loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxHostName))
-authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxHostName))
-deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxHostName))
+loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxIPAdder))
+authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxIPAdder))
+deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxIPAdder))
 
 
 def login(key, name):

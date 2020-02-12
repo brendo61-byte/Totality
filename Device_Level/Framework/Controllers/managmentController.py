@@ -1,16 +1,18 @@
-from Device_Level.Framework.Base_Classes.controller import Controller
-from Device_Level.Framework.Base_Classes.packageTypes import *
+# from Device_Level.Framework.Base_Classes.controller import Controller
+# from Device_Level.Framework.Base_Classes.packageTypes import *
+
+from Framework.Base_Classes.controller import Controller
+from Framework.Base_Classes.packageTypes import *
 
 import requests
 import logging
 import traceback
 import time
 
-Registration_URL = "http://localhost:8804/device/management/supervisorRegistration"
-
 
 class ManagementController(Controller):
-    def __init__(self, pipe, updateInterval, deviceID, DM):
+    def __init__(self, pipe, updateInterval, deviceID, DM, registrationURL):
+        self.registrationURL = registrationURL
         self.pipe = pipe
         self.updateInterval = updateInterval
         self.deviceID = deviceID
@@ -26,7 +28,7 @@ class ManagementController(Controller):
 
                 packageTypes = {
                     registerSupervisor: self.registration(package=package, packageType="requestGlobalID",
-                                                          url=Registration_URL)
+                                                          url=self.registrationURL)
                 }
 
                 try:
@@ -40,7 +42,7 @@ class ManagementController(Controller):
                         else:
                             logging.debug("No commands returned for management package")
                     else:
-                        logging.info("Non 200 return on management Controller. Info: {}".format(response.text))
+                        logging.warning("Non 200 return on management Controller. Info: {}".format(response.text))
                 except KeyError:
                     logging.warning("Invalid package type provided: {}".format(packageType))
                 except Exception as e:
