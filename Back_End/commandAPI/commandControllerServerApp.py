@@ -16,12 +16,12 @@ app = Flask(__name__)
 logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-nginxHostName = os.environ.get("nginxHostName", "nginxIoT")
+nginxIPAddr = os.environ.get("nginxIPAddr", "172.28.1.6")
 
-loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxHostName))
-authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxHostName))
-deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxHostName))
-supervisorAuth = os.environ.get('supervisorAuth', 'http://{}/keyAPI/supervisorAuth'.format(nginxHostName))
+loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxIPAddr))
+authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxIPAddr))
+deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxIPAddr))
+supervisorAuth = os.environ.get('supervisorAuth', 'http://{}/keyAPI/supervisorAuth'.format(nginxIPAddr))
 
 """
 This is the API for pushing new commands and pulling queued commands. There are a number of features that need to be added (see the #ToDo's around). Commands added

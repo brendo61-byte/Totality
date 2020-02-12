@@ -1,6 +1,10 @@
-from Device_Level.Framework.Base_Classes.supervisor import Supervisor
-from Device_Level.Framework.Base_Classes.package import Package
-from Device_Level.Framework.Base_Classes.packageTypes import dataPush
+# from Device_Level.Framework.Base_Classes.supervisor import Supervisor
+# from Device_Level.Framework.Base_Classes.package import Package
+# from Device_Level.Framework.Base_Classes.packageTypes import dataPush
+
+from Framework.Base_Classes.supervisor import Supervisor
+from Framework.Base_Classes.package import Package
+from Framework.Base_Classes.packageTypes import dataPush
 
 import random
 import datetime
@@ -68,8 +72,7 @@ class intMaker(Supervisor):
             "customConfig": self.tags["customConfig"]
         }
 
-        self.headers = ["someInt", "supervisorID", "supervisorName", "deviceID", "customConfig",
-                        "timeStamp(UTC)"]
+        self.headers = ["data", "timeStamp", "dataType", "units", "sensorType", "supervisorID"]
         """
                 ALL Supervisors need a headers list
         Must have the values being collected -- in this case 'someInt' --- followed by supervisorID, supervisorName, supervisorOwner, customConfig, TimeStamp
@@ -84,14 +87,30 @@ class intMaker(Supervisor):
         while self.operational:
             someInt = random.randint(self.lowEnd, self.highEnd)  # Replace this later on with a Fake Totality
 
-            timeStamp = datetime.datetime.utcnow()
+            timeStamp = datetime.datetime.now()
+            timeStampStr = timeStamp.strftime("%m/%d/%Y-%H:%M:%S")
 
             # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
-            data = {
-                "someInt": someInt
+            data1 = {
+                "data": someInt,  # the data you are sending - needs to be a int or float
+                "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
+                "dataType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
+                "units": "n/a",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
+                "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
+                "supervisorID": self.getGlobalID()  # the global ID of the supervisor - needs to be an int
             }
 
-            self.package(data=data, timeStamp=timeStamp)
+            data2 = {
+                "data": someInt,  # the data you are sending - needs to be a int or float
+                "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
+                "dataType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
+                "units": "n/a",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
+                "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
+                "supervisorID": self.getGlobalID()  # the global ID of the supervisor - needs to be an int
+            }
+
+            self.package(data=data1, timeStamp=timeStamp)
+            self.package(data=data2, timeStamp=timeStamp)
 
             time.sleep(self.samplePeriod)
 
@@ -108,7 +127,7 @@ class intMaker(Supervisor):
         return self.supervisorID
 
     def getGlobalID(self):
-        return self.globalID()
+        return self.globalID
 
     def updateGlobalID(self, globalID):
         self.globalID = globalID

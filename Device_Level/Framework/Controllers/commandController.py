@@ -1,4 +1,5 @@
-from Device_Level.Framework.Base_Classes.controller import Controller
+# from Device_Level.Framework.Base_Classes.controller import Controller
+from Framework.Base_Classes.controller import Controller
 
 import requests
 import time
@@ -6,16 +7,14 @@ import logging
 import json
 import traceback
 
-# ToDo: Make this an env variable --- This will be done during/around deployment
-CommandServerEndPoint = 'http://localhost:8802/device/commands/getCommands'
-
 
 class CommandController(Controller):
     """
     In future this class will be able to talk to a cloud once a 'heartBeatInterval' to see if new commands need to be run on the device.
     """
 
-    def __init__(self, heartBeatInterval, deviceID, DM):
+    def __init__(self, heartBeatInterval, deviceID, DM, commandServerEndPoint):
+        self.commandServerEndPoint = commandServerEndPoint
         self.operational = True
         self.heartBeatInterval = heartBeatInterval
         self.deviceID = deviceID
@@ -36,7 +35,7 @@ class CommandController(Controller):
 
     def pullCommands(self):
         try:
-            commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
+            commands = requests.post(self.commandServerEndPoint, json={"deviceID": self.deviceID})
             jsonCommands = commands.json()
             if commands.status_code != 200:
                 logging.warning(

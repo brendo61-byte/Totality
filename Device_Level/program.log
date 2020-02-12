@@ -1,91 +1,1277 @@
-2019-11-03 14:46:12,414 - INFO - 
+2020-02-11 22:32:52,864 - INFO - 
 
 Launching Program
-2019-11-03 14:46:12,414 - INFO - No Local Data directory found. Creating new directory now.
-2019-11-03 14:46:12,419 - DEBUG - Preforming Data-Push
-2019-11-03 14:46:12,419 - INFO - All Threads Launched Successfully
-2019-11-03 14:46:12,428 - DEBUG - Starting new HTTP connection (1): localhost:8802
-2019-11-03 14:46:12,428 - INFO - New supervisor Spawned. supervisor Info: {
+2020-02-11 22:32:52,869 - DEBUG - Preforming Data-Push
+2020-02-11 22:32:52,869 - INFO - All Threads Launched Successfully
+2020-02-11 22:32:52,879 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:32:52,935 - INFO - New supervisor Spawned. supervisor Info: {
+    "channel": 2,
     "customConfig": "False",
     "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
+    "gain": 1,
+    "samplePeriod": 10,
     "supervisorID": 2,
-    "supervisorName": "intMaker",
-    "supervisorType": "intMaker"
+    "supervisorName": "ADC1115_Pyra",
+    "supervisorType": "ADC1115_Pyra"
 }
 
-2019-11-03 14:46:12,435 - INFO - New supervisor Spawned. supervisor Info: {
-    "customConfig": "False",
-    "deviceID": 1,
-    "highEndInt": 100,
-    "lowEndInt": 0,
-    "samplePeriod": 1,
-    "supervisorID": 1,
-    "supervisorName": "intMaker",
-    "supervisorType": "intMaker"
-}
+2020-02-11 22:32:52,935 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:32:52,935 - INFO - All Launch Supervisors Spawned Successfully
+2020-02-11 22:32:52,944 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:32:52,983 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:32:52,985 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-2019-11-03 14:46:12,435 - INFO - All Launch Supervisors Spawned Successfully
-2019-11-03 14:46:12,437 - WARNING - Critical Error Has Occurred While Trying To Connect To Command Server. Error Message: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused'))
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 160, in _new_conn
-    (self._dns_host, self.port), self.timeout, **extra_kw)
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
-    raise err
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 61] Connection refused
+2020-02-11 22:32:52,986 - DEBUG - No New Commands To Execute
+2020-02-11 22:33:02,956 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:33:02,966 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:33:12,978 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:33:12,988 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:33:23,000 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:33:23,010 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:33:33,022 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:33:33,032 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:33:43,044 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:33:43,054 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:33:52,904 - DEBUG - Preforming Data-Push
+2020-02-11 22:33:52,963 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,054 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,065 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:33:53,073 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:53,078 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:33:53,136 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,156 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:33:53,160 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-During handling of the above exception, another exception occurred:
+2020-02-11 22:33:53,161 - DEBUG - No New Commands To Execute
+2020-02-11 22:33:53,249 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:53,311 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,413 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:53,474 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,595 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:53,657 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,761 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:53,823 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:53,923 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:53,985 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:54,099 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:54,160 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:54,260 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:54,321 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:54,423 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:54,484 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:54,596 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:54,658 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:54,764 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:54,825 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:54,933 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:54,995 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:55,098 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:55,159 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:55,267 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:55,329 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:55,433 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:55,494 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:55,600 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:55,662 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:55,764 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:55,825 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:55,940 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:56,002 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:56,111 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:56,171 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:56,279 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:56,341 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:56,453 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:56,514 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:56,624 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:56,686 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:56,787 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:56,848 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:56,951 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:57,013 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:58,261 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:58,322 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:58,423 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:33:58,485 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:58,602 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:33:58,663 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:33:58,775 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:34:03,090 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:34:03,100 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:34:13,112 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:34:13,122 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:34:23,134 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:34:23,144 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:34:33,156 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:34:33,166 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:34:43,178 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:34:43,188 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:34:53,200 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:34:53,209 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:34:53,221 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:53,322 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:34:53,327 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 603, in urlopen
-    chunked=chunked)
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 355, in _make_request
-    conn.request(method, url, **httplib_request_kw)
-  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1244, in request
-    self._send_request(method, url, body, headers, encode_chunked)
-  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1290, in _send_request
-    self.endheaders(body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1239, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1026, in _send_output
-    self.send(msg)
-  File "/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 966, in send
-    self.connect()
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 183, in connect
-    conn = self._new_conn()
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
-    self, "Failed to establish a new connection: %s" % e)
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused
+2020-02-11 22:34:53,328 - DEBUG - No New Commands To Execute
+2020-02-11 22:34:58,840 - DEBUG - Preforming Data-Push
+2020-02-11 22:34:58,898 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:59,006 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:34:59,068 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:59,186 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:34:59,248 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:59,359 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:34:59,420 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:59,531 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:34:59,594 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:59,698 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:34:59,759 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:34:59,868 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:34:59,930 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:00,065 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:00,126 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:00,230 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:00,292 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:00,412 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:00,473 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:00,572 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:00,635 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:00,742 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:00,803 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:00,912 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:00,974 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:01,075 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:01,136 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:01,236 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:01,298 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:01,403 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:01,464 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:01,571 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:01,633 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:01,748 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:01,809 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:01,915 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:01,977 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:02,093 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:02,155 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:02,262 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:02,324 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:02,427 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:02,488 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:02,590 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:02,652 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:02,767 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:35:02,828 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:02,930 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:35:03,215 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:35:03,225 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:35:13,237 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:35:13,247 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:35:23,259 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:35:23,269 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:35:33,281 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:35:33,291 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:35:43,303 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:35:43,313 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:35:53,325 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:35:53,340 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:35:53,343 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:35:53,445 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:35:53,450 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-During handling of the above exception, another exception occurred:
+2020-02-11 22:35:53,450 - DEBUG - No New Commands To Execute
+2020-02-11 22:36:02,964 - DEBUG - Preforming Data-Push
+2020-02-11 22:36:03,022 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:03,126 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:03,187 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:03,297 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:03,354 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:36:03,361 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:03,369 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:36:03,465 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:03,526 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:03,636 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:03,698 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:03,802 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:03,863 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:03,965 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:04,027 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:04,128 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:04,189 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:04,300 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:04,361 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:04,467 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:04,528 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:04,633 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:04,695 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:04,798 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:04,859 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:04,968 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:05,030 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:05,137 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:05,198 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:05,302 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:05,364 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:05,479 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:05,540 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:05,647 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:05,709 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:05,812 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:05,874 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:05,976 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:06,038 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:06,154 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:06,215 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:06,320 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:06,382 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:06,483 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:06,544 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:06,645 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:06,707 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:06,812 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:06,873 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:06,977 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:07,039 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:07,156 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:07,217 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:07,322 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:07,384 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:07,488 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:36:07,549 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:07,655 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:36:13,381 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:36:13,391 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:36:23,403 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:36:23,413 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:36:33,425 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:36:33,435 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:36:43,447 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:36:43,457 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:36:53,471 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:36:53,474 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:36:53,485 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:36:53,575 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:36:53,579 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
-    timeout=timeout
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/connectionpool.py", line 641, in urlopen
-    _stacktrace=sys.exc_info()[2])
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
-    raise MaxRetryError(_pool, url, error or ResponseError(cause))
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2020-02-11 22:36:53,580 - DEBUG - No New Commands To Execute
+2020-02-11 22:37:03,497 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:37:03,507 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:37:07,664 - DEBUG - Preforming Data-Push
+2020-02-11 22:37:07,722 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:07,842 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:07,903 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:08,017 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:08,079 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:08,184 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:08,246 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:08,356 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:08,418 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:08,519 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:08,580 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:08,693 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:08,756 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:08,868 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:08,929 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:09,031 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:09,093 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:09,200 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:09,261 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:09,363 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:09,425 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:09,531 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:09,591 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:09,702 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:09,764 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:09,867 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:09,928 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:10,033 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:10,095 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:10,198 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:10,259 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:10,362 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:10,424 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:10,534 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:10,595 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:10,711 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:10,773 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:10,875 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:10,936 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:11,039 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:11,101 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:11,206 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:11,267 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:11,374 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:11,436 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:11,540 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:37:11,602 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:11,700 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:37:13,519 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:37:13,529 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:37:23,541 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:37:23,551 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:37:33,563 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:37:33,573 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:37:43,585 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:37:43,595 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:37:53,613 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:37:53,616 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:37:53,626 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:37:53,722 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:37:53,727 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-During handling of the above exception, another exception occurred:
+2020-02-11 22:37:53,728 - DEBUG - No New Commands To Execute
+2020-02-11 22:38:03,638 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:38:03,648 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:38:11,714 - DEBUG - Preforming Data-Push
+2020-02-11 22:38:11,772 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:11,891 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:11,952 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:12,058 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:12,120 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:12,225 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:12,286 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:12,388 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:12,451 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:12,566 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:12,627 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:12,733 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:12,795 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:12,904 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:12,965 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:13,073 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:13,135 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:13,237 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:13,298 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:13,408 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:13,470 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:13,586 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:13,647 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:13,655 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:38:13,665 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:38:13,749 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:13,811 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:13,935 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:13,997 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:14,114 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:14,176 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:14,280 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:14,341 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:14,448 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:14,510 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:14,632 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:14,693 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:14,792 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:14,855 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:14,955 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:15,016 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:15,122 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:15,184 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:15,285 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:15,347 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:15,462 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:15,524 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:15,633 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:15,694 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:15,825 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:15,888 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:15,996 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:16,057 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:16,157 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:16,219 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:16,326 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:38:16,387 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:16,500 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:38:23,677 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:38:23,687 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:38:33,699 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:38:33,709 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:38:43,715 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:38:43,725 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:38:53,743 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:38:53,746 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:38:53,756 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:38:53,847 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:38:53,851 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
-Traceback (most recent call last):
-  File "/Users/brendo/repos/CSU/Totality/Device_Level/Framework/Controllers/commandController.py", line 39, in pullCommands
-    commands = requests.post(CommandServerEndPoint, json={"deviceID": self.deviceID})
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 116, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/api.py", line 60, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
-    r = adapter.send(request, **kwargs)
-  File "/Users/brendo/repos/CSU/Totality/venv/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8802): Max retries exceeded with url: /device/commands/getCommands (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f49f110>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2020-02-11 22:38:53,852 - DEBUG - No New Commands To Execute
+2020-02-11 22:39:03,768 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:39:03,778 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:39:13,790 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:39:13,800 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:39:16,544 - DEBUG - Preforming Data-Push
+2020-02-11 22:39:16,602 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:16,705 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:16,766 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:16,877 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:16,939 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:17,041 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:17,103 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:17,205 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:17,267 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:17,393 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:17,454 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:17,556 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:17,619 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:17,723 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:17,785 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:17,894 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:17,957 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:18,059 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:18,121 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:18,230 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:18,293 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:18,408 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:18,469 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:18,573 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:18,635 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:18,738 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:18,799 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:18,938 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:19,000 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:19,101 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:19,162 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:19,263 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:19,325 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:19,430 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:19,491 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:19,593 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:19,656 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:19,774 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:19,835 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:19,941 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:20,003 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:20,109 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:20,170 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:20,281 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:20,343 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:20,453 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:39:20,515 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:20,643 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:39:23,812 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:39:23,822 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:39:33,834 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:39:33,844 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:39:43,856 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:39:43,866 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:39:53,878 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:39:53,887 - DEBUG - Read the following from register 0x00: bytearray(b'\x129')
+2020-02-11 22:39:53,911 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:39:54,023 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:39:54,025 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
 
+2020-02-11 22:39:54,026 - DEBUG - No New Commands To Execute
+2020-02-11 22:40:03,899 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:40:03,909 - DEBUG - Read the following from register 0x00: bytearray(b'\x12:')
+2020-02-11 22:40:13,921 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:40:13,931 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:40:20,708 - DEBUG - Preforming Data-Push
+2020-02-11 22:40:20,766 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:20,872 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:20,933 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:21,042 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:21,104 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:21,216 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:21,277 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:21,383 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:21,445 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:21,546 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:21,607 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:21,711 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:21,773 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:21,923 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:21,984 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:22,085 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:22,147 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:22,251 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:22,313 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:22,414 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:22,477 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:22,580 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:22,641 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:22,750 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:22,812 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:22,919 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:22,980 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:23,083 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:23,146 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:23,259 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:23,320 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:23,431 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:23,493 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:23,597 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:23,658 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:23,773 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:23,836 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:23,943 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:23,947 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:40:23,957 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:40:24,005 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:24,107 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:24,169 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:24,273 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:24,334 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:24,443 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:24,506 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:24,623 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:24,684 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:24,794 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:24,856 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:24,968 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:25,029 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:25,130 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:25,193 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:25,308 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:40:25,369 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:25,480 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:40:33,969 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:40:33,979 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:40:43,985 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:40:43,995 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:40:54,007 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:40:54,017 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:40:54,093 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:40:54,205 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:40:54,209 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:40:54,210 - DEBUG - No New Commands To Execute
+2020-02-11 22:41:04,029 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:41:04,039 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:41:14,051 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:41:14,061 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:41:24,073 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:41:24,083 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:41:25,504 - DEBUG - Preforming Data-Push
+2020-02-11 22:41:25,562 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:25,668 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:25,730 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:25,831 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:25,893 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:26,000 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:26,061 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:26,161 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:26,223 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:26,326 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:26,387 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:26,486 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:26,549 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:26,674 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:26,736 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:26,837 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:26,899 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:27,009 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:27,071 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:27,175 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:27,238 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:27,357 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:27,419 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:27,532 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:27,594 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:27,707 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:27,768 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:27,868 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:27,930 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:28,030 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:28,092 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:28,198 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:28,260 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:28,363 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:28,425 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:28,536 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:28,598 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:28,700 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:28,761 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:28,877 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:28,940 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:29,041 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:29,102 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:29,213 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:29,276 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:29,379 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:41:29,440 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:29,547 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:41:34,095 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:41:34,105 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:41:44,117 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:41:44,127 - DEBUG - Read the following from register 0x00: bytearray(b'\x12:')
+2020-02-11 22:41:54,139 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:41:54,149 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:41:54,221 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:41:54,325 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:41:54,329 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:41:54,330 - DEBUG - No New Commands To Execute
+2020-02-11 22:42:04,161 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:42:04,171 - DEBUG - Read the following from register 0x00: bytearray(b'\x128')
+2020-02-11 22:42:14,183 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:42:14,193 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:42:24,205 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:42:24,214 - DEBUG - Read the following from register 0x00: bytearray(b'\x129')
+2020-02-11 22:42:29,612 - DEBUG - Preforming Data-Push
+2020-02-11 22:42:29,670 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:29,776 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:29,837 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:29,946 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:30,008 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:30,110 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:30,172 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:30,279 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:30,341 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:30,442 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:30,503 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:30,615 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:30,678 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:30,779 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:30,840 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:30,950 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:31,012 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:31,128 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:31,189 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:31,289 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:31,351 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:31,462 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:31,524 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:31,640 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:31,703 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:31,814 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:31,876 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:31,976 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:32,039 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:32,152 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:32,213 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:32,315 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:32,378 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:32,492 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:32,553 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:32,670 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:32,732 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:32,844 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:32,905 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:33,006 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:33,068 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:33,174 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:33,235 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:33,346 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:33,408 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:33,524 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:42:33,585 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:33,691 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:42:34,225 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:42:34,235 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:42:44,247 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:42:44,257 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:42:54,269 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:42:54,279 - DEBUG - Read the following from register 0x00: bytearray(b'\x129')
+2020-02-11 22:42:54,398 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:42:54,501 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:42:54,506 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:42:54,506 - DEBUG - No New Commands To Execute
+2020-02-11 22:43:04,291 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:43:04,301 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:43:14,313 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:43:14,323 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:43:24,335 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:43:24,345 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:43:33,714 - DEBUG - Preforming Data-Push
+2020-02-11 22:43:33,772 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:33,884 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:33,945 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:34,051 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:34,113 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:34,224 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:34,286 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:34,357 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:43:34,367 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:43:34,396 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:34,458 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:34,565 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:34,627 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:34,726 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:34,788 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:34,897 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:34,958 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:35,061 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:35,123 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:35,238 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:35,299 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:35,401 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:35,463 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:35,569 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:35,630 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:35,749 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:35,811 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:35,911 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:35,973 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:36,076 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:36,138 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:36,241 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:36,303 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:36,416 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:36,478 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:36,582 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:36,644 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:36,777 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:36,840 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:36,947 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:37,008 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:37,110 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:37,172 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:37,280 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:37,342 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:37,442 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:37,505 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:37,610 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:37,671 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:37,774 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:37,836 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:37,953 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:38,014 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:38,117 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:38,180 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:38,280 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:43:38,341 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:38,440 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:43:44,379 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:43:44,389 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:43:54,401 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:43:54,411 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:43:54,574 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:43:54,688 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:43:54,692 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:43:54,693 - DEBUG - No New Commands To Execute
+2020-02-11 22:44:04,423 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:44:04,433 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:44:14,445 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:44:14,454 - DEBUG - Read the following from register 0x00: bytearray(b'\x12:')
+2020-02-11 22:44:24,465 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:44:24,475 - DEBUG - Read the following from register 0x00: bytearray(b'\x12:')
+2020-02-11 22:44:34,487 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:44:34,497 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:44:38,464 - DEBUG - Preforming Data-Push
+2020-02-11 22:44:38,522 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:38,785 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:38,846 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:39,009 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:39,071 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:39,234 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:39,295 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:39,451 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:39,513 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:39,669 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:39,730 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:39,887 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:39,950 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:40,053 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:40,114 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:40,216 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:40,278 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:40,383 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:40,444 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:40,554 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:40,617 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:40,734 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:40,795 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:40,895 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:40,957 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:41,059 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:41,121 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:41,236 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:41,298 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:41,410 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:41,471 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:41,577 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:41,640 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:41,743 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:41,805 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:41,912 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:41,975 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:42,076 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:42,137 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:42,242 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:42,305 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:42,408 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:42,469 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:42,571 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:42,633 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:42,739 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:44:42,800 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:42,919 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:44:44,509 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:44:44,519 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:44:54,531 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:44:54,541 - DEBUG - Read the following from register 0x00: bytearray(b'\x12:')
+2020-02-11 22:44:54,721 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:44:54,830 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:44:54,835 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:44:54,836 - DEBUG - No New Commands To Execute
+2020-02-11 22:45:04,553 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:45:04,563 - DEBUG - Read the following from register 0x00: bytearray(b'\x12:')
+2020-02-11 22:45:14,575 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:45:14,585 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:45:24,597 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:45:24,607 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:45:34,619 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:45:34,629 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:45:42,964 - DEBUG - Preforming Data-Push
+2020-02-11 22:45:43,022 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:43,150 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:43,211 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:43,311 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:43,374 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:43,478 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:43,539 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:43,753 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:43,815 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:43,930 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:43,991 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:44,091 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:44,153 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:44,262 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:44,323 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:44,424 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:44,486 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:44,635 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:44,641 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:45:44,650 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:45:44,696 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:44,820 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:44,882 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:44,984 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:45,045 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:45,151 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:45,213 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:45,314 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:45,375 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:45,486 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:45,548 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:45,651 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:45,711 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:45,825 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:45,888 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:45,998 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:46,060 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:46,161 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:46,223 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:46,330 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:46,391 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:46,491 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:46,553 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:46,665 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:46,726 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:46,826 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:46,888 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:46,991 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:47,052 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:47,157 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:47,219 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:47,329 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:47,390 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:47,491 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:47,554 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:47,665 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:45:47,726 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:47,918 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:45:54,662 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:45:54,672 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:45:54,871 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:45:54,984 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:45:54,989 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:45:54,990 - DEBUG - No New Commands To Execute
+2020-02-11 22:46:04,684 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:46:04,694 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:46:14,705 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:46:14,715 - DEBUG - Read the following from register 0x00: bytearray(b'\x129')
+2020-02-11 22:46:24,727 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:46:24,737 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:46:34,749 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:46:34,759 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:46:44,771 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:46:44,781 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:46:47,964 - DEBUG - Preforming Data-Push
+2020-02-11 22:46:48,022 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:48,130 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:48,191 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:48,294 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:48,356 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:48,464 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:48,525 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:48,630 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:48,692 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:48,801 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:48,862 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:48,977 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:49,039 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:49,141 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:49,202 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:49,302 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:49,364 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:49,464 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:49,525 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:49,634 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:49,696 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:49,804 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:49,865 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:49,968 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:50,030 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:50,133 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:50,194 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:50,313 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:50,375 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:50,483 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:50,544 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:50,648 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:50,710 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:52,953 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:53,014 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:53,124 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:53,186 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:53,288 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:53,349 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:53,456 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:53,519 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:53,631 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:53,692 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:53,792 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:53,854 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:53,957 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:46:54,018 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:54,121 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:46:54,793 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:46:54,803 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:46:55,057 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:46:55,158 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:46:55,162 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:46:55,163 - DEBUG - No New Commands To Execute
+2020-02-11 22:47:04,815 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:47:04,825 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:47:14,828 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:47:14,838 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:47:24,850 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:47:24,859 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:47:34,871 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:47:34,881 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:47:44,893 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:47:44,903 - DEBUG - Read the following from register 0x00: bytearray(b'\x12;')
+2020-02-11 22:47:54,186 - DEBUG - Preforming Data-Push
+2020-02-11 22:47:54,244 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:54,349 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:54,410 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:54,515 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:54,577 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:54,679 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:54,740 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:54,840 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:54,902 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:54,915 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:47:54,925 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:47:55,008 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:55,069 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:55,183 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:55,221 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:55,246 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:55,345 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:47:55,347 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:55,352 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:47:55,355 - DEBUG - No New Commands To Execute
+2020-02-11 22:47:55,414 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:55,513 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:55,575 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:55,679 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:55,740 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:55,846 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:55,908 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,009 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:56,070 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,170 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:56,232 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,333 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:56,395 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,498 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:56,560 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,665 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:56,726 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,826 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:56,888 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:56,988 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:57,049 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:57,151 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:57,212 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:57,312 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:57,373 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:59,587 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:47:59,650 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:59,774 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:47:59,835 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:47:59,944 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:48:00,006 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:00,122 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:48:00,183 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:00,284 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:48:00,346 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:00,454 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:48:00,515 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:00,622 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:48:00,684 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:00,788 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:48:00,849 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:00,966 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:48:04,937 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:48:04,947 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:48:14,959 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:48:14,969 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:48:24,981 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:48:24,991 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:48:35,003 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:48:35,013 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:48:45,025 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:48:45,035 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:48:55,047 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:48:55,057 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:48:55,377 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:48:55,478 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:48:55,483 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:48:55,483 - DEBUG - No New Commands To Execute
+2020-02-11 22:49:01,024 - DEBUG - Preforming Data-Push
+2020-02-11 22:49:01,083 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:01,186 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:01,247 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:01,346 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:01,408 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:01,512 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:01,573 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:01,677 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:01,739 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:01,844 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:01,905 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:02,010 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:02,072 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:02,180 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:02,241 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:02,353 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:02,415 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:02,514 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:02,575 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:02,681 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:02,743 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:02,846 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:02,907 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:03,022 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:03,084 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:03,186 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:03,247 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:03,347 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:03,409 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:03,510 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:03,571 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:03,678 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:03,740 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:03,853 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:03,914 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:04,016 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:04,078 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:04,178 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:04,239 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:04,354 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:04,417 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:04,522 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:04,584 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:04,693 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:04,755 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:04,867 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:49:04,928 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:05,030 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:49:05,069 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:49:05,079 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:49:15,091 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:49:15,101 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:49:25,112 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:49:25,122 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:49:35,134 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:49:35,144 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:49:45,156 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:49:45,166 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:49:55,178 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:49:55,188 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:49:55,551 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:49:55,657 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:49:55,661 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:49:55,662 - DEBUG - No New Commands To Execute
+2020-02-11 22:50:05,095 - DEBUG - Preforming Data-Push
+2020-02-11 22:50:05,153 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:05,200 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:50:05,210 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:50:05,256 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:05,317 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:05,416 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:05,479 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:05,590 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:05,651 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:05,750 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:05,813 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:05,914 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:05,975 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:06,078 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:06,140 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:06,241 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:06,302 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:06,410 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:06,472 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:06,578 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:06,639 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:06,742 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:06,805 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:06,920 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:06,981 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:07,088 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:07,150 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:07,262 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:07,323 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:07,433 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:07,496 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:07,599 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:07,660 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:07,778 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:07,839 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:07,947 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:08,008 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:08,111 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:08,173 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:08,280 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:08,341 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:08,456 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:08,518 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:08,623 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:08,684 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:08,788 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:08,850 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:08,952 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:09,013 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:09,120 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:09,182 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:09,284 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:09,345 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:09,458 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:09,520 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:09,633 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:50:09,694 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:09,815 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:50:15,222 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:50:15,232 - DEBUG - Read the following from register 0x00: bytearray(b'\x12<')
+2020-02-11 22:50:25,244 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:50:25,254 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:50:35,266 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:50:35,276 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:50:45,288 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:50:45,298 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:50:55,305 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:50:55,315 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:50:55,721 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:50:55,822 - DEBUG - http://18.221.181.138:80 "POST /command/device/getCommands HTTP/1.1" 400 60
+2020-02-11 22:50:55,827 - WARNING - Connection Error To Command Server. Response Code: 400
+Json return: {"userMessge": "Unable To Get Device Commands In Data Base"}
+Full text: {"userMessge":"Unable To Get Device Commands In Data Base"}
+
+2020-02-11 22:50:55,828 - DEBUG - No New Commands To Execute
+2020-02-11 22:51:05,328 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:51:05,337 - DEBUG - Read the following from register 0x00: bytearray(b'\x12=')
+2020-02-11 22:51:09,880 - DEBUG - Preforming Data-Push
+2020-02-11 22:51:09,938 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:10,073 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:10,134 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:10,246 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:10,308 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:10,413 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:10,474 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:10,576 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:10,638 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:10,756 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:10,818 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:10,930 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:10,993 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:11,097 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:11,158 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:11,260 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:11,322 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:11,433 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:11,495 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:11,598 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:11,661 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:11,762 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:11,824 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:11,925 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:11,988 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:12,091 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:12,152 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:12,253 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:12,315 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:12,419 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:12,480 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:12,582 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:12,645 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:12,747 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:12,808 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:12,920 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:12,982 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:13,085 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:13,147 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:13,246 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:13,308 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:13,412 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:13,473 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:13,584 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:13,646 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:13,749 - DEBUG - http://18.221.181.138:80 "POST /data/device/dataIngestion HTTP/1.1" 400 64
+2020-02-11 22:51:13,810 - DEBUG - Starting new HTTP connection (1): 18.221.181.138:80
+2020-02-11 22:51:13,911 - DEBUG - http://18.221.181.138:80 "POST /data/devicecallBack HTTP/1.1" 404 232
+2020-02-11 22:51:15,349 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:51:15,359 - DEBUG - Read the following from register 0x00: bytearray(b'\x12@')
+2020-02-11 22:51:25,371 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:51:25,381 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
+2020-02-11 22:51:35,393 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:51:35,403 - DEBUG - Read the following from register 0x00: bytearray(b'\x12?')
+2020-02-11 22:51:45,415 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:51:45,425 - DEBUG - Read the following from register 0x00: bytearray(b'\x12>')
+2020-02-11 22:51:55,437 - DEBUG - Wrote to register 0x01: [213, 131]
+2020-02-11 22:51:55,447 - DEBUG - Read the following from register 0x00: bytearray(b'\x12A')
