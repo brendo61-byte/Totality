@@ -1,4 +1,4 @@
-from Framework.Base_Classes.supervisor import Supervisor
+from Framework.Base_Classes.sensor import Sensor
 from Framework.Base_Classes.package import Package
 from Framework.Base_Classes.packageTypes import dataPush
 
@@ -12,33 +12,7 @@ import board
 import busio
 
 
-class BME280(Supervisor):
-    """
-    Note: that the class name is EXACTLY the same of the file its in and the same as its corresponding config file -- class 'intMaker' in file 'intMaker.py' with
-    'intMaker.json'
-
-    Note: The base config for EVERY supervisor will contain all information besides supervisor ID - This assumes that the supervisor will be working in an isolated
-    local environment - so if that is not the case the fields 'deviceName' and 'deviceID' should be filled out too. See deviceManger in Framework.
-
-    Note: EVERY supervisor MUST have a self.info that contains all configuration data.
-
-    --- THE BELOW ARGS ARE UNIVERSAL AND ALL supervisorS WILL NEED THEM ---
-    samplePeriod: Sleep time between data readings
-    supervisorName: The Name Of The supervisor (While The ID Defines The Unique Identity Of The Totality 'deviceName' Is For Human Use)
-    supervisorType: Names The Type Of supervisor
-    supervisorID: The ID Of The supervisor
-    deviceID: ID to know device
-    tags: A json of descriptive tags Defining The supervisor
-    pipe: An object of the dataPipe class. All supervisors will share the same pipe object -- meaning all supervisors will put data on the same queue
-    delay: If a supervisor is 'restarted' then the new supervisor can the old supervisor cannot talk to a device at the same time. To avoid this the new supervisor will wait a full
-    sample period of the old supervisor to ensure that it has died. Defaulted to zero
-
-    ______________________________________________________________________________________________________________________________________________________________
-
-    lowEnd: The min integer that will be randomly generated
-    highEnd: The (exclusive) max integer that will be randomly generated
-    """
-
+class BME280(Sensor):
     def __init__(self, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, tags, pipe, globalID, delay=0):
         self.globalID = globalID
         self.operational = True
@@ -51,16 +25,12 @@ class BME280(Supervisor):
         self.tags = tags
         self.pipe = pipe
         self.delay = delay  # Should always be defaulted to 0
-        # The above class variables MUST be present for ALL supervisors
-        # self.lowEnd = lowEnd
-        # self.highEnd = highEnd
-        # The two above class variables are only relevant for this type of supervisor
 
         i2c = busio.I2C(board.SCL, board.SDA)
         self.BME = adafruit_bme280.Adafruit_BME280_I2C(i2c)
         self.BME.sea_level_pressure = 1013.25
 
-        # Supervisors must update tags based on config settings
+        # Sensors must update tags based on config settings
         self.tags["deviceID"] = self.deviceID
         self.tags["supervisorName"] = self.supervisorName
         self.tags["supervisorID"] = self.supervisorID
@@ -77,16 +47,6 @@ class BME280(Supervisor):
         }
 
         self.headers = ["data", "timeStamp", "dataType", "units", "sensorType", "supervisorID"]
-        """
-                ALL Supervisors need a headers list
-        Must have the values being collected -- in this case 'someInt' --- followed by supervisorID, supervisorName, supervisorOwner, customConfig, TimeStamp
-        Order does not matter but let's set a standard example of having collection fields, 'someInt' followed by supervisorID, supervisorName etc (see above) and ending
-        with a timeStamp
-        These are the headers to the CSV file that will store data for this supervisor instance
-        Program assumes ALL timestamps will be in UTC time -- do this too b/c timezones can be a pain and the UI can adjust this value easily
-        """
-
-        # HERE
 
     def getData(self):
         time.sleep(self.delay)
@@ -108,11 +68,11 @@ class BME280(Supervisor):
                 data1 = {
                     "data": temperatureSigFigs,  # the data you are sending - needs to be a int or float
                     "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
-                    "dataType": "Temperature", # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
+                    "dataType": "Temperature",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
                     "units": "C",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
                     "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
                     "supervisorID": self.getGlobalID(),  # the global ID of the supervisor - needs to be an int
-                    "supervisorIDLocal": self.getSupervisorID()
+                    "supervisorIDLocal": self.getSensorID()
                 }
                 data2 = {
                     "data": humiditySigFigs,
@@ -121,7 +81,7 @@ class BME280(Supervisor):
                     "units": "%",
                     "sensorType": self.supervisorType,
                     "supervisorID": self.getGlobalID(),
-                    "supervisorIDLocal": self.getSupervisorID()
+                    "supervisorIDLocal": self.getSensorID()
                 }
                 data3 = {
                     "data": pressureSigFigs,
@@ -130,7 +90,7 @@ class BME280(Supervisor):
                     "units": "hPa",
                     "sensorType": self.supervisorType,
                     "supervisorID": self.getGlobalID(),
-                    "supervisorIDLocal": self.getSupervisorID()
+                    "supervisorIDLocal": self.getSensorID()
                 }
                 data4 = {
                     "data": altitudeSigFig,
@@ -139,7 +99,7 @@ class BME280(Supervisor):
                     "units": "m",
                     "sensorType": self.supervisorType,
                     "supervisorID": self.getGlobalID(),
-                    "supervisorIDLocal": self.getSupervisorID()
+                    "supervisorIDLocal": self.getSensorID()
                 }
 
                 self.package(data=data1, timeStamp=timeStamp)
@@ -161,7 +121,7 @@ class BME280(Supervisor):
     def getSupervisorInfo(self):
         return self.info
 
-    def getSupervisorID(self):
+    def getSensorID(self):
         return self.supervisorID
 
     def getGlobalID(self):

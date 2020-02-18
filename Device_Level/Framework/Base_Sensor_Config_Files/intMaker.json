@@ -1,0 +1,7 @@
+{
+  "samplePeriod": 1,
+  "lowEnd": 0,
+  "highEnd": 100,
+  "sensorType": "intMaker",
+  "sensorName": "intMaker"
+}

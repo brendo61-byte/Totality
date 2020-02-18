@@ -18,9 +18,10 @@ class DataController(Controller):
     NOTE: Uploading to an InfluxDB will be implemented later
     """
 
-    def __init__(self, pipe, updateInterval, deviceID, dataIngestion_URL, callBack_URL, destination, localData, localFileName):
+    def __init__(self, pipe, updateInterval, deviceID, dataIngestion_URL, destination, localData, localFileName, headers, localOnly=True):
+        self.localOnly = localOnly
+        self.headers = headers
         self.dataIngestion_URL = dataIngestion_URL
-        self.callBack_URL = callBack_URL
         self.destination = destination
         self.localData = localData
         self.localFileName = localFileName
@@ -31,39 +32,55 @@ class DataController(Controller):
         self.deviceID = deviceID
 
     def starter(self):
-        # ToDo: Have batch uploads
         while self.operational:
             logging.debug("Preforming Data-Push")
+            allPayloadsInFIFO = []
+            noData = True
             while not self.pipe.empty():
                 package = self.pipe.get()
                 packageType = package.getPackageType()
                 packageTypes = {
-                    dataPush: self.post(package=package, packageType="dataPush", URL=self.dataIngestion_URL),
-                    callBack: self.post(package=package, packageType="callBack", URL=self.callBack_URL),
+                    dataPush: self.packager(package=package, packageType=packageType),
+                    callBack: self.packager(package=package, packageType=packageType)
                 }
 
                 try:
-                    packageTypes.get(packageType)
-                except KeyError:
-                    logging.warning("Invalid package type provided: {}".format(packageType))
+                    assembledPackage = packageTypes.get(packageType)
+                    if assembledPackage is not None:
+                        allPayloadsInFIFO.append(assembledPackage)
+                        if noData:
+                            noData = False
+
                 except Exception as e:
                     logging.warning("Unable To Push Package To DB.\nException: {}\nTraceBack: {}".format(e, traceback))
 
-                if packageType == dataPush:
-                    self.localCSV(package=package)
+            masterPackage = {"bigLoad": allPayloadsInFIFO}
+
+            self.localCSV(masterPackage=masterPackage["bigLoad"])
+
+            if not self.localOnly:
+                if not noData:
+                    self.post(package=masterPackage)
 
             time.sleep(self.updateInterval)
 
-    def post(self, package, packageType, URL):
-        time.sleep(0.05)
-        requests.post(url=URL, json=self.packager(package=package, packageType=packageType))
+    def post(self, package):
+        requests.post(url=self.dataIngestion_URL, json=package)
 
     def packager(self, package, packageType):
+
+        if packageType is dataPush:
+            packageType = "dataPush"
+
+        elif packageType is callBack:
+            packageType = "packageYpe"
+
+        else:
+            return
+
         body = {
             "data": {
                 "package": package.getData(),
-                "tags": package.getSupervisorTags(),
-                "timeStamp": package.getTimeStamp()
             },
             "deviceID": self.deviceID,
             "packageType": packageType
@@ -71,28 +88,33 @@ class DataController(Controller):
 
         return body
 
-    def localCSV(self, package):
-        payload = package.getPayload()
-        path = os.path.join(self.localData, "supervisorID_" + str(payload["supervisorIDLocal"]), self.localFileName)
-        dataList = []
+    def localCSV(self, masterPackage):
+        path = os.path.join(self.localData, self.localFileName)
 
         try:
-            for headerKey in package.getSupervisorHeaders():
-                dataList.append(payload[headerKey])
-
             with open(path, 'a') as csvFile:
-                writer = csv.writer(csvFile)
-                writer.writerow(dataList)
+                writer = csv.DictWriter(csvFile, fieldnames=self.headers)
+                # writer.writerow(dataList)
 
-        except FileNotFoundError as FNFE:
-            logging.warning(
-                "File Not Error Occurred When Trying To Save Data Locally.\nError Message: {}\n{}".format(FNFE,
-                                                                                                          traceback.format_exc()))
-        except AttributeError as AE:
-            logging.warning("Attribute Error Occurred When Trying To Save Data Locally\nError Message: {}\n{}".format(AE,
-                                                                                                                      traceback.format_exc()))
+                for package in masterPackage:
+                    try:
+
+                        payload = package["data"]["package"]
+                        packageType = package["packageType"]
+
+                        if packageType == dataPush:
+
+                            rowDict = {}
+                            for headerKey in self.headers:
+                                rowDict[headerKey] = (payload[headerKey])
+
+                            writer.writerow(rowDict)
+
+                    except Exception as e:
+                        logging.info("Failed to save a Payload Locally.\nError Message: {}\n{}".format(e, traceback.format_exc()))
+
         except Exception as E:
-            logging.warning("Failed To Save Data Locally.\nError Message: {}\n{}".format(E, traceback.format_exc()))
+            logging.warning("Failed To Processes To Save Data Locally.\nError Message: {}\n{}".format(E, traceback.format_exc()))
 
     def kill(self):
         self.operational = False

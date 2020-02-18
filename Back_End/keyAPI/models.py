@@ -61,25 +61,25 @@ class Command(BaseModel):
                                          null=False)  # Back ref to know who gets the command
 
 
-class Supervisor(BaseModel):
+class Sensor(BaseModel):
     name = peewee.CharField(null=True)
     refID = peewee.IntegerField(null=True)
-    supervisorType = peewee.CharField(null=False)
-    supervisorID = peewee.AutoField(primary_key=True)  # Supervisor ID
+    sensorType = peewee.CharField(null=False)
+    sensorID = peewee.AutoField(primary_key=True)  # Sensor ID
     samplePeriod = peewee.IntegerField(default=1, null=False)
-    deviceOwner = peewee.ForeignKeyField(Device, backref='supervisor', null=False)
+    deviceOwner = peewee.ForeignKeyField(Device, backref='sensor', null=False)
     customConfig = peewee.CharField(null=True)
 
 
 class ReliableDelivery(BaseModel):
     inputTimeStamp = peewee.DateTimeField(default=datetime.datetime.utcnow(), null=False)  # when payload was put into Db
 
-    timeStamp = peewee.FloatField()  # when data was collected in TSE
+    timeStamp = peewee.CharField()  # when data was collected in TSE
     dataType = peewee.CharField()  # what type of data it is
     units = peewee.CharField()  # units data is measured in
     data = peewee.FloatField()  # the data its self
-    sensorType = peewee.CharField()  # the supervisor type that generated this data
-    supervisorID = peewee.ForeignKeyField(Supervisor, backref='reliableDelivery', null=False)  # globalID of supervisor
+    sensorType = peewee.CharField()  # the sensor type that generated this data
+    sensorID = peewee.ForeignKeyField(Sensor, backref='reliableDelivery', null=False)  # globalID of sensor
 
     deviceOwner = peewee.ForeignKeyField(Device, backref='reliableDelivery',
                                          null=False)  # Back ref to know who owns the payload
@@ -100,7 +100,7 @@ def makeTables():
     retires = 5
     while retires >= 0:
         try:
-            models = [Customer, Device, ReliableDelivery, Supervisor, Command, CustomerKeys, SessionKeys]
+            models = [Customer, Device, ReliableDelivery, Sensor, Command, CustomerKeys, SessionKeys]
             db.create_tables(models, safe=True)
             break
         except:

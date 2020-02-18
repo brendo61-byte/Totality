@@ -44,7 +44,6 @@ def validateDeviceExists(deviceID):
 
 @app.route('/data/device/getAllDeviceData/<int:deviceID>', methods=["GET"])
 def collectData(deviceID):
-
     if deviceID is None:
         statement = "Data Push Hit: No deviceID Provided"
         logging.info(statement)
@@ -68,13 +67,13 @@ def collectData(deviceID):
                 "units": entry.units,
                 "data": entry.data,
                 "sensorType": entry.sensorType,
-                "supervisorID": entry.supervisorID_id
+                "sensorID": entry.sensorID_id
             }
 
             formattedData.append(tempData)
 
         fileName = "deviceID:{}_on_{}.csv".format(deviceID, datetime.datetime.now().strftime("%m/%d/%Y-%H:%M:%S"))
-        fieldNames = ["timeStamp", "dataType", "units", "data", "sensorType", "supervisorID"]
+        fieldNames = ["timeStamp", "dataType", "units", "data", "sensorType", "sensorID"]
 
         with open('data.csv', 'w') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=fieldNames)
@@ -96,7 +95,9 @@ def collectData(deviceID):
 def dataPush():
     package = request.get_json()
     data = package.get('data').get('package')
+    payload = package.get('data')
     deviceID = package.get('deviceID')
+    packageType = package.get("packageType")
 
     if data is None:
         statement = "Data Push Hit: No Payload Provided"
@@ -108,16 +109,29 @@ def dataPush():
         logging.info(statement)
         return jsonify(userMessage=statement), 400
 
+    if not packageType == "dataPush" or not packageType == "callBack":
+        statement = "Data Push Hit: No PackageType"
+        logging.info(statement)
+        return jsonify(userMessage=statement), 400
+
     if not validateDeviceExists(deviceID=deviceID):
         statement = "Data Push Hit: Unable To Verify DID Existence"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
 
-    logging.debug("\n\nDATA: {}\nTIMESTAMP: {}\n\n\n".format(data, data.get("timeStamp")))
+    logging.debug("\nDATA: {}\nTIMESTAMP: {}\n".format(data, data.get("timeStamp")))
 
+    if packageType == "dataPush":
+        dataPush(data=data, deviceID=deviceID)
+
+    elif packageType == "dataPush":
+        callBack(payload=payload)
+
+
+def dataPush(data, deviceID):
     try:
         ReliableDelivery.create(timeStamp=data.get("timeStamp"), dataType=data.get("dataType"), units=data.get("units"), data=data.get("data"), deviceOwner=deviceID,
-                                sensorType=data.get("sensorType"), supervisorID=data.get("supervisorID"))
+                                sensorType=data.get("sensorType"), sensorID=data.get("sensorID"))
         logging.debug("Data Push Hit: New Entry Into RD")
         return jsonify(userMessage="Payload added to reliable delivery"), 200
     except Exception as e:
@@ -127,26 +141,8 @@ def dataPush():
         return jsonify(userMessage="Unable to push data into RD"), 400
 
 
-@app.route('/data/device/callBack', methods=["POST"])
-def callBack():
-    package = request.get_json()
-    payload = package.get('data')
-    deviceID = package.get('deviceID')
-
-    if payload is None:
-        statement = "Data Push Hit: No Payload Provided"
-        logging.info(statement)
-        return jsonify(userMessage=statement), 400
-
-    if deviceID is None:
-        statement = "Data Push Hit: No deviceID Provided"
-        logging.info(statement)
-        return jsonify(userMessage=statement), 400
-
-    if not validateDeviceExists(deviceID=deviceID):
-        statement = "Data Push Hit: Unable To Verify DID Existence"
-        logging.info(statement)
-        return jsonify(userMessage=statement), 400
+def callBack(payload):
+    # payload = package.get('data')
 
     status = payload.get("status")
     refID = payload.get("refID")

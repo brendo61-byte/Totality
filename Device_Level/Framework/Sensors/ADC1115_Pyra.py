@@ -1,17 +1,15 @@
-# from Device_Level.Framework.Base_Classes.supervisor import Supervisor
-# from Device_Level.Framework.Base_Classes.package import Package
-# from Device_Level.Framework.Base_Classes.packageTypes import dataPush
-
-from Framework.Base_Classes.supervisor import Supervisor
+from Framework.Base_Classes.sensor import Sensor
 from Framework.Base_Classes.package import Package
 from Framework.Base_Classes.packageTypes import dataPush
 
-import random
 import datetime
 import time
+import Adafruit_ADS1x15
+import logging
+import traceback
 
 
-class intMaker(Supervisor):
+class ADC1115_Pyra(Sensor):
     """
     Note: that the class name is EXACTLY the same of the file its in and the same as its corresponding config file -- class 'intMaker' in file 'intMaker.py' with
     'intMaker.json'
@@ -39,7 +37,7 @@ class intMaker(Supervisor):
     highEnd: The (exclusive) max integer that will be randomly generated
     """
 
-    def __init__(self, lowEnd, highEnd, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, globalID,
+    def __init__(self, gain, channel, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, globalID,
                  tags, pipe, delay=0):
         self.operational = True
         self.samplePeriod = samplePeriod
@@ -52,11 +50,14 @@ class intMaker(Supervisor):
         self.pipe = pipe
         self.delay = delay  # Should always be defaulted to 0
         # The above class variables MUST be present for ALL supervisors
-        self.lowEnd = lowEnd
-        self.highEnd = highEnd
+        self.gain = gain
+        self.channel = channel
         # The two above class variables are only relevant for this type of supervisor
 
-        # Supervisors must update tags based on config settings
+        self.ADC = Adafruit_ADS1x15.ADS1115()
+        # ADC1115 Reader Instance
+
+        # Sensors must update tags based on config settings
         self.tags["deviceID"] = self.deviceID
         self.tags["supervisorName"] = self.supervisorName
         self.tags["supervisorID"] = self.supervisorID
@@ -67,14 +68,14 @@ class intMaker(Supervisor):
             "supervisorID": self.supervisorID,
             "deviceID": self.deviceID,
             "samplePeriod": self.samplePeriod,
-            "lowEndInt": self.lowEnd,
-            "highEndInt": self.highEnd,
+            "gain": self.gain,
+            "channel": self.channel,
             "customConfig": self.tags["customConfig"]
         }
 
         self.headers = ["data", "timeStamp", "dataType", "units", "sensorType", "supervisorID"]
         """
-                ALL Supervisors need a headers list
+                ALL Sensors need a headers list
         Must have the values being collected -- in this case 'someInt' --- followed by supervisorID, supervisorName, supervisorOwner, customConfig, TimeStamp
         Order does not matter but let's set a standard example of having collection fields, 'someInt' followed by supervisorID, supervisorName etc (see above) and ending
         with a timeStamp
@@ -82,35 +83,52 @@ class intMaker(Supervisor):
         Program assumes ALL timestamps will be in UTC time -- do this too b/c timezones can be a pain and the UI can adjust this value easily
         """
 
+    def getBitVal(self):
+        bitValRaw = 4.096 / (2 ** 15)
+        bitVal = bitValRaw / self.gain
+        return bitVal
+
     def getData(self):
         time.sleep(self.delay)
         while self.operational:
-            someInt = random.randint(self.lowEnd, self.highEnd)  # Replace this later on with a Fake Totality
+            try:
+                rawVoltage = self.ADC.read_adc(self.gain, self.channel)
+                voltageFloat = rawVoltage * self.getBitVal()
 
-            timeStamp = datetime.datetime.now()
-            timeStampStr = timeStamp.strftime("%m/%d/%Y-%H:%M:%S")
+                val = voltageFloat / 0.0001981
 
-            # Data should be in a dict form with key/val being "name of sample"/"value of sample" -- i.e. {"Voltage":12.345, "temp(C)":67.89}
-            data1 = {
-                "data": someInt,  # the data you are sending - needs to be a int or float
-                "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
-                "dataType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
-                "units": "n/a",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
-                "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
-                "supervisorID": self.getGlobalID()  # the global ID of the supervisor - needs to be an int
-            }
+                timeStampStr = datetime.datetime.now().strftime("%m/%d/%Y-%H:%M:%S")
 
-            data2 = {
-                "data": someInt,  # the data you are sending - needs to be a int or float
-                "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
-                "dataType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
-                "units": "n/a",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
-                "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
-                "supervisorID": self.getGlobalID()  # the global ID of the supervisor - needs to be an int
-            }
 
-            self.package(data=data1, timeStamp=timeStamp)
-            self.package(data=data2, timeStamp=timeStamp)
+                dataRaw = {
+                    "data": voltageFloat,
+                    "timeStamp": timeStampStr,
+                    "dataType": "raw Voltage",
+                    "units": "V",
+                    "sensorType": self.supervisorType,
+                    "supervisorID": self.getGlobalID(),
+                    "supervisorIDLocal": self.getSensorID()
+                }
+
+                data = {
+                    "data": val,  # the data you are sending - needs to be a int or float
+                    "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
+                    "dataType": "solar irradiance",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
+                    "units": "w/m^2",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
+                    "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
+                    "supervisorID": self.getGlobalID(),  # the global ID of the supervisor - needs to be an int
+                    "supervisorIDLocal": self.getSensorID()
+                }
+
+                timeStamp = datetime.datetime.now()
+                self.package(data=data, timeStamp=timeStamp)
+                self.package(data=dataRaw, timeStamp=timeStamp)
+
+            except Exception as e:
+                logging.info("Unable to read from ADS1115\nException: {}\nTraceBack: {}".format(e, traceback.format_exc()))
+                voltageSigFigs = None
+
+
 
             time.sleep(self.samplePeriod)
 
@@ -123,7 +141,7 @@ class intMaker(Supervisor):
     def getSupervisorInfo(self):
         return self.info
 
-    def getSupervisorID(self):
+    def getSensorID(self):
         return self.supervisorID
 
     def getGlobalID(self):

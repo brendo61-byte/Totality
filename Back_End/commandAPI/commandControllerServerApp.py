@@ -17,17 +17,16 @@ logging.basicConfig(level="DEBUG", filename='program.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 nginxIPAddr = os.environ.get("nginxIPAddr", "172.28.1.6")
-
 loginURL = os.environ.get('loginURL', 'http://{}/keyAPI/generateSessionKey'.format(nginxIPAddr))
 authenticationURL = os.environ.get('authenticationURL', 'http://{}/keyAPI/authenticateSessionKey'.format(nginxIPAddr))
 deviceOwnershipURL = os.environ.get('deviceOwnershipURL', 'http://{}/keyAPI/deviceOwnerShip'.format(nginxIPAddr))
-supervisorAuth = os.environ.get('supervisorAuth', 'http://{}/keyAPI/supervisorAuth'.format(nginxIPAddr))
+sensorAuth = os.environ.get('sensorAuth', 'http://{}/keyAPI/sensorAuth'.format(nginxIPAddr))
 
 """
 This is the API for pushing new commands and pulling queued commands. There are a number of features that need to be added (see the #ToDo's around). Commands added
 to queue will be given to the device with a matching DID and then run on said device. 
 
-The commands "new supervisor", "update supervisor", "stop supervisor", and "get all local supervisor" have the added option of "callBack=True". The idea for this 
+The commands "new sensor", "update sensor", "stop sensor", and "get all local sensor" have the added option of "callBack=True". The idea for this 
 is so each command should be added to a the DB (not implemented). If callBack is set to True then the device will reply if that command has been successfully 
 executed or not. This reply will to a URL that the data Controller will manage. From there the DB will up dated to reflect if the command was successful.
 This is not implemented but the device knows how to handle "callBacks" so a little bit of data piping is all that's require on its end - and of course the backend
@@ -93,14 +92,14 @@ def deviceOwnerShip(CID, DID):
             "Failed to reach Device Ownership key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
-def validateSupervisorAuthorization(DID, SID, CID):
+def validateSensorAuthorization(DID, SID, CID):
     body = {
         "SID": SID,
         "DID": DID
     }
 
     try:
-        response = requests.post(url=supervisorAuth, json=body)
+        response = requests.post(url=sensorAuth, json=body)
 
         info = response.json()
         data = info.get("data")
@@ -114,13 +113,13 @@ def validateSupervisorAuthorization(DID, SID, CID):
             "Failed to reach Device Ownership key API\nException: {}\nTraceBack {}".format(e, traceback.format_exc()))
 
 
-def genSupervisorRefID():
+def genSensorRefID():
     refID = random.randint(0, 2147483645)
-    q = Supervisor.select().where(Supervisor.refID == refID)
+    q = Sensor.select().where(Sensor.refID == refID)
 
     while q.exists():
         refID = random.randint(0, 2147483645)
-        q = Supervisor.select().where(Supervisor.refID == refID)
+        q = Sensor.select().where(Sensor.refID == refID)
 
     return refID
 
@@ -136,10 +135,10 @@ def genCommandRefID():
     return refID
 
 
-@app.route('/command/user/device/newSupervisor', methods=["POST"])
-def newSupervisor():
+@app.route('/command/user/device/newSensor', methods=["POST"])
+def newSensor():
     data = request.get_json()
-    supervisorType = data.get('supervisorType')
+    sensorType = data.get('sensorType')
     customConfig = data.get('customConfig')
 
     key = request.get_json().get("key")
@@ -152,7 +151,7 @@ def newSupervisor():
         return jsonify(userMessage="Unable to validate Session Key"), 400
 
     if DID is None:
-        statement = "New Supervisor Hit: No DID Type Provided"
+        statement = "New Sensor Hit: No DID Type Provided"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
 
@@ -160,72 +159,72 @@ def newSupervisor():
         logging.info("Device Drop Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if supervisorType is None:
-        statement = "New Supervisor Hit: No Supervisor Type Provided"
+    if sensorType is None:
+        statement = "New Sensor Hit: No Sensor Type Provided"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
 
     if customConfig is None:
-        logging.info("New Supervisor Hit: Using Base Configuration")
+        logging.info("New Sensor Hit: Using Base Configuration")
 
-    refID = genSupervisorRefID()
-    logging.debug("New Supervisor Hit: refID generated: {}".format(refID))
+    refID = genSensorRefID()
+    logging.debug("New Sensor Hit: refID generated: {}".format(refID))
 
-    supervisorID = None
+    sensorID = None
 
     try:
-        Supervisor.create(deviceOwner=DID, refID=refID, supervisorType=supervisorType, customConfig=str(customConfig))
+        Sensor.create(deviceOwner=DID, refID=refID, sensorType=sensorType, customConfig=str(customConfig))
         # ToDo: Use fsting (python 3.6) - cleaner way of putting variables in strings
-        logging.debug("New Supervisor Hit: Supervisor Created in DB. RefID: {}".format(refID))
+        logging.debug("New Sensor Hit: Sensor Created in DB. RefID: {}".format(refID))
 
     except Exception as e:
-        statement = "New Supervisor Hit: Unable to create new supervisor in DB.\nException: {}\nTraceBack: {}".format(
+        statement = "New Sensor Hit: Unable to create new sensor in DB.\nException: {}\nTraceBack: {}".format(
             e, traceback.format_exc())
         logging.info(statement)
         return jsonify(userMesage=statement), 400
 
     try:
-        logging.debug("New Supervisor Hit: Fetching SID based on refID")
-        entry = Supervisor.get(Supervisor.refID == refID)
-        supervisorID = entry.supervisorID
+        logging.debug("New Sensor Hit: Fetching SID based on refID")
+        entry = Sensor.get(Sensor.refID == refID)
+        sensorID = entry.sensorID
         entry.refID = 0
         entry.save()
-        logging.debug("New Supervisor Hit: SID Fetched: {}".format(supervisorID))
+        logging.debug("New Sensor Hit: SID Fetched: {}".format(sensorID))
 
     except Exception as e:
-        statement = "New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(e,
+        statement = "New Sensor Hit: Unable to assign sensor an ID.\nException: {}\nTraceBack: {}".format(e,
                                                                                                                   traceback.format_exc())
         logging.info(statement)
         return jsonify(userMessage=statement), 400
-        # ToDo: How to handle a new supervisor being created if the command is not passed to the device
+        # ToDo: How to handle a new sensor being created if the command is not passed to the device
 
     try:
 
-        body = {"supervisorType": supervisorType, "globalID": supervisorID, "deviceID": DID,
+        body = {"sensorType": sensorType, "globalID": sensorID, "deviceID": DID,
                 "customConfig": customConfig}
 
         refID = genCommandRefID()
         CF = str(makeCommandFormat(body=body, commandType="launcher", callBack=True, refID=refID)).replace("'", "\'")
         Command.create(command=CF, deviceOwner=DID, refID=refID)
         logging.debug(
-            "New Supervisor Hit: New Supervisor Command Added. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
-                supervisorType, supervisorID, DID, customConfig))
+            "New Sensor Hit: New Sensor Command Added. Info --- Sensor Type: {}, Sensor ID: {}, DID: {}, Custom Config: {}".format(
+                sensorType, sensorID, DID, customConfig))
 
-        return jsonify(userMessage="New Supervisor Hit: New Supervisor Command Added To Queue"), 200
+        return jsonify(userMessage="New Sensor Hit: New Sensor Command Added To Queue"), 200
 
     except Exception as e:
-        logging.info("New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+        logging.info("New Sensor Hit: Unable to assign sensor an ID.\nException: {}\nTraceBack: {}".format(
             e, traceback.format_exc()))
 
         return jsonify(
-            userMessage="New Supervisor Hit: Unable to assign supervisor an ID.\nException: {}\nTraceBack: {}".format(
+            userMessage="New Sensor Hit: Unable to assign sensor an ID.\nException: {}\nTraceBack: {}".format(
                 e, traceback.format_exc())), 400
 
 
-@app.route('/command/user/device/updateSupervisor', methods=["POST"])
-def updateSupervisor():
+@app.route('/command/user/device/updateSensor', methods=["POST"])
+def updateSensor():
     data = request.get_json()
-    supervisorType = data.get('supervisorType')
+    sensorType = data.get('sensorType')
     customConfig = data.get('customConfig')
 
     key = data.get("key")
@@ -235,56 +234,56 @@ def updateSupervisor():
     CID = authenticateSessionKey(key=key)
 
     if not CID:
-        logging.info("Update Supervisor Hit: Unable to validate sessionKey")
+        logging.info("Update Sensor Hit: Unable to validate sessionKey")
         return jsonify(userMessage="Unable to validate Session Key"), 400
 
     if DID is None:
-        statement = "Update Supervisor Hit: No DID Type Provided"
+        statement = "Update Sensor Hit: No DID Type Provided"
         logging.info(statement)
         return jsonify(userMessage=statement), 400
 
     if not deviceOwnerShip(CID=CID, DID=DID):
-        logging.info("Update Supervisor Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
+        logging.info("Update Sensor Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateSupervisorAuthorization(SID=SID, DID=DID, CID=CID):
-        logging.info("Update Supervisor Hit: Unauthorized access on SID {} from CID {}".format(SID, CID))
-        return jsonify(userMessage="Please Provide a Valid Supervisor ID"), 400
+    if not validateSensorAuthorization(SID=SID, DID=DID, CID=CID):
+        logging.info("Update Sensor Hit: Unauthorized access on SID {} from CID {}".format(SID, CID))
+        return jsonify(userMessage="Please Provide a Valid Sensor ID"), 400
 
-    if supervisorType is None:
-        logging.info("Update Supervisor Hit: No Supervisor Type Provided")
-        return jsonify(userMessage="Please Provide A Valid Supervisor ID"), 400
+    if sensorType is None:
+        logging.info("Update Sensor Hit: No Sensor Type Provided")
+        return jsonify(userMessage="Please Provide A Valid Sensor ID"), 400
 
     if customConfig is None:
-        logging.info("Update Supervisor Hit: No Custom Configuration Provided")
+        logging.info("Update Sensor Hit: No Custom Configuration Provided")
         return jsonify(userMessage="Please Provide A Valid Custom Configuration"), 400
 
     try:
-        entry = Supervisor.get(Supervisor.supervisorID == DID)
+        entry = Sensor.get(Sensor.sensorID == DID)
         entry.customConfig = str(customConfig)
         entry.customConfig = 'True'
         entry.save()
 
     except:
-        statement = "Update Supervisor Hit: Unable to update supervisor in DB"
+        statement = "Update Sensor Hit: Unable to update sensor in DB"
         logging.warning(statement)
         return jsonify(userMessage=statement), 400
 
-    body = {'supervisorType': supervisorType, 'supervisorID': SID, 'customConfig': customConfig,
+    body = {'sensorType': sensorType, 'sensorID': SID, 'customConfig': customConfig,
             "restart": True}
 
     refID = genCommandRefID()
     CF = makeCommandFormat(body=body, commandType="launcher", callBack=True, refID=refID)
     Command.create(command=CF, deviceOwner=DID, refID=refID)
     logging.debug(
-        "Update Supervisor Hit: Update Supervisor Command Added To Queue. Info --- Supervisor Type: {}, Supervisor ID: {}, DID: {}, Custom Config: {}".format(
-            supervisorType, SID, DID, configStatus))
+        "Update Sensor Hit: Update Sensor Command Added To Queue. Info --- Sensor Type: {}, Sensor ID: {}, DID: {}, Custom Config: {}".format(
+            sensorType, SID, DID, configStatus))
 
-    return jsonify(userMessage="Update Supervisor Command Added To Queue."), 200
+    return jsonify(userMessage="Update Sensor Command Added To Queue."), 200
 
 
-@app.route('/command/user/device/stopSupervisor', methods=["POST"])
-def stopSupervisor():
+@app.route('/command/user/device/stopSensor', methods=["POST"])
+def stopSensor():
     data = request.get_json()
 
     DID = data.get("DID")
@@ -305,17 +304,17 @@ def stopSupervisor():
         logging.info("Device Drop Hit: Unauthorized access on DID {} from CID {}".format(DID, CID))
         return jsonify(userMessage="Please Provide A Valid Device ID"), 400
 
-    if not validateSupervisorAuthorization(SID=SID, DID=DID, CID=CID):
-        logging.info("Update Supervisor Hit: Unauthorized access on SID {} from CID {}".format(SID, CID))
-        return jsonify(userMessage="Please Provide a Valid Supervisor ID"), 400
+    if not validateSensorAuthorization(SID=SID, DID=DID, CID=CID):
+        logging.info("Update Sensor Hit: Unauthorized access on SID {} from CID {}".format(SID, CID))
+        return jsonify(userMessage="Please Provide a Valid Sensor ID"), 400
 
-    body = {"supervisorID": SID}
+    body = {"sensorID": SID}
     refID = genCommandRefID()
-    CF = makeCommandFormat(body=body, commandType="killSupervisor", callBack=True, refID=refID)
+    CF = makeCommandFormat(body=body, commandType="killSensor", callBack=True, refID=refID)
     Command.create(command=CF, deviceOwner=DID, refID=refID)
-    logging.debug("Stop Supervisor Hit: Stop Supervisor Command Added To Queue")
+    logging.debug("Stop Sensor Hit: Stop Sensor Command Added To Queue")
 
-    return jsonify(userMessage="Stop Supervisor Command Added To Queue. DID: {}, Supervisor ID: {}".format(DID, SID)), 200
+    return jsonify(userMessage="Stop Sensor Command Added To Queue. DID: {}, Sensor ID: {}".format(DID, SID)), 200
 
 
 def generateDeviceCommands(deviceID):

@@ -54,20 +54,20 @@ def deviceOwnerShip():
         return jsonify(usermessage=statement, data=False), 400
 
 
-@app.route('/keyAPI/supervisorAuth', methods=["POST"])
-def supervisorAuth():
+@app.route('/keyAPI/sensorAuth', methods=["POST"])
+def sensorAuth():
     SID = request.get_json().get("SID")
     DID = request.get_json().get("DID")
 
     try:
-        fetchedDID = Supervisor.get(Supervisor.deviceOwner == SID).deviceOwner
+        fetchedDID = Sensor.get(Sensor.deviceOwner == SID).deviceOwner
 
         if int("{}".format(fetchedDID)) == DID:
             logging.debug("DID {} authorized to access SID {}".format(DID, SID))
             return jsonify(usermessage="Ownership check passed", data=True), 200
         else:
             statement = "Ownership check failed"
-            logging.info(statement + ". DID {} tried to access non-associated supervisor ID {}".format(DID, SID))
+            logging.info(statement + ". DID {} tried to access non-associated sensor ID {}".format(DID, SID))
             return jsonify(usermessage=statement, data=False), 400
     except Exception as e:
         statement = "Failed to query database"
