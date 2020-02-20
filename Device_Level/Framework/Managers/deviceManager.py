@@ -122,7 +122,7 @@ class deviceManager:
         logging.info("New sensor Spawned. sensor Info: {}\n".format(
             json.dumps(sensor.getInfo(), indent=4, sort_keys=True)))
 
-    def sensorGlobalRegistration(self, globalID, localID):
+    def supervisorGlobalRegistration(self, globalID, localID):
         self.NAT[globalID] = localID
         self.updatesensorConfGlobalID(globalID=globalID, sensorID=localID)
 

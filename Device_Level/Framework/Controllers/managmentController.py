@@ -78,7 +78,9 @@ class ManagementController(Controller):
                                                                                                                   traceback.format_exc()))
 
     def registration(self, package, packageType, url):
-        return self.post(body=self.packager(package=package, packageType=packageType), url=url)
+        payload = self.packager(package=package, packageType=packageType)
+        print(payload)
+        return self.post(body=payload, url=url)
 
     def post(self, body, url):
         return requests.post(url=url, json=body)

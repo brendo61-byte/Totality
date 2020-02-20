@@ -1,34 +1,25 @@
-2020-02-12 23:44:39,697 - INFO - 
+2020-02-19 17:54:52,433 - INFO - 
 
 Launching Program
-2020-02-12 23:44:39,698 - DEBUG - Preforming Data-Push
-2020-02-12 23:44:39,699 - INFO - All Threads Launched Successfully
-2020-02-12 23:44:39,701 - INFO - No global ID. Requesting sensor Registration
-2020-02-12 23:44:39,702 - INFO - New sensor Spawned. sensor Info: {
+2020-02-19 17:54:52,435 - DEBUG - Preforming Data-Push
+2020-02-19 17:54:52,435 - INFO - All Threads Launched Successfully
+2020-02-19 17:54:52,439 - INFO - New sensor Spawned. sensor Info: {
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
     "samplePeriod": 1,
-    "sensorID": 2,
+    "sensorID": 1,
     "sensorName": "intMaker",
     "sensorType": "intMaker"
 }
 
-2020-02-12 23:44:39,702 - INFO - All Launch Sensors Spawned Successfully
-2020-02-12 23:44:39,706 - DEBUG - Starting new HTTP connection (1): 0.0.0.0:80
-2020-02-12 23:44:39,721 - DEBUG - http://0.0.0.0:80 "POST /command/device/getCommands HTTP/1.1" 200 41
-2020-02-12 23:44:39,722 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2020-02-12 23:44:39,722 - DEBUG - No New Commands To Execute
-2020-02-12 23:44:40,706 - DEBUG - Starting new HTTP connection (1): 0.0.0.0:80
-2020-02-12 23:44:40,723 - DEBUG - http://0.0.0.0:80 "POST /management/device/supervisorRegistration HTTP/1.1" 404 232
-2020-02-12 23:44:40,723 - WARNING - Non 200 return on management Controller. Info: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-<title>404 Not Found</title>
-<h1>Not Found</h1>
-<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
-
-2020-02-12 23:44:41,703 - DEBUG - Preforming Data-Push
-2020-02-12 23:44:41,707 - DEBUG - Starting new HTTP connection (1): 0.0.0.0:80
-2020-02-12 23:44:41,718 - DEBUG - http://0.0.0.0:80 "POST /data/device/dataIngestion HTTP/1.1" 500 290
-2020-02-12 23:44:43,722 - DEBUG - Preforming Data-Push
-2020-02-12 23:44:43,726 - DEBUG - Starting new HTTP connection (1): 0.0.0.0:80
-2020-02-12 23:44:43,737 - DEBUG - http://0.0.0.0:80 "POST /data/device/dataIngestion HTTP/1.1" 500 290
+2020-02-19 17:54:52,439 - INFO - All Launch Sensors Spawned Successfully
+2020-02-19 17:54:52,443 - DEBUG - Starting new HTTP connection (1): 10.84.141.230:80
+2020-02-19 17:54:52,573 - DEBUG - http://10.84.141.230:80 "POST /command/device/getCommands HTTP/1.1" 200 41
+2020-02-19 17:54:52,574 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
+2020-02-19 17:54:52,574 - DEBUG - No New Commands To Execute
+2020-02-19 17:54:54,438 - DEBUG - Preforming Data-Push
+2020-02-19 17:54:54,442 - DEBUG - Starting new HTTP connection (1): 10.84.141.230:80
+2020-02-19 17:54:54,514 - DEBUG - http://10.84.141.230:80 "POST /data/device/dataIngestion HTTP/1.1" 500 290
+2020-02-19 17:54:56,515 - DEBUG - Preforming Data-Push
+2020-02-19 17:54:56,519 - DEBUG - Starting new HTTP connection (1): 10.84.141.230:80

@@ -2,35 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4073e931-869b-4309-ad01-3794d6a773f6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Framework/Base_Classes/sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/commandControllerServerApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/commandAPI/commandControllerServerApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/commandAPI/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/creationAPI/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/dataControllerServerApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/dataAPI/dataControllerServerApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/dataAPI/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/keyServerApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/keyAPI/keyServerApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/keyAPI/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/managementServerApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/managementAPI/managementServerApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back_End/managementAPI/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Classes/exceptionClasses.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Classes/exceptionClasses.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Classes/package.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Classes/package.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Classes/packageTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Classes/packageTypes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Classes/supervisor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Supervisor_Config_Files/ADC1115_Pyra.json" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Sensor_Config_Files/ADC1115_Pyra.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Supervisor_Config_Files/BME280.json" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Sensor_Config_Files/BME280.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Base_Supervisor_Config_Files/intMaker.json" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Sensor_Config_Files/intMaker.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Controllers/dataController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Controllers/dataController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Framework/Controllers/managmentController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Controllers/managmentController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Launcher/localLauncher.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Launcher/localLauncher.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Framework/Managers/deviceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Managers/deviceManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Supervisors/ADC1115_Pyra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/ADC1115_Pyra.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Supervisors/BME280.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/BME280.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Supervisors/bme280_simpletest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/bme280_simpletest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Supervisors/intMaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/intMaker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Test_Sweet/deviceMangerTester.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Test_Sweet/deviceMangerTester.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Framework/Totality_Config/deviceConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Totality_Config/deviceConfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launchPad.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchPad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,6 +110,8 @@
       <workItem from="1581553085417" duration="1992000" />
       <workItem from="1581568638874" duration="7356000" />
       <workItem from="1581593856268" duration="63000" />
+      <workItem from="1582078506093" duration="1459000" />
+      <workItem from="1582157868838" duration="3493000" />
     </task>
     <servers />
   </component>
@@ -146,29 +123,29 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="283" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1581571388089" />
-    <state width="1398" height="303" key="GridCell.Tab.0.bottom" timestamp="1581579427703">
-      <screen x="0" y="23" width="1440" height="809" />
+    <state width="1398" height="237" key="GridCell.Tab.0.bottom" timestamp="1582163262255">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="245" key="GridCell.Tab.0.bottom/-1920.45.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1581036127707" />
-    <state width="1398" height="237" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581576284816" />
+    <state width="1398" height="237" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1582163262255" />
     <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.23.1440.809@0.23.1440.809" timestamp="1581579427703" />
-    <state width="1398" height="303" key="GridCell.Tab.0.center" timestamp="1581579427700">
-      <screen x="0" y="23" width="1440" height="809" />
+    <state width="1398" height="237" key="GridCell.Tab.0.center" timestamp="1582163262253">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="245" key="GridCell.Tab.0.center/-1920.45.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1581036127705" />
-    <state width="1398" height="237" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581576284815" />
+    <state width="1398" height="237" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1582163262253" />
     <state width="1398" height="303" key="GridCell.Tab.0.center/0.23.1440.809@0.23.1440.809" timestamp="1581579427700" />
-    <state width="1398" height="303" key="GridCell.Tab.0.left" timestamp="1581579427698">
-      <screen x="0" y="23" width="1440" height="809" />
+    <state width="1398" height="237" key="GridCell.Tab.0.left" timestamp="1582163262247">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="245" key="GridCell.Tab.0.left/-1920.45.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1581036127704" />
-    <state width="1398" height="237" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581576284814" />
+    <state width="1398" height="237" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1582163262247" />
     <state width="1398" height="303" key="GridCell.Tab.0.left/0.23.1440.809@0.23.1440.809" timestamp="1581579427698" />
-    <state width="1398" height="303" key="GridCell.Tab.0.right" timestamp="1581579427702">
-      <screen x="0" y="23" width="1440" height="809" />
+    <state width="1398" height="237" key="GridCell.Tab.0.right" timestamp="1582163262254">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="245" key="GridCell.Tab.0.right/-1920.45.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1581036127706" />
-    <state width="1398" height="237" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581576284816" />
+    <state width="1398" height="237" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1582163262254" />
     <state width="1398" height="303" key="GridCell.Tab.0.right/0.23.1440.809@0.23.1440.809" timestamp="1581579427702" />
     <state x="482" y="88" key="refactoring.ChangeSignatureDialog" timestamp="1581574455376">
       <screen x="0" y="0" width="1440" height="900" />
@@ -176,6 +153,6 @@
     <state x="482" y="88" key="refactoring.ChangeSignatureDialog/0.0.1440.900@0.0.1440.900" timestamp="1581574455376" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Device_Level$launchPad.coverage" NAME="launchPad Coverage Results" MODIFIED="1581576279536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Device_Level$launchPad.coverage" NAME="launchPad Coverage Results" MODIFIED="1582160092265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
