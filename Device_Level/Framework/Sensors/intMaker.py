@@ -74,7 +74,7 @@ class intMaker(Sensor):
             data1 = {
                 "data": someInt,  # the data you are sending - needs to be a int or float
                 "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
-                "dataType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
+                "readingType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
                 "units": "n/a",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
                 "sensorType": self.sensorType,  # the type of sensor it is - needs to be a string
                 "sensorID": self.getGlobalID()  # the global ID of the sensor - needs to be an int
@@ -83,13 +83,13 @@ class intMaker(Sensor):
             data2 = {
                 "data": someInt,  # the data you are sending - needs to be a int or float
                 "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
-                "dataType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
+                "readingType": "randomInt",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
                 "units": "n/a",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
                 "sensorType": self.sensorType,  # the type of sensor it is - needs to be a string
                 "sensorID": self.getGlobalID()  # the global ID of the sensor - needs to be an int
             }
 
-            self.package(data=data1, timeStamp=timeStamp)
-            self.package(data=data2, timeStamp=timeStamp)
+            self.package(data=data1)
+            self.package(data=data2)
 
             time.sleep(self.samplePeriod)

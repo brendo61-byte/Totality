@@ -2,11 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4073e931-869b-4309-ad01-3794d6a773f6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Back_End/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/.idea/Back_End2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/DataBase/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/DataBase/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/app.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/commandControllerServerApp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/program.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/commandAPI/testScript.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/app.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/creationServerApp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/program.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/creationAPI/testScript.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/.idea/dataAPI.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/app.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/dataControllerServerApp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/program.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/dataAPI/testScript.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/app.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/keyServerApp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/keyAPI/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/app.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/managementServerApp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/managementAPI/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/models.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/nginx/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/nginx/nginx.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/pyvenv.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Back_End/seed.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Controllers/managmentController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Controllers/managmentController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/Managers/deviceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Managers/deviceManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Base_Classes/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Base_Classes/sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Controllers/dataController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Controllers/dataController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Sensors/ADC1115_Pyra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/ADC1115_Pyra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Sensors/BME280.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/BME280.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/Sensors/intMaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Sensors/intMaker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Framework/Totality_Config/deviceConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/Totality_Config/deviceConfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchPad.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchPad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../exmaple.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test.txt2" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +182,10 @@
       <workItem from="1581593856268" duration="63000" />
       <workItem from="1582078506093" duration="1459000" />
       <workItem from="1582157868838" duration="3493000" />
+      <workItem from="1583096909176" duration="1417000" />
+      <workItem from="1583295502288" duration="2171000" />
+      <workItem from="1583341554473" duration="1532000" />
+      <workItem from="1583608082008" duration="862000" />
     </task>
     <servers />
   </component>

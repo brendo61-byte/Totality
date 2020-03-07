@@ -66,81 +66,44 @@ class BME280(Sensor):
                 timeStampStr = timeStamp.strftime("%m/%d/%Y-%H:%M:%S")
 
                 data1 = {
-                    "data": temperatureSigFigs,  # the data you are sending - needs to be a int or float
-                    "timeStamp": timeStampStr,  # a time stamp of the data - copy this code here - needs to be a str
-                    "dataType": "Temperature",  # the type of data - i.e. Voltage, Pressure, Humidity, etc - needs to be a string
-                    "units": "C",  # the units of the data - i.e. mV, PSI, %, etc - needs to be a string
-                    "sensorType": self.supervisorType,  # the type of supervisor it is - needs to be a string
-                    "supervisorID": self.getGlobalID(),  # the global ID of the supervisor - needs to be an int
-                    "supervisorIDLocal": self.getSensorID()
+                    "data": temperatureSigFigs,
+                    "timeStamp": timeStampStr,
+                    "readingType": "Temperature",
+                    "units": "C",
+                    "sensorType": self.supervisorType,
+                    "sensorID": self.getGlobalID()
                 }
                 data2 = {
                     "data": humiditySigFigs,
                     "timeStamp": timeStampStr,
-                    "dataType": "Humidity",
+                    "readingType": "Humidity",
                     "units": "%",
                     "sensorType": self.supervisorType,
-                    "supervisorID": self.getGlobalID(),
-                    "supervisorIDLocal": self.getSensorID()
+                    "sensorID": self.getGlobalID(),
                 }
                 data3 = {
                     "data": pressureSigFigs,
                     "timeStamp": timeStampStr,
-                    "dataType": "Pressure",
+                    "readingType": "Pressure",
                     "units": "hPa",
                     "sensorType": self.supervisorType,
-                    "supervisorID": self.getGlobalID(),
-                    "supervisorIDLocal": self.getSensorID()
+                    "sensorID": self.getGlobalID(),
                 }
                 data4 = {
                     "data": altitudeSigFig,
                     "timeStamp": timeStampStr,
-                    "dataType": "Elevation",
+                    "readingType": "Elevation",
                     "units": "m",
                     "sensorType": self.supervisorType,
-                    "supervisorID": self.getGlobalID(),
-                    "supervisorIDLocal": self.getSensorID()
+                    "sensorID": self.getGlobalID(),
                 }
 
-                self.package(data=data1, timeStamp=timeStamp)
-                self.package(data=data2, timeStamp=timeStamp)
-                self.package(data=data3, timeStamp=timeStamp)
-                self.package(data=data4, timeStamp=timeStamp)
+                self.package(data=data1)
+                self.package(data=data2)
+                self.package(data=data3)
+                self.package(data=data4)
 
             except Exception as e:
                 logging.info("Unable to read from BME280\nException: {}\nTraceBack: {}".format(e, traceback.format_exc()))
 
             time.sleep(self.samplePeriod)
-
-    def getSupervisorHeaders(self):
-        return self.headers
-
-    def getSupervisorTags(self):
-        return self.tags
-
-    def getSupervisorInfo(self):
-        return self.info
-
-    def getSensorID(self):
-        return self.supervisorID
-
-    def getGlobalID(self):
-        return self.globalID
-
-    def updateGlobalID(self, globalID):
-        self.globalID = globalID
-
-    def monitor(self, data):
-        # ToDo: Figure out how to implement monitor
-        """
-        In future this method will be able to evaluate data that was just collected to see if something but be done.
-        Ex: Check battery voltage to see if it's low and the system needs to be turned off
-        Ex: Check if a reading is out of a set threshold and someone/thing needs to be notified
-        That sort of stuff will go here
-        """
-        return None
-
-    def package(self, data, timeStamp):
-        package = Package(data=data, tags=self.tags, timeStamp=timeStamp, monitorResponse=self.monitor(data=data),
-                          headers=self.headers, packageType=dataPush)
-        self.pipe.put(payload=package)

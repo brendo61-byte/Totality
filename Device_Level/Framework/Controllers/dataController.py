@@ -19,6 +19,18 @@ class DataController(Controller):
     """
 
     def __init__(self, pipe, updateInterval, deviceID, dataIngestion_URL, destination, localData, localFileName, headers, localOnly=True):
+        """
+
+        :param pipe:
+        :param updateInterval:
+        :param deviceID:
+        :param dataIngestion_URL:
+        :param destination:
+        :param localData:
+        :param localFileName:
+        :param headers:
+        :param localOnly:
+        """
         self.localOnly = localOnly
         self.headers = headers
         self.dataIngestion_URL = dataIngestion_URL
@@ -65,7 +77,12 @@ class DataController(Controller):
             time.sleep(self.updateInterval)
 
     def post(self, package):
-        requests.post(url=self.dataIngestion_URL, json=package)
+        try:
+            print(package)
+            requests.post(url=self.dataIngestion_URL, json=package)
+        except Exception as e:
+            tb = traceback.format_exc()
+            logging.warning(f"Unable to push dat to server\nError: {e}\nTraceBack: {tb}")
 
     def packager(self, package, packageType):
 

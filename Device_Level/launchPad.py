@@ -56,7 +56,7 @@ if __name__ == '__main__':
             launcher = Launcher(**config["launcher"]["args"], deviceManager=DM)
             useLauncher = True
 
-        commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
+        # commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
         dataController = DataController(**config["dataControl"]["args"], localOnly=config["localOnly"], pipe=dataPipe, deviceID=DID)
         managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe, deviceID=DID, DM=DM)
 
@@ -66,10 +66,10 @@ if __name__ == '__main__':
 
         DCThread = Thread(target=dataController.starter, name="DC_Thread")
         if not config["localOnly"]:
-            CCThread = Thread(target=commandController.starter, name="CC_Thread")
+            # CCThread = Thread(target=commandController.starter, name="CC_Thread")
             MCThread = Thread(target=managementController.starter, name="MC_Thread")
 
-            CCThread.start()
+            # CCThread.start()
             MCThread.start()
 
         DCThread.start()

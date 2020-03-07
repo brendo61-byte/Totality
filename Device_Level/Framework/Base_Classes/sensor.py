@@ -24,6 +24,6 @@ class Sensor:
     def updateGlobalID(self, globalID):
         self.globalID = globalID
 
-    def package(self, data, timeStamp):
+    def package(self, data):
         package = Package(data=data, packageType=dataPush)
         self.pipe.put(payload=package)

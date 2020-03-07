@@ -1,9 +1,9 @@
-2020-02-19 17:54:52,433 - INFO - 
+2020-03-04 10:41:13,151 - INFO - 
 
 Launching Program
-2020-02-19 17:54:52,435 - DEBUG - Preforming Data-Push
-2020-02-19 17:54:52,435 - INFO - All Threads Launched Successfully
-2020-02-19 17:54:52,439 - INFO - New sensor Spawned. sensor Info: {
+2020-03-04 10:41:13,152 - DEBUG - Preforming Data-Push
+2020-03-04 10:41:13,152 - INFO - All Threads Launched Successfully
+2020-03-04 10:41:13,153 - INFO - New sensor Spawned. sensor Info: {
     "deviceID": 1,
     "highEndInt": 100,
     "lowEndInt": 0,
@@ -13,13 +13,7 @@ Launching Program
     "sensorType": "intMaker"
 }
 
-2020-02-19 17:54:52,439 - INFO - All Launch Sensors Spawned Successfully
-2020-02-19 17:54:52,443 - DEBUG - Starting new HTTP connection (1): 10.84.141.230:80
-2020-02-19 17:54:52,573 - DEBUG - http://10.84.141.230:80 "POST /command/device/getCommands HTTP/1.1" 200 41
-2020-02-19 17:54:52,574 - DEBUG - 'Get' From Command Server Returned Status 200 Okay
-2020-02-19 17:54:52,574 - DEBUG - No New Commands To Execute
-2020-02-19 17:54:54,438 - DEBUG - Preforming Data-Push
-2020-02-19 17:54:54,442 - DEBUG - Starting new HTTP connection (1): 10.84.141.230:80
-2020-02-19 17:54:54,514 - DEBUG - http://10.84.141.230:80 "POST /data/device/dataIngestion HTTP/1.1" 500 290
-2020-02-19 17:54:56,515 - DEBUG - Preforming Data-Push
-2020-02-19 17:54:56,519 - DEBUG - Starting new HTTP connection (1): 10.84.141.230:80
+2020-03-04 10:41:13,153 - INFO - All Launch Sensors Spawned Successfully
+2020-03-04 10:41:15,158 - DEBUG - Preforming Data-Push
+2020-03-04 10:41:15,168 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:8000
+2020-03-04 10:41:15,181 - DEBUG - http://127.0.0.1:8000 "POST /data HTTP/1.1" 200 0

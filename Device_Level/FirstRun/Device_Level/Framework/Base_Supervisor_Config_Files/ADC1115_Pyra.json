@@ -1,0 +1,13 @@
+{
+  "samplePeriod": 15,
+  "gain": 1,
+  "channel": 1,
+  "supervisorType": "ADC1115_Pyra",
+  "supervisorName": "ADC1115_Pyra",
+  "tags": {
+    "supervisorName": "ADC1115_Pyra",
+    "supervisorType": "ADC1115_Pyra",
+    "supervisorID": "None",
+    "customConfig": "False"
+  }
+}
