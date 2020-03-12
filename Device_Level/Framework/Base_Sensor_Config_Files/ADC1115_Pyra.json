@@ -1,0 +1,7 @@
+{
+  "samplePeriod": 10,
+  "gain": 1,
+  "channel": 2,
+  "supervisorType": "ADC1115_Pyra",
+  "supervisorName": "ADC1115_Pyra"
+}

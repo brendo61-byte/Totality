@@ -15,34 +15,34 @@ NOTE: If the base config is used for a supervisorr it WILL work (b/c you have to
 """
 
 class Launcher(Controller):
-    def __init__(self, supervisorList, deviceManager):
-        self.supervisorListList = supervisorList
+    def __init__(self, sensorList, deviceManager):
+        self.sensorListList = sensorList
         self.deviceManager = deviceManager
 
     def spawnSupervisor(self):
         status = True
-        for supervisorConfig in self.supervisorListList:
+        for sensorConfig in self.sensorListList:
 
             try:
 
-                self.deviceManager.launcher(**supervisorConfig)
+                self.deviceManager.launcher(**sensorConfig)
 
             except Exception as e:
                 status = False
                 logging.critical(
                     "Failed To Start supervisor. supervisor Config: {}.\nError Message: {}\n\n{}".format(
-                        supervisorConfig,
+                        sensorConfig,
                         e,
                         traceback.format_exc()))
 
         if status:
-            logging.info("All Launch Supervisors Spawned Successfully")
+            logging.info("All Launch Sensors Spawned Successfully")
         else:
             print("ERROR: Unable to spawn launch supervisors. See Logs.")
 
 
             logging.warning(
-                "Launch supervisorr Spanning Complete. Some Supervisors Did Not Spawn Successfully. See logs")
+                "Launch supervisorr Spanning Complete. Some Sensors Did Not Spawn Successfully. See logs")
 
     def starter(self):
         self.spawnSupervisor()

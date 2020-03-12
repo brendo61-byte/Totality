@@ -1,0 +1,6 @@
+{
+  "samplePeriod": 1,
+  "supervisorType": "BME280",
+  "supervisorName": "BME280"
+}
+

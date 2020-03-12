@@ -27,8 +27,7 @@ class ManagementController(Controller):
                 packageType = package.getPackageType()
 
                 packageTypes = {
-                    registerSupervisor: self.registration(package=package, packageType="requestGlobalID",
-                                                          url=self.registrationURL)
+                    registerSensor: self.registration(package=package, packageType="requestGlobalID", url=self.registrationURL)
                 }
 
                 try:
@@ -43,8 +42,7 @@ class ManagementController(Controller):
                             logging.debug("No commands returned for management package")
                     else:
                         logging.warning("Non 200 return on management Controller. Info: {}".format(response.text))
-                except KeyError:
-                    logging.warning("Invalid package type provided: {}".format(packageType))
+
                 except Exception as e:
                     logging.warning(
                         "Unable To Push Management Package.\nException: {}\nTraceBack: {}".format(e, traceback))
@@ -72,11 +70,6 @@ class ManagementController(Controller):
                         callBack, body,
                         e,
                         traceback.format_exc()))
-        except KeyError as KE:
-            logging.warning(
-                "KeyError Decoding Command. Command Failed\n Error Message: {}\nFull Command Json: {}\n{}".format(
-                    KE, command,
-                    traceback.format_exc()))
 
         except Exception as e:
             logging.warning(
@@ -85,7 +78,9 @@ class ManagementController(Controller):
                                                                                                                   traceback.format_exc()))
 
     def registration(self, package, packageType, url):
-        return self.post(body=self.packager(package=package, packageType=packageType), url=url)
+        payload = self.packager(package=package, packageType=packageType)
+        print(payload)
+        return self.post(body=payload, url=url)
 
     def post(self, body, url):
         return requests.post(url=url, json=body)
@@ -94,8 +89,6 @@ class ManagementController(Controller):
         body = {
             "data": {
                 "package": package.getData(),
-                "tags": package.getSupervisorTags(),
-                "timeStamp": package.getTimeStamp()
             },
             "deviceID": self.deviceID,
             "packageType": packageType

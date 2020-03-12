@@ -1,8 +1,8 @@
-class SupervisorUniqueError(BaseException):
+class SensorUniqueError(BaseException):
     pass
 
 
-class SupervisorThreadLimit(BaseException):
+class SensorThreadLimit(BaseException):
     pass
 
 

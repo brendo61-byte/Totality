@@ -39,35 +39,40 @@ if __name__ == '__main__':
             config = json.load(configFile)
 
         DID = config["deviceID"]
-        logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='a',
-                            format='%(asctime)s - %(levelname)s - %(message)s')
+        logging.basicConfig(level=config["logLevel"], filename='program.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("\n\nLaunching Program")
+
         dataPipe = dataPipe.DataPipe()
-        managementPipe = managementPipe.ManagementPipe()
+        if not config["localOnly"]:
+            managementPipe = managementPipe.ManagementPipe()
+        else:
+            managementPipe = None
+
         DM = deviceManager(pipe=dataPipe, manegementPipe=managementPipe, deviceID=DID, test=config["test"],
-                           threadLimit=config["threadLimit"], configPath=CONFIG_PATH)
+                           threadLimit=config["threadLimit"], configPath=CONFIG_PATH, localOnly=config["localOnly"])
 
         useLauncher = False
         if config["launcher"]["args"] != 'None' and bool(config["launcher"]["args"]):
             launcher = Launcher(**config["launcher"]["args"], deviceManager=DM)
             useLauncher = True
 
-        commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
-        dataController = DataController(**config["dataControl"]["args"], pipe=dataPipe, deviceID=DID)
-        managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe,
-                                                    deviceID=DID, DM=DM)
+        # commandController = CommandController(**config["commandControl"]["args"], DM=DM, deviceID=DID)
+        dataController = DataController(**config["dataControl"]["args"], localOnly=config["localOnly"], pipe=dataPipe, deviceID=DID)
+        managementController = ManagementController(**config["managementController"]["args"], pipe=managementPipe, deviceID=DID, DM=DM)
 
         if useLauncher:
             LT = Thread(target=launcher.starter, name="Launcher_Thread")
             LT.start()
 
-        CCThread = Thread(target=commandController.starter, name="CC_Thread")
         DCThread = Thread(target=dataController.starter, name="DC_Thread")
-        MCThread = Thread(target=managementController.starter, name="MC_Thread")
+        if not config["localOnly"]:
+            # CCThread = Thread(target=commandController.starter, name="CC_Thread")
+            MCThread = Thread(target=managementController.starter, name="MC_Thread")
 
-        CCThread.start()
+            # CCThread.start()
+            MCThread.start()
+
         DCThread.start()
-        MCThread.start()
 
         logging.info("All Threads Launched Successfully")
         print("All Threads Launched Successfully")

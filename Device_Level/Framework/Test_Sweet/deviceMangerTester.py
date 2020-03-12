@@ -74,8 +74,8 @@ class DMTest(Tester):
             print(killDict)
             print()
             log = json.dumps(killDict, indent=4, sort_keys=True)
-            print("deviceMangerTester: Failed to kill all Supervisors launched for testing. See below for details:\n" + log)
-            logging.debug("deviceMangerTester: Failed to kill all Supervisors launched for testing. See below for details:\n" + log)
+            print("deviceMangerTester: Failed to kill all Sensors launched for testing. See below for details:\n" + log)
+            logging.debug("deviceMangerTester: Failed to kill all Sensors launched for testing. See below for details:\n" + log)
 
         # print("\n\n\n")
         # print(self.DM.getAllLocalSupervisors())
@@ -175,7 +175,7 @@ class DMTest(Tester):
         return
 
     def testkillSupervisor(self):
-        # cleanUp will test that Supervisors can be killed properly
+        # cleanUp will test that Sensors can be killed properly
         # Test 1: KeyError with kill Supervisor
         try:
             self.DM.killSupervisor(supervisorID=self.genNewID())
@@ -240,7 +240,7 @@ class DMTest(Tester):
             if type(t) is not dict:
                 print("WARNING: Testing integrity compromised. Unknown Supervisor IDs in use.")
                 self.resultsDict["testgetAllLocalSupervisors"] = {
-                    "test": "Tests that a dict of all local Supervisors can be retrieved",
+                    "test": "Tests that a dict of all local Sensors can be retrieved",
                     "WARNING": "TEST INTEGRITY COMPROMISED",
                     "return": str(t)
                 }
@@ -250,7 +250,7 @@ class DMTest(Tester):
         except:
             print("WARNING: Testing integrity compromised. Unknown Supervisor IDs in use.")
             self.resultsDict["testgetAllLocalSupervisors"] = {
-                "test": "Tests that a dict of all local Supervisors can be retrieved",
+                "test": "Tests that a dict of all local Sensors can be retrieved",
                 "WARNING": "TEST INTEGRITY COMPROMISED",
             }
 
