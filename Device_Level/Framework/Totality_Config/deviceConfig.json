@@ -4,15 +4,8 @@
       "sensorList": [
         {
           "sensorType": "intMaker",
-          "sensorID": 1
-        },
-        {
-          "sensorType": "ADC1115_Pyra",
-          "sensorID": 2
-        },
-        {
-            "sensorType": "BME280",
-            "sensorID": 3
+          "sensorID": 1,
+          "globalID": 1
         }
       ]
     }
@@ -48,7 +41,7 @@
   },
   "logLevel": "DEBUG",
   "test": false,
-  "localOnly": true,
+  "localOnly": false,
   "threadLimit": 10,
   "deviceID": 1
 }

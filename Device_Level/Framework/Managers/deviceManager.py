@@ -242,6 +242,8 @@ class deviceManager:
         if customConfig != 'None' and bool(customConfig):
             config = self.customConfiguration(baseConfig=config, customConfig=customConfig)
 
+            # ToDo: Clean this up - don't loops to handle
+
         sensorClass = self.getsensorClass(sensorType=sensorType)
 
         if restart:

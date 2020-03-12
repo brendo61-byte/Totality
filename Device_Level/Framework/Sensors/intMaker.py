@@ -58,6 +58,7 @@ class intMaker(Sensor):
             "sensorID": self.sensorID,
             "deviceID": self.deviceID,
             "samplePeriod": self.samplePeriod,
+            # sensor specific below
             "lowEndInt": self.lowEnd,
             "highEndInt": self.highEnd
         }

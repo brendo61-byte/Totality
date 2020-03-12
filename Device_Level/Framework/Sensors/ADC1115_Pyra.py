@@ -11,16 +11,14 @@ import traceback
 
 class ADC1115_Pyra(Sensor):
 
-    def __init__(self, gain, channel, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, globalID,
-                 tags, pipe, delay=0):
+    def __init__(self, gain, channel, samplePeriod, supervisorName, supervisorType, sensorID, deviceID, globalID, pipe, delay=0):
         self.operational = True
         self.samplePeriod = samplePeriod
         self.supervisorName = supervisorName
         self.supervisorType = supervisorType
-        self.supervisorID = supervisorID
+        self.sensorID = sensorID
         self.deviceID = deviceID
         self.globalID = globalID
-        self.tags = tags
         self.pipe = pipe
         self.delay = delay  # Should always be defaulted to 0
         # The above class variables MUST be present for ALL supervisors
@@ -31,20 +29,15 @@ class ADC1115_Pyra(Sensor):
         self.ADC = Adafruit_ADS1x15.ADS1115()
         # ADC1115 Reader Instance
 
-        # Sensors must update tags based on config settings
-        self.tags["deviceID"] = self.deviceID
-        self.tags["supervisorName"] = self.supervisorName
-        self.tags["supervisorID"] = self.supervisorID
-
-        self.info = {  # ALL supervisors should have a self.info dict of this formatting
+        self.info = {  # ALL sensors should have a self.info dict of this formatting
             "supervisorName": self.supervisorName,
             "supervisorType": self.supervisorType,
-            "supervisorID": self.supervisorID,
+            "sensorID": self.sensorID,
             "deviceID": self.deviceID,
             "samplePeriod": self.samplePeriod,
+            # sensor specific below
             "gain": self.gain,
             "channel": self.channel,
-            "customConfig": self.tags["customConfig"]
         }
 
     def getBitVal(self):

@@ -78,8 +78,8 @@ class DataController(Controller):
 
     def post(self, package):
         try:
-            print(package)
-            requests.post(url=self.dataIngestion_URL, json=package)
+            response = requests.post(url=self.dataIngestion_URL, json=package)
+            print(response.status_code)
         except Exception as e:
             tb = traceback.format_exc()
             logging.warning(f"Unable to push dat to server\nError: {e}\nTraceBack: {tb}")

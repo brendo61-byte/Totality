@@ -13,16 +13,15 @@ import busio
 
 
 class BME280(Sensor):
-    def __init__(self, samplePeriod, supervisorName, supervisorType, supervisorID, deviceID, tags, pipe, globalID, delay=0):
+    def __init__(self, samplePeriod, supervisorName, supervisorType, sensorID, deviceID, pipe, globalID, delay=0):
         self.globalID = globalID
         self.operational = True
 
         self.samplePeriod = samplePeriod
         self.supervisorName = supervisorName
         self.supervisorType = supervisorType
-        self.supervisorID = supervisorID
+        self.sensorID = sensorID
         self.deviceID = deviceID
-        self.tags = tags
         self.pipe = pipe
         self.delay = delay  # Should always be defaulted to 0
 
@@ -30,23 +29,13 @@ class BME280(Sensor):
         self.BME = adafruit_bme280.Adafruit_BME280_I2C(i2c)
         self.BME.sea_level_pressure = 1013.25
 
-        # Sensors must update tags based on config settings
-        self.tags["deviceID"] = self.deviceID
-        self.tags["supervisorName"] = self.supervisorName
-        self.tags["supervisorID"] = self.supervisorID
-
-        self.info = {  # ALL supervisors should have a self.info dict of this formatting
+        self.info = {  # ALL sensors should have a self.info dict of this formatting
             "supervisorName": self.supervisorName,
             "supervisorType": self.supervisorType,
-            "supervisorID": self.supervisorID,
+            "sensorID": self.sensorID,
             "deviceID": self.deviceID,
             "samplePeriod": self.samplePeriod,
-            # "lowEndInt": self.lowEnd,
-            # "highEndInt": self.highEnd,
-            "customConfig": self.tags["customConfig"]
         }
-
-        self.headers = ["data", "timeStamp", "dataType", "units", "sensorType", "supervisorID"]
 
     def getData(self):
         time.sleep(self.delay)
